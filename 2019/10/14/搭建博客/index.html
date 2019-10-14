@@ -24,11 +24,9 @@
 <meta property="og:image" content="https://img-blog.csdn.net/20160331182812581">
 <meta property="og:image" content="https://img-blog.csdn.net/20160401105726342">
 <meta property="og:image" content="https://img-blog.csdn.net/20160401112025991">
+<meta property="og:image" content="http://yoursite.com/2019/10/pictures/address.png">
 <meta property="og:image" content="https://img-blog.csdn.net/20160401113212168">
-<meta property="og:image" content="https://img-blog.csdn.net/20160401114216765">
-<meta property="og:image" content="https://img-blog.csdn.net/20160401114227187">
-<meta property="og:image" content="https://img-blog.csdn.net/20160401114237859">
-<meta property="og:updated_time" content="2019-10-14T12:42:48.823Z">
+<meta property="og:updated_time" content="2019-10-14T13:29:02.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="搭建博客">
 <meta name="twitter:description" content="安装Node.js可以去官网下载通过 node -v 测试是否成功 1.安装Git2.注册github账号注册完之后记得添加SSH Key 搭建博客1.安装Hexo在本地新建一个Blog的文件夹，右键选择Git bash输入指令安装hexo：等安装完毕，通过输入hexo的命令来测试Hexo是否安装成功，若成功如下： 接着初始化Hexohexo init hexo初始化成功会显示： 这时在你刚才创建">
@@ -136,20 +134,25 @@
 <h2 id="将本地hexo项目托管到github"><a href="#将本地hexo项目托管到github" class="headerlink" title="将本地hexo项目托管到github"></a>将本地hexo项目托管到github</h2><p>打开修改hexo目录下配置文件_config.yml<br>编辑最后面的deploy属性 加入代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type: git   repository: git@github.com:WX-JIN/WX-JIN.github.io.git   branch: master</span><br></pre></td></tr></table></figure>
 
-<p>type使用是git。<br>repository属性改成你的刚才创建仓库git地址。<br>分支branch填写master。</p>
+<p>type使用是git。<br>repository属性改成你的刚才创建仓库git地址。<br>地址为这里的：<img src="../../pictures/address.png"><br>分支branch填写master。</p>
 <p>这边说下本地网站配置文件 _config.yml</p>
 <p>网站的配置文件，你可以在这里配置一些基本信息，这里列举部分关键配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Hexo Configuration ## Docs: https://hexo.io/docs/configuration.html ## Source: https://github.com/hexojs/hexo/  # Site title: Dududzai’s Blog #网站的标题 subtitle: life is struggle #副标题 description: life is struggle #描述 author: examble #作者信息 avatar: /images/avatar.png #头像，图片位置在相应主题目录下的images language: zh-Hans #中文简体 email: 85268837@qq.com timezone:  # Extensions ## Plugins: https://hexo.io/plugins/ ## Themes: https://hexo.io/themes/ theme: next #配置主题，这里使用next主题 stylus:   compress: true #自适应布局  # Deployment ## Docs: https://hexo.io/docs/deployment.html deploy:   type: git #部署环境，基于hexo+githubpage,所以这里使用git。注意：不同版本的hexo，type有可能不同，3.x以后应使用git,具体参看官方文档   repository: git@github.com:username/username.github.io.git #git仓库地址，替换成你的username即可，其他保持不变，后面会提到如何创建git仓库   branch: master</span><br></pre></td></tr></table></figure>
 
 <p>根据自己的需要更改</p>
+<h2 id="写一篇文章（例如hello）"><a href="#写一篇文章（例如hello）" class="headerlink" title="写一篇文章（例如hello）"></a>写一篇文章（例如hello）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;hello&quot;</span><br></pre></td></tr></table></figure>
+
+<p>用编辑器打开hello.md文件编写完后保存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">title: hello</span><br><span class="line">date: 2015-07-01 22:37:23</span><br><span class="line">categories:</span><br><span class="line">  - 日志</span><br><span class="line">  - 二级目录</span><br><span class="line">tags:</span><br><span class="line">  - hello</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">摘要:</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">正文:</span><br></pre></td></tr></table></figure>
+
+<h2 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h2><h3 id="设置git身份信息"><a href="#设置git身份信息" class="headerlink" title="设置git身份信息"></a>设置git身份信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;你的用户名&quot;</span><br><span class="line">$ git config --global user.email &quot;你的邮箱&quot;</span><br></pre></td></tr></table></figure>
+
 <h3 id="安装hexo-deployer-git插件"><a href="#安装hexo-deployer-git插件" class="headerlink" title="安装hexo-deployer-git插件"></a>安装hexo-deployer-git插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 
 <img src="https://img-blog.csdn.net/20160401113212168">
 
-<h3 id="部署你本地的主题到github上"><a href="#部署你本地的主题到github上" class="headerlink" title="部署你本地的主题到github上"></a>部署你本地的主题到github上</h3><p>需要执行：</p>
-<img src="https://img-blog.csdn.net/20160401114216765">
-<img src="https://img-blog.csdn.net/20160401114227187">
-<img src="https://img-blog.csdn.net/20160401114237859">
+<h3 id="部署你本地的主题到github上"><a href="#部署你本地的主题到github上" class="headerlink" title="部署你本地的主题到github上"></a>部署你本地的主题到github上</h3><p>更新发布博客</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$hexo d -g</span><br></pre></td></tr></table></figure>
 
 <p>就成功啦！</p>
 
