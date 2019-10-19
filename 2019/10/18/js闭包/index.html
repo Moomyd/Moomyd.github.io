@@ -5,15 +5,20 @@
   
 
   
-  <title>zmy&#39;s Blog</title>
+  <title>js闭包 | zmy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zmy&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="闭包是函数和生命该函数的词法环境的组合变量作用域要理解闭包，首先就要理解js中的变量的作用域变量的作用域无非两种：全局变量和局部变量函数内部可以直接读取全局变量 1234567var n=2; 　　function f1()&amp;#123;　　　　alert(n);　　&amp;#125; 　　f1(); // 2  函数外部无法读取函数内的局部变量 12345function f1()&amp;#123;　　var">
+<meta name="keywords" content="js闭包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js闭包">
+<meta property="og:url" content="http://yoursite.com/2019/10/18/js闭包/index.html">
 <meta property="og:site_name" content="zmy&#39;s Blog">
+<meta property="og:description" content="闭包是函数和生命该函数的词法环境的组合变量作用域要理解闭包，首先就要理解js中的变量的作用域变量的作用域无非两种：全局变量和局部变量函数内部可以直接读取全局变量 1234567var n=2; 　　function f1()&amp;#123;　　　　alert(n);　　&amp;#125; 　　f1(); // 2  函数外部无法读取函数内的局部变量 12345function f1()&amp;#123;　　var">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-19T06:52:12.518Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zmy&#39;s Blog">
+<meta name="twitter:title" content="js闭包">
+<meta name="twitter:description" content="闭包是函数和生命该函数的词法环境的组合变量作用域要理解闭包，首先就要理解js中的变量的作用域变量的作用域无非两种：全局变量和局部变量函数内部可以直接读取全局变量 1234567var n=2; 　　function f1()&amp;#123;　　　　alert(n);　　&amp;#125; 　　f1(); // 2  函数外部无法读取函数内的局部变量 12345function f1()&amp;#123;　　var">
   
     <link rel="alternate" href="/atom.xml" title="zmy&#39;s Blog" type="application/atom+xml">
   
@@ -64,9 +69,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-js闭包" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-js闭包" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/10/18/js闭包/" class="article-date">
   <time datetime="2019-10-18T15:46:11.000Z" itemprop="datePublished">2019-10-18</time>
@@ -83,8 +86,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/18/js闭包/">js闭包</a>
+    <h1 class="article-title" itemprop="name">
+      js闭包
     </h1>
   
 
@@ -171,209 +174,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-排序" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/14/排序/" class="article-date">
-  <time datetime="2019-10-14T13:42:26.000Z" itemprop="datePublished">2019-10-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/数据结构/">数据结构</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/14/排序/">排序</a>
-    </h1>
+    <a href="/2019/10/14/排序/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">排序</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>是按关键字的非递减或非递增顺序对一组记录重新进行整队的操作</p>
-<h3 id="判断排序是否稳定："><a href="#判断排序是否稳定：" class="headerlink" title="判断排序是否稳定："></a>判断排序是否稳定：</h3><p>以键为基准，对拥有相同键的两个数据，如果排序可能会改变数据的相对位置，则排序是不稳定的</p>
-<p>选择排序、快速排序、希尔排序、堆排序不是稳定的排序算法，而冒泡排序、插入排序、归并排序和基数排序是稳定的排序算法</p>
-<p>参考文章：<a href="https://www.cnblogs.com/codingmylife/archive/2012/10/21/2732980.html" target="_blank" rel="noopener">稳定排序和不稳定排序</a></p>
-<h3 id="根据排序过程中设计的存储器的不同可以分为："><a href="#根据排序过程中设计的存储器的不同可以分为：" class="headerlink" title="根据排序过程中设计的存储器的不同可以分为："></a>根据排序过程中设计的存储器的不同可以分为：</h3><p>(1)内部排序：在排序过程中不使用计算及外部存储器的排序过程<br>(2)外部排序：在排序过程中需要对外存进行访问的排序</p>
-<p>内部排序：　　</p>
-<ol>
-<li>插入排序<br>　　1）直接插入排序<br>　　2）希尔排序</li>
-<li>选择排序<br>　　1）简单选择排序<br>　　2）堆排序</li>
-<li>交换排序<br>　　1）冒泡排序<br>　　2）快速排序</li>
-<li>归并排序</li>
-<li>基数排序</li>
-</ol>
-<p>外部排序：外部排序最常用的算法是多路归并排序，即将原文件分解成多个能够一次性装入内存的部分分别把每一部分调入内存完成排序。然后，对已经排序的子文件进行归并排序。一般来说外排序分为两个步骤:预处理和合并排序。</p>
-<h2 id="简单排序方法"><a href="#简单排序方法" class="headerlink" title="简单排序方法"></a>简单排序方法</h2><h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">typedef int KeyType;</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    KeyType key;</span><br><span class="line">    InfoType otherinfo;</span><br><span class="line">&#125;RcdType;</span><br><span class="line">const MAXSIZE=20;</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    RcdType r[MAXSIZE+1];</span><br><span class="line">    int length;</span><br><span class="line">&#125;SqList;</span><br><span class="line">void SelectSort(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">    RcdType W;</span><br><span class="line">    int j,k,i;</span><br><span class="line">    for(i=1;i&lt;L.length;i++)&#123;</span><br><span class="line">        j=i;</span><br><span class="line">        for(k=i+1;k&lt;=L.length;k++)</span><br><span class="line">            if ( L.r[k].key &lt; L.r[j].key )  j =k ;</span><br><span class="line">        if ( i!=j ) </span><br><span class="line">             &#123; W=L.r[j]; L.r[j] =L.r[i]; L.r[i] = W;&#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两种基本操作：1 比较两个关键字大小 2 将元素从一个位置移动到另一个位置<br>时间复杂度为 O(n^2)</p>
-<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/排序/" data-id="ck1x7gtjy00065wsnv67xc92s" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/经典排序/">经典排序</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-搭建博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/14/搭建博客/" class="article-date">
-  <time datetime="2019-10-14T12:38:53.000Z" itemprop="datePublished">2019-10-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/日志/">-日志</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/14/搭建博客/">搭建博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h2><p>可以去官网下载<br>通过 node -v 测试是否成功</p>
-<h2 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1.安装Git"></a>1.安装Git</h2><h2 id="2-注册github账号"><a href="#2-注册github账号" class="headerlink" title="2.注册github账号"></a>2.注册github账号</h2><p>注册完之后记得添加SSH Key</p>
-<h1 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h1><h2 id="1-安装Hexo"><a href="#1-安装Hexo" class="headerlink" title="1.安装Hexo"></a>1.安装Hexo</h2><p>在本地新建一个Blog的文件夹，右键选择Git bash<br><img src="https://img-blog.csdn.net/20160331173337966"><br>输入指令安装hexo：<br><img src="https://img-blog.csdn.net/20160331174515127"><br>等安装完毕，通过输入hexo的命令来测试Hexo是否安装成功，若成功如下：<br><img src="https://img-blog.csdn.net/20160331174612127"></p>
-<p>接着初始化Hexo<br>hexo init hexo<br><img src="https://img-blog.csdn.net/20160331174810425"><br>初始化成功会显示：<br><img src="https://img-blog.csdn.net/20160331174935191"></p>
-<p>这时在你刚才创建的Blog里面会多出一个hexo文件<br><img scr="https://img-blog.csdn.net/20160331175135145"></p>
-<p>进入hexo目录输入指令npm install 安装依赖文件以及部署形成文件打开hexo目录：<br>打开hexo目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd hexo</span><br></pre></td></tr></table></figure>
-
-<p>安装依赖文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<p>部署形成文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
-
-<img src="https://img-blog.csdn.net/20160331182208672">
-最后运行server 跑起hexo服务
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-<img src="https://img-blog.csdn.net/20160331182812581">
-
-<p>这时根据提示运行 <a href="http://loalhost:4000/" target="_blank" rel="noopener">http://loalhost:4000/</a>. 可以看到默认的博客<br>到这里 hexo 安装完毕</p>
-<h2 id="配置githubPage"><a href="#配置githubPage" class="headerlink" title="配置githubPage"></a>配置githubPage</h2><p>登录github点击“New repository”新建一个仓库<br>输入仓库名：你的github名称.github.io（必须）然后creat</p>
-<h3 id="启用github-page"><a href="#启用github-page" class="headerlink" title="启用github page"></a>启用github page</h3><p>点击右边的“Setting”菜单进入设置，点击 Lauch…<br><img src="https://img-blog.csdn.net/20160401105726342"><br>点击 continue to layouts<br>之后选择一个随意的模板点击“publish page”发布 github默认生成的一个静态站点<br><img src="https://img-blog.csdn.net/20160401112025991"></p>
-<h2 id="将本地hexo项目托管到github"><a href="#将本地hexo项目托管到github" class="headerlink" title="将本地hexo项目托管到github"></a>将本地hexo项目托管到github</h2><p>打开修改hexo目录下配置文件_config.yml<br>编辑最后面的deploy属性 加入代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type: git   repository: git@github.com:WX-JIN/WX-JIN.github.io.git   branch: master</span><br></pre></td></tr></table></figure>
-
-<p>type使用是git。<br>repository属性改成你的刚才创建仓库git地址。<br>地址为这里的：<img src="../../pictures/address.png"><br>分支branch填写master。</p>
-<p>这边说下本地网站配置文件 _config.yml</p>
-<p>网站的配置文件，你可以在这里配置一些基本信息，这里列举部分关键配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Hexo Configuration ## Docs: https://hexo.io/docs/configuration.html ## Source: https://github.com/hexojs/hexo/  # Site title: Dududzai’s Blog #网站的标题 subtitle: life is struggle #副标题 description: life is struggle #描述 author: examble #作者信息 avatar: /images/avatar.png #头像，图片位置在相应主题目录下的images language: zh-Hans #中文简体 email: 85268837@qq.com timezone:  # Extensions ## Plugins: https://hexo.io/plugins/ ## Themes: https://hexo.io/themes/ theme: next #配置主题，这里使用next主题 stylus:   compress: true #自适应布局  # Deployment ## Docs: https://hexo.io/docs/deployment.html deploy:   type: git #部署环境，基于hexo+githubpage,所以这里使用git。注意：不同版本的hexo，type有可能不同，3.x以后应使用git,具体参看官方文档   repository: git@github.com:username/username.github.io.git #git仓库地址，替换成你的username即可，其他保持不变，后面会提到如何创建git仓库   branch: master</span><br></pre></td></tr></table></figure>
-
-<p>根据自己的需要更改</p>
-<h2 id="写一篇文章（例如hello）"><a href="#写一篇文章（例如hello）" class="headerlink" title="写一篇文章（例如hello）"></a>写一篇文章（例如hello）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;hello&quot;</span><br></pre></td></tr></table></figure>
-
-<p>用编辑器打开hello.md文件编写完后保存</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">title: hello</span><br><span class="line">date: 2015-07-01 22:37:23</span><br><span class="line">categories:</span><br><span class="line">  - 日志</span><br><span class="line">  - 二级目录</span><br><span class="line">tags:</span><br><span class="line">  - hello</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">摘要:</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">正文:</span><br></pre></td></tr></table></figure>
-
-<h2 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h2><h3 id="设置git身份信息"><a href="#设置git身份信息" class="headerlink" title="设置git身份信息"></a>设置git身份信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;你的用户名&quot;</span><br><span class="line">$ git config --global user.email &quot;你的邮箱&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装hexo-deployer-git插件"><a href="#安装hexo-deployer-git插件" class="headerlink" title="安装hexo-deployer-git插件"></a>安装hexo-deployer-git插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<img src="https://img-blog.csdn.net/20160401113212168">
-
-<h3 id="部署你本地的主题到github上"><a href="#部署你本地的主题到github上" class="headerlink" title="部署你本地的主题到github上"></a>部署你本地的主题到github上</h3><p>更新发布博客</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$hexo d -g</span><br></pre></td></tr></table></figure>
-
-<p>就成功啦！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ck1x7gtjb00005wsnghdaackm" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/30/hello-world/" class="article-date">
-  <time datetime="2019-09-30T02:35:50.198Z" itemprop="datePublished">2019-09-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/30/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/30/hello-world/" data-id="ck1x7gtjh00015wsncxsu0tab" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
