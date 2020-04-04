@@ -66,6 +66,226 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CSAPP-two" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/17/CSAPP-two/" class="article-date">
+  <time datetime="2020-02-17T08:05:17.000Z" itemprop="datePublished">2020-02-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CSAPP/">-CSAPP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/17/CSAPP-two/">CSAPP two</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="信息存储"><a href="#信息存储" class="headerlink" title="信息存储"></a>信息存储</h2><p>机器级程序将内存视为一个非常大的字节数组，称为虚拟内存<br>内存的每一个字节都有一个唯一的数字来标识，称为地址<br>所有可能地址的集合称为虚拟地址空间<br>每个程序对象可以简单地视为一个字节块，而程序本身就是一个字节序列<br>字长决定的最重要的系统参数是虚拟地址空间的最大大小。例如字长为w则虚拟地址的范围为0~2^w-1<br>多字节对象呗存储为连续的字节序列<br>最低有效字节在前为小端法<br>最高有效字节在前为大端法<br>问题：字节顺序 1.小端法机器产生的数据发送到大端法2.阅读整数数据的字节序列3.当编写规避正常的类型系统的程序时<br>文本数据比二进制数据具有更强的平台独立性<br>二进制代码是不兼容的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/17/CSAPP-two/" data-id="ck8l78qcv0000r4sneqjruvpq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-CSAPP-七" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/06/CSAPP-七/" class="article-date">
+  <time datetime="2020-02-06T10:22:53.000Z" itemprop="datePublished">2020-02-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CSAPP/">-CSAPP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/06/CSAPP-七/">CSAPP 七</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p>将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可被加载（复制）到内存并执行<br>链接器：分离编译<br>学习链接：<br>理解连接器将帮助你构造大型程序，理解链接器如何解析应用引用，什么是库以及链接器如何使用库来解析引用<br>理解链接器帮助避免一些危险的编程错误<br>理解链接将帮助你理解语言的作用域规则是如何实现的<br>理解链接将帮助你理解其他重要的系统概念，例如加载和运行程序、虚拟内存、分页、内存映射<br>理解链接将使你能够利用共享库<br>编译器驱动程序：.c -&gt; .i -&gt; .s -&gt; .o -&gt; 链接器 -&gt;prog -&gt; 加载器（可执行文件prog中的代码和数据复制到内存然后将控制转移到程序的开头）<br>为了构造可执行文件，链接器的两个主要任务：<br>符号解析，将每一个符号引用和一个符号定义关联起来<br>重定义<br>关于链接器的一些基本事实：<br>目标文件纯粹是字节块的集合。这些块中有些包含程序代码，有些包含程序数据，而其他的则包含引导链接器和加载器的数据结构。链接器将这些块连接起来确定被连接块的运行时位置，并且修改代码和数据块中的各种位置。链接器对目标机器了解甚少，产生目标文件的编译器和汇编器已经完成了大部分工作<br>目标文件的三种形式：<br>可重定位目标文件。包含二进制代码和数据<br>可执行目标文件。包含二进制代码和数据其形式可以被直接复制到内存并执行<br>共享目标文件。一种特殊类型的可重定位目标文件，可以在加载或运行时被动态的加载进内存并链接<br>可重定义目标文件的三个伪节：<br>ABS不该被重定义的符号<br>UNDEF未定义的符号在本目标模块引用在其他地方定义<br>COMMON未初始化的全局变量<br>.bss未初始化的静态变量以及初始化为0的全局或静态变量</p>
+<h2 id="符号解析"><a href="#符号解析" class="headerlink" title="符号解析"></a>符号解析</h2><p>链接器解析符号引用的方法是将每个引用与它输入的可重定位目标文件的符号表中的一个确定的符号定义关联起来<br>函数和已经初始化的全局变量是强符号，未初始化的全局变量是弱符号<br>处理多重定义的符号名：<br>1.不允许有多个同名的强符号<br>2.如果一个强符号和多个弱符号同名则选择强符号<br>3.如果有多个弱符号同名那么从弱中任意选择一个</p>
+<h3 id="与静态库链接"><a href="#与静态库链接" class="headerlink" title="与静态库链接"></a>与静态库链接</h3><p>将所有相关的目标模块打包成为一个单独的文件叫做静态库，用作链接器的输入</p>
+<h3 id="链接器用静态库来解析引用"><a href="#链接器用静态库来解析引用" class="headerlink" title="链接器用静态库来解析引用"></a>链接器用静态库来解析引用</h3><p>一个可重定位目标文件的集合E（这个集合中的文件会被合并起来形成可执行文件）<br>一个未解析的符号（引用了尚未定义）集合U<br>一个在前面输入文件中已经定义的符号集合D</p>
+<h2 id="重定位"><a href="#重定位" class="headerlink" title="重定位"></a>重定位</h2><p>合并输入模块，并为每个符号分配运行时地址</p>
+<ul>
+<li>重定位节和符号定义，合并相同类型的节，完成时程序中每条指令和全局变量都有唯一的运行时的内存地址了</li>
+<li>重定位节中的符号引用<h3 id="重定位条目"><a href="#重定位条目" class="headerlink" title="重定位条目"></a>重定位条目</h3>告诉链接器在将目标文件合并成可执行文件时如何修改这个引用。<br>代码的重定位条目放在.rel.text中 已初始化数据的重定位条目放在.rel.data中<br>ELF中两种最近本的重定位类型：</li>
+<li>R_X86_64_PC32重定位一个使用32位pc相对地址的引用</li>
+<li>R_X86_64_32重定位一个使用32位绝对地址的引用<h3 id="重定位符号引用"><a href="#重定位符号引用" class="headerlink" title="重定位符号引用"></a>重定位符号引用</h3><h2 id="可执行目标文件"><a href="#可执行目标文件" class="headerlink" title="可执行目标文件"></a>可执行目标文件</h2></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/06/CSAPP-七/" data-id="ck8l78qd40004r4sni6obvbb2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/七-链接/">七 链接</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-分享" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/15/分享/" class="article-date">
+  <time datetime="2019-12-15T00:37:49.000Z" itemprop="datePublished">2019-12-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/js/">-js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/15/分享/">分享</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h2><p>Javascript和其他编程语言相比比较随意，所以Javascript代码中充满各种奇葩的写法，有时雾里看花，当然，能理解各型各色的写法也是对javascript语言特性更进一步的深入理解。其中( function(){…} )()和( function (){…} () )是两种javascript立即执行函数的常见写法。</p>
+<pre><code> 概念理解：函数声明、函数表达式、匿名函数
+
+1、 函数声明：function fnName () {…};使用function关键字声明一个函数，再指定一个函数名，叫函数声明。
+
+2、函数表达式 var fnName = function () {…};使用function关键字声明一个函数，但未给函数命名，最后将匿名函数赋予一个变量，叫函数表达式，这是最常见的函数表达式语法形式。
+
+3、匿名函数：function () {}; 使用function关键字声明一个函数，但未给函数命名，所以叫匿名函数，匿名函数属于函数表达式，匿名函数有很多作用，赋予一个变量则创建函数，赋予一个事件则成为事件处理程序或创建闭包等等。
+
+ 其中函数声明和函数表达式不同：
+
+1、Javascript引擎在解析javascript代码时会‘函数声明提升&apos;（Function declaration Hoisting）当前执行环境（作用域）上的函数声明，而函数表达式必须等到Javascirtp引擎执行到它所在行时，才会从上而下一行一行地解析函数表达式。
+
+2、函数表达式后面可以加括号立即调用该函数，函数声明不可以，只能以fnName()形式调用。</code></pre><p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">fnName();</span><br><span class="line">function fnName()&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line">//正常，因为‘提升&apos;了函数声明，函数调用可在函数声明之前</span><br><span class="line">  </span><br><span class="line">fnName();</span><br><span class="line">var fnName=function()&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line">//报错，变量fnName还未保存对函数的引用，函数调用必须在函数表达式之后</span><br><span class="line"> </span><br><span class="line">var fnName=function()&#123;</span><br><span class="line">  alert(&apos;Hello World&apos;);</span><br><span class="line">&#125;();</span><br><span class="line">//函数表达式后面加括号，当javascript引擎解析到此处时能立即调用函数</span><br><span class="line">function fnName()&#123;</span><br><span class="line">  alert(&apos;Hello World&apos;);</span><br><span class="line">&#125;();</span><br><span class="line">//不会报错，但是javascript引擎只解析函数声明，忽略后面的括号，函数声明不会被调用</span><br><span class="line">function()&#123;</span><br><span class="line">  console.log(&apos;Hello World&apos;); </span><br><span class="line">&#125;();</span><br><span class="line">//语法错误，虽然匿名函数属于函数表达式，但是未进行赋值操作，</span><br><span class="line">//所以javascript引擎将开头的function关键字当做函数声明，报错：要求需要一个函数名</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>在理解了一些函数基本概念后，回头看看( function(){…} )()和( function (){…} () )这两种立即执行函数的写法，最初我以为是一个括号包裹匿名函数，并后面加个括号立即调用函数，当时不知道为什么要加括号，后来明白，要在函数体后面加括号就能立即调用，则这个函数必须是函数表达式，不能是函数声明。</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出123,使用（）运算符</span><br><span class="line">&#125;)(123);</span><br><span class="line">  </span><br><span class="line">(function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出1234，使用（）运算符</span><br><span class="line">&#125;(1234));</span><br><span class="line">  </span><br><span class="line">!function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出12345,使用！运算符</span><br><span class="line">&#125;(12345);</span><br><span class="line">  </span><br><span class="line">+function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出123456,使用+运算符</span><br><span class="line">&#125;(123456);</span><br><span class="line">  </span><br><span class="line">-function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出1234567,使用-运算符</span><br><span class="line">&#125;(1234567);</span><br><span class="line">  </span><br><span class="line">var fn=function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出12345678，使用=运算符</span><br><span class="line">&#125;(12345678)</span><br></pre></td></tr></table></figure>
+
+<pre><code>可以看到输出结果，在function前面加！、+、 -甚至是逗号等到都可以起到函数定义后立即执行的效果，而（）、！、+、-、=等运算符，都将函数声明转换成函数表达式，消除了javascript引擎识别函数表达式和函数声明的歧义，告诉javascript引擎这是一个函数表达式，不是函数声明，可以在后面加括号，并立即执行函数的代码。加括号是最安全的做法，因为！、+、-等运算符还会和函数的返回值进行运算，有时造成不必要的麻烦。
+
+Javascript中没用私有作用域的概念，如果在多人开发的项目上，你在全局或局部作用域中声明了一些变量，可能会被其他人不小心用同名的变量给覆盖掉，根据javascript函数作用域链的特性，可以使用这种技术可以模仿一个私有作用域，用匿名函数作为一个“容器”，“容器”内部可以访问外部的变量，而外部环境不能访问“容器”内部的变量，所以( function(){…} )()内部定义的变量不会和外部的变量发生冲突，俗称“匿名包裹器”或“命名空间”。
+
+JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,undefined){…jquery代码…} (window)中，在全局作用域中调用JQuery代码时，可以达到保护JQuery内部变量的作用。</code></pre><h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p>回调函数：通过函数指针调用的函数，回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外一方调用的，用于该事件或条件的响应<br>一、前奏<br>在谈回调函数之前，先看下下面两段代码：<br>不妨猜测一下代码的结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function say (value) &#123;</span><br><span class="line">    alert(value);</span><br><span class="line">&#125;</span><br><span class="line">alert(say);</span><br><span class="line">alert(say(&apos;hi js.&apos;));</span><br></pre></td></tr></table></figure>
+
+<p>如果你测试了，就会发现：</p>
+<p>只写变量名  say   返回的将会是 say方法本身，以字符串的形式表现出来。<br>而在变量名后加()如say()返回的就会使say方法调用后的结果，这里是弹出value的值。</p>
+<p>二、js中函数可以作为参数传递<br>再看下面的两段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function say (value) &#123;</span><br><span class="line">    alert(value);</span><br><span class="line">&#125;</span><br><span class="line">function execute (someFunction, value) &#123;</span><br><span class="line">    someFunction(value);</span><br><span class="line">&#125;</span><br><span class="line">execute(say, &apos;hi js.&apos;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function execute (someFunction, value) &#123;</span><br><span class="line">    someFunction(value);</span><br><span class="line">&#125;</span><br><span class="line">execute(function(value)&#123;alert(value);&#125;, &apos;hi js.&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>上面第一段代码是将say方法作为参数传递给execute方法<br>第二段代码则是直接将匿名函数作为参数传递给execute方法</p>
+<p>实际上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function say (value) &#123;</span><br><span class="line">    alert(value);</span><br><span class="line">&#125;</span><br><span class="line">// 注意看下面,直接写say方法的方法名与下面的匿名函数可以认为是一个东西</span><br><span class="line">// 这样再看上面两段代码是不是对函数可以作为参数传递就更加清晰了</span><br><span class="line">say;</span><br><span class="line"></span><br><span class="line">function (value) &#123;</span><br><span class="line">    alert(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的say或者匿名函数就被称为回调函数。<br>1<br>三、回调函数易混淆点——传参<br>如果回调函数需要传参，如何做到，这里介绍两种解决方案。<br>将回调函数的参数作为与回调函数同等级的参数进行传递<br><img src="https://img-blog.csdn.net/20170210133828574?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYmFpZHVfMzIyNjIzNzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
+<p>回调函数的参数在调用回调函数内部创建<br><img src="https://img-blog.csdn.net/20170210134724086?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYmFpZHVfMzIyNjIzNzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/15/分享/" data-id="ck8l78qd9000ar4sn1izmqxuh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-css" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/22/css/" class="article-date">
+  <time datetime="2019-11-22T13:21:19.000Z" itemprop="datePublished">2019-11-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/css/">-css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/22/css/">css</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="实现半圆角半直角框"><a href="#实现半圆角半直角框" class="headerlink" title="实现半圆角半直角框"></a>实现半圆角半直角框</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">border-bottom-left-radius: 5px;</span><br><span class="line">border-top-left-radius: 5px;</span><br></pre></td></tr></table></figure>
+
+ <img src="https://img-blog.csdn.net/20170109175800034?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQmVpTGluWXU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ck8l78qd00001r4snd5wrz3ok" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css小知识点/">css小知识点</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-js中this的用法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/10/19/js中this的用法/" class="article-date">
@@ -141,7 +361,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ck1xccqs60000c4sn55mal7tq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ck8l78qd60005r4sntfz2ogk0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js中的this/">js中的this</a></li></ul>
@@ -253,7 +473,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/18/js闭包/" data-id="ck1xccqsw000gc4sn52gi106w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/18/js闭包/" data-id="ck8l78qds000yr4sntyb6fucs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js闭包/">js闭包</a></li></ul>
@@ -308,11 +528,12 @@
 <h2 id="简单排序方法"><a href="#简单排序方法" class="headerlink" title="简单排序方法"></a>简单排序方法</h2><h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">typedef int KeyType;</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    KeyType key;</span><br><span class="line">    InfoType otherinfo;</span><br><span class="line">&#125;RcdType;</span><br><span class="line">const MAXSIZE=20;</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    RcdType r[MAXSIZE+1];</span><br><span class="line">    int length;</span><br><span class="line">&#125;SqList;</span><br><span class="line">void SelectSort(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">    RcdType W;</span><br><span class="line">    int j,k,i;</span><br><span class="line">    for(i=1;i&lt;L.length;i++)&#123;</span><br><span class="line">        j=i;</span><br><span class="line">        for(k=i+1;k&lt;=L.length;k++)</span><br><span class="line">            if ( L.r[k].key &lt; L.r[j].key )  j =k ;</span><br><span class="line">        if ( i!=j ) </span><br><span class="line">             &#123; W=L.r[j]; L.r[j] =L.r[i]; L.r[i] = W;&#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>两种基本操作：1 比较两个关键字大小 2 将元素从一个位置移动到另一个位置<br>时间复杂度为 O(n^2)</p>
-<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>参考文章：<a href="https://www.cnblogs.com/skywang12345/p/3602162.html" target="_blank" rel="noopener">堆排序</a></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/排序/" data-id="ck1xccqsl0005c4sn2f5bjb1j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/排序/" data-id="ck8l78qde000fr4snae3erq1i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/经典排序/">经典排序</a></li></ul>
@@ -402,7 +623,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ck1xccqsd0001c4snr043xyz5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ck8l78qdb000br4sn2by13n3z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li></ul>
@@ -453,7 +674,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/30/hello-world/" data-id="ck1xccqsi0004c4sno3xu7xh3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/30/hello-world/" data-id="ck8l78qd70006r4sn16p88nqt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -473,7 +694,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/js/">-js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/日志/">-日志</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSAPP/">-CSAPP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">-css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">-js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/日志/">-日志</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
     </div>
   </div>
 
@@ -483,7 +704,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/经典排序/">经典排序</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css小知识点/">css小知识点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/经典排序/">经典排序</a></li></ul>
     </div>
   </div>
 
@@ -493,7 +714,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/经典排序/" style="font-size: 10px;">经典排序</a>
+      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/css小知识点/" style="font-size: 10px;">css小知识点</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/经典排序/" style="font-size: 10px;">经典排序</a>
     </div>
   </div>
 
@@ -502,7 +723,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
     </div>
   </div>
 
@@ -515,23 +736,23 @@
       <ul>
         
           <li>
+            <a href="/2020/02/17/CSAPP-two/">CSAPP two</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/06/CSAPP-七/">CSAPP 七</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/15/分享/">分享</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/22/css/">css</a>
+          </li>
+        
+          <li>
             <a href="/2019/10/19/js中this的用法/">js中this的用法</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/18/js闭包/">js闭包</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/14/排序/">排序</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/14/搭建博客/">搭建博客</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/30/hello-world/">Hello World</a>
           </li>
         
       </ul>
@@ -546,7 +767,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 zmy<br>
+      &copy; 2020 zmy<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
