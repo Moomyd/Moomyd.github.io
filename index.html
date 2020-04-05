@@ -66,6 +66,144 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-生成器和promise" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/05/生成器和promise/" class="article-date">
+  <time datetime="2020-04-04T17:29:39.912Z" itemprop="datePublished">2020-04-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/js/">-js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/05/生成器和promise/">生成器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="生成器函数"><a href="#生成器函数" class="headerlink" title="生成器函数"></a>生成器函数</h3><p>生成器（generator）是一种特殊类型的函数。当从头到尾运行标准函数时，它最多只生成一个值。然而生成器函数会在几次运行请求中暂停，因此每次运行都可能会生成一个值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">myGenertor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">yield</span> <span class="string">'test1'</span>;</span><br><span class="line">   <span class="keyword">yield</span> <span class="string">'test2'</span>;</span><br><span class="line">   <span class="keyword">yield</span> <span class="string">'test3'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> aa <span class="keyword">of</span> myGenertor())&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(aa)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，这个程序依次输出的是test1.test2和test3.在定义函数的时候在function后面加一个*表示这是一个生成器函数，并通过关键字yield返回相应的值，可以通过它来指定调用迭代器的next()方法时的返回值及返回顺序。并且，对于生成器函数来说，它不会像普通函数一样停止执行，而是当一个值的请求到来后，生成器就会从上次离开的地方继续开始执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">myGenertor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> bb = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line">    bb++;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">let</span> aa <span class="keyword">of</span> myGenertor())&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(aa)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>从上面这个例子可知，第一次调用myGenenrtor这个生成器函数的时候，首先定义了一个名为bb的变量并且初始化为1，然后将这个值返回。第二次调用的时候，生成器不会像普通函数那样，再次从函数的开始执行，而是从上次执行的语句之后又开始执行b++，并返回此时bb的值为2.然后继续这个过程，返回的值是3</p>
+<h3 id="通过迭代对象控制生成器"><a href="#通过迭代对象控制生成器" class="headerlink" title="通过迭代对象控制生成器"></a>通过迭代对象控制生成器</h3><p>在 JavaScript 中，迭代器是一个对象，它定义一个序列，并在终止时可能返回一个返回值。 更具体地说，迭代器是通过使用 next() 方法实现 Iterator protocol 的任何一个对象，该方法返回具有两个属性的对象： value，这是序列中的 next 值；和 done ，如果已经迭代到序列中的最后一个值，则它为 true 。如果 value 和 done 一起存在，则它是迭代器的返回值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">myGenertor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> bb = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line">    bb++;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> myIterator = myGenertor();</span><br><span class="line"><span class="built_in">console</span>.log(myIterator);</span><br><span class="line"><span class="built_in">console</span>.log(myIterator.next())</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myIterator.next())</span><br><span class="line"><span class="built_in">console</span>.log(myIterator.next())</span><br><span class="line"><span class="comment">//执行的结果为</span></span><br><span class="line"><span class="comment">//&#123;&#125;</span></span><br><span class="line"><span class="comment">//&#123; value: 1, done: false &#125;</span></span><br><span class="line"><span class="comment">//&#123; value: 2, done: false &#125;</span></span><br><span class="line"><span class="comment">//&#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面这个例子中，依然定义了一个生成器函数myGenertor，接下来调用这个生成器函数，但这一次赋给了一个名为myIterator的一个变量，如果直接输出这个变量，得到的是一个空的对象，只有对这个对象执行接口方法next(),生成器才开始执行代码，当代码执行到yield关键字的时候，生成一个中间结果并且返回一个新的对象，其中封装了一个结果值和指示完成的指示器。每当生成器生成一个值之后，生成器就会非阻塞挂起，等待下一次请求的到达。当没有可执行的代码的时候，生成器就会返回一个value为“undefined”，done为true的值，表示他的状态已完成。</p>
+<h3 id="利用生成器函数把执行权交给下一个生成器"><a href="#利用生成器函数把执行权交给下一个生成器" class="headerlink" title="利用生成器函数把执行权交给下一个生成器"></a>利用生成器函数把执行权交给下一个生成器</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">g1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">g2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">yield</span>* g1();</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> iterator = g2();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: 1, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: 2, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: 3, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: 4, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: 5, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>​ 上面这个实例中，在迭代器上使用yield*操作符，程序会跳转到另一个生成器上执行，这一切对于最初调用的迭代器而言都是透明的。</p>
+<h3 id="生成器异常和处理"><a href="#生成器异常和处理" class="headerlink" title="生成器异常和处理"></a>生成器异常和处理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">myGenerator</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">yield</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"出错了！！"</span> + e)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> test1 = myGenerator();</span><br><span class="line"><span class="built_in">console</span>.log(test1.next());</span><br><span class="line">test1.throw(<span class="string">"迭代器抛出了一个错误"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//  运行结果：</span></span><br><span class="line"><span class="comment">// &#123; value: 'hello', done: false &#125;</span></span><br><span class="line"><span class="comment">// 出错了！！迭代器抛出了一个错误</span></span><br></pre></td></tr></table></figure>
+
+<p>这里将生成器中全部的代码装入try-catch块中去。在创建了迭代器之后，通过调用迭代器中的throw方法抛出异常，并利用生成器函数中的catch语句进行异常的接受和处理。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/05/生成器和promise/" data-id="ck8mcz8wd000fpwsn48z934gc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-面向对象与原型" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/04/面向对象与原型/" class="article-date">
+  <time datetime="2020-04-04T05:57:37.000Z" itemprop="datePublished">2020-04-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/js/">-js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/04/面向对象与原型/">面向对象的封装继承</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="js面型对象编程"><a href="#js面型对象编程" class="headerlink" title="js面型对象编程"></a>js面型对象编程</h1><h2 id="原型继承"><a href="#原型继承" class="headerlink" title="原型继承"></a>原型继承</h2><p>与其它编程语言不一样的是，javascript的面向对象并非依赖于抽象的类，而是通过原型链，将一个个具体的对象实例进行连接，位于原型链下游的对象实例可以读取/使用位于上游的对象实例的属性/方法。<br>万物之源：js的原生类型–object<br>javascript定义了最基础的对象类型Object，并且为这一对象类型定义了许多成员方法。其它许多原生对象类型，实际上都是继承自Object，比如说Function、Date等。</p>
+<h3 id="生成对象实例的new和构造函数constructor"><a href="#生成对象实例的new和构造函数constructor" class="headerlink" title="生成对象实例的new和构造函数constructor"></a>生成对象实例的new和构造函数constructor</h3><p>在其它编程语言中，new往往也是用来生成对象实例的，用法一般是这样：new ClassName[([arguments])]，而生成出来的对象实例也被冠以“ClassName对象”这样的称谓；而javascript则大不相同，由于原生没有类这一概念，因此构造函数便取而代之：new constructor[([arguments])]，称谓也改为“constructor对象”或”constructor类型的对象”，构造函数名直接就等同于数据类型</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;    <span class="comment">//有一函数名A。（若是用来生成对象，则称为构造函数）</span></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> A();    <span class="comment">//使用构造函数A来生成实例对象obj</span></span><br><span class="line"><span class="built_in">console</span>.dir(obj);    <span class="comment">//打印实例对象obj</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><p>要想生成对象实例，必须使用构造函数(constructor)，即便是var arr = [];或var obj = {}这样的形式，javascript也会在内部调用Function()、Object()这样预设的构造函数（由于是预设的构造函数/数据类型，因此不需显式指定）。</p>
+<p><img src="https://segmentfault.com/img/bVr41O"></p>
+<p>我们略过一些与面向对象无关的属性（arguments/caller/length/name），以及其函数作用域(<function scope>)，剩下的就是与面向对象息息相关的俩属性了：prototype和<strong>proto</strong>。</function></p>
+<h4 id="构造函数中的prototype属性"><a href="#构造函数中的prototype属性" class="headerlink" title="构造函数中的prototype属性"></a>构造函数中的prototype属性</h4><p>prototype属性指定了使用该构造函数生成的对象实例继承了哪个对象实例。<br>用function A()作为构造函数实例化的obj实际上就是继承了那默认的Object类型的对象实例，虽然obj本身并没有自定义的属性/方法，但是能通过obj调用继承回来的所有属性/方法。</p>
+<h4 id="对象继承的单向链条：原型链"><a href="#对象继承的单向链条：原型链" class="headerlink" title="对象继承的单向链条：原型链"></a>对象继承的单向链条：原型链</h4><p>既然构造函数的prototype属性能指定继承的对象实例，那么只要我们修改这prototype属性，使其指向其它对象实例，那么就可以达到实现继承任意对象的效果了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> car = &#123;    <span class="comment">//一个普通的Object类型实例对象</span></span><br><span class="line">    status: <span class="string">'stop'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">audi</span>(<span class="params"></span>) </span>&#123;&#125;    <span class="comment">//构造函数audi</span></span><br><span class="line">audi.prototype = car;    <span class="comment">//修改构造函数audi的prototype属性，使其指向car</span></span><br><span class="line"><span class="built_in">console</span>.dir(audi);</span><br><span class="line"><span class="keyword">var</span> audiQ3 = <span class="keyword">new</span> audi();    <span class="comment">//利用构造函数audi生成的数据类型为audi的实例对象</span></span><br><span class="line"><span class="built_in">console</span>.dir(audiQ3);</span><br></pre></td></tr></table></figure>
+
+<p>audi的结果<br><img src="https://segmentfault.com/img/bVr5fu"></p>
+<p>从audi.prototype.status可以看出，此时的audi.prototype的确是指向{status: ‘stop’}这个对象实例了。<br>audiQ3：<br><img src="https://segmentfault.com/img/bVr5fQ"></p>
+<p>audiQ3这一实例对象的数据类型是audi（与构造函数同名），另外，audiQ3其下只有<strong>proto</strong>这唯一一个成员属性，继续查看<strong>proto</strong>，里面有status: “stop”。<strong>proto</strong>属性是指向{status: ‘stop’}这个对象实例的一个引用。</p>
+<h4 id="原型链的接点：proto"><a href="#原型链的接点：proto" class="headerlink" title="原型链的接点：proto"></a>原型链的接点：<em>proto</em></h4><p>通过对象实例中的<strong>proto</strong>属性，继承的对象实例得以与被继承的对象实例链接起来，于是，一环扣一环，形成了一条由对象实例、指向被继承对象实例的引用所构成的链条：原型链。</p>
+<p><img src="https://segmentfault.com/img/bVr5ix"></p>
+<p>由于<strong>proto</strong>是由构造函数的prototype属性决定的（也可以说是prototype直接赋值给<strong>proto</strong>），因此我们可以通过修改prototype属性来操纵这条原型链。</p>
+<h4 id="js原生支持的原型继承方式-Object-create"><a href="#js原生支持的原型继承方式-Object-create" class="headerlink" title="js原生支持的原型继承方式:Object.create"></a>js原生支持的原型继承方式:Object.create</h4><p>ECMAScript 5定义了一种原生的原型继承方式:Object.create，我们可以通过这种方式更简便地实现原型继承。<br>语法：<br>Object.create(proto, [ propertiesObject ])<br>参数：<br>proto 一个对象，作为新创建对象的原型。<br>propertiesObject 可选。该参数对象是一组属性与值，该对象的属性名称将是新创建的对象的属性名称，值是属性描述符（这些属性描述符的结构与Object.defineProperties()的第二个参数一样）。注意：该参数对象不能是undefined，另外只有该对象中自身拥有的可枚举的属性才有效，也就是说该对象的原型链上属性是无效的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> car = &#123;</span><br><span class="line">    status: <span class="string">'stop'</span>,</span><br><span class="line">    start: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.status = <span class="string">'running'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> audiQ3 = <span class="built_in">Object</span>.create(car);</span><br><span class="line"><span class="built_in">console</span>.dir(audiQ3);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://segmentfault.com/img/bVr79C"></p>
+<p>实际上，这是ECMAScript 5给我们做了一下封装，相当于：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">proto</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="keyword">constructor</span> = function()&#123;&#125;</span><br><span class="line">  <span class="keyword">constructor</span>.prototype = proto;</span><br><span class="line">  return new <span class="keyword">constructor</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>封装：把客观事物封装成抽象的类，隐藏属性和方法的实现细节，仅对外公开接口。<br>模拟class概念。类其实就是保存了一个函数的变量这个函数有自己的属性和方法。将属性和方法组成一个类的过程就是封装</p>
+<h3 id="通过构造函数"><a href="#通过构造函数" class="headerlink" title="通过构造函数"></a>通过构造函数</h3><p>javascript提供了一个构造函数（Constructor）模式，用来在创建对象时初始化对象。<br>构造函数的特点：</p>
+<ul>
+<li>首字母大写（建议构造函数首字母大写，即使用大驼峰命名，非构造函数首字母小写）</li>
+<li>内部使用this</li>
+<li>使用 new生成实例<br>通过构造函数添加属性和方法实际上也就是通过this添加属性和方法。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name,color</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.color = color;</span><br><span class="line">        <span class="keyword">this</span>.eat = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            alert(<span class="string">'吃老鼠'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//生成实例</span></span><br><span class="line"><span class="keyword">var</span> cat1 = <span class="keyword">new</span> Cat(<span class="string">'tom'</span>,<span class="string">'red'</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="通过原型prototype"><a href="#通过原型prototype" class="headerlink" title="通过原型prototype"></a>通过原型prototype</h3><p>在类上通过this方式添加属性和对象时，我们实例化一个新对象的时候，this指向的属性和方法都会得到相应的创建，也就是会在内存中复制一份，这样就造成了内存的浪费。所以我们考虑让实例化的类所使用的方法直接使用指针指向同一个方法<br>Javascript规定，每一个构造函数都有一个prototype属性，指向另一个对象。这个对象的所有属性和方法，都会被构造函数的实例继承。<br>也就是说，对于那些不变的属性和方法，我们可以直接将其添加在类的prototype 对象上。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">　<span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params">name,color</span>)</span>&#123;</span><br><span class="line">　　　　<span class="keyword">this</span>.name = name;</span><br><span class="line">　　　　<span class="keyword">this</span>.color = color;</span><br><span class="line">　　&#125;</span><br><span class="line">　　Cat.prototype.type = <span class="string">"猫科动物"</span>;</span><br><span class="line">　　Cat.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="string">"吃老鼠"</span>)&#125;;</span><br><span class="line"><span class="comment">//生成实例</span></span><br><span class="line"><span class="keyword">var</span> cat1 = <span class="keyword">new</span> Cat(<span class="string">"大毛"</span>,<span class="string">"黄色"</span>);</span><br><span class="line">　　<span class="keyword">var</span> cat2 = <span class="keyword">new</span> Cat(<span class="string">"二毛"</span>,<span class="string">"黑色"</span>);</span><br><span class="line">　　alert(cat1.type); <span class="comment">// 猫科动物</span></span><br><span class="line">　　cat1.eat(); <span class="comment">// 吃老鼠</span></span><br></pre></td></tr></table></figure>
+
+<p>这时所有实例的type属性和eat()方法，其实都是同一个内存地址，指向prototype对象，因此就提高了运行效率。</p>
+<h3 id="在类的外部通过-语法添加"><a href="#在类的外部通过-语法添加" class="headerlink" title="在类的外部通过.语法添加"></a>在类的外部通过.语法添加</h3><p>我们还可以在类的外部通过. 语法进行添加，因为在实例化对象的时候，并不会执行到在类外部通过. 语法添加的属性，所以实例化之后的对象是不能访问到. 语法所添加的对象和属性的，只能通过该类访问。</p>
+<h3 id="三者区别"><a href="#三者区别" class="headerlink" title="三者区别"></a>三者区别</h3><p>通过构造函数、原型和. 语法三者都可以在类上添加属性和方法。但是三者是有一定的区别的。<br>构造函数：通过this添加的属性和方法总是指向当前对象的，所以在实例化的时候，通过this添加的属性和方法都会在内存中复制一份，这样就会造成内存的浪费。但是这样创建的好处是即使改变了某一个对象的属性或方法，不会影响其他的对象（因为每一个对象都是复制的一份）。<br>原型：通过原型继承的方法并不是自身的，我们要在原型链上一层一层的查找，这样创建的好处是只在内存中创建一次，实例化的对象都会指向这个prototype 对象，但是这样做也有弊端，因为实例化的对象的原型都是指向同一内存地址，改动其中的一个对象的属性可能会影响到其他的对象<br>. 语法：在类的外部通过. 语法创建的属性和方法只会创建一次，但是这样创建的实例化的对象是访问不到的，只能通过类的自身访问</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/04/面向对象与原型/" data-id="ck8mcz8wz0012pwsnhx3do2xk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-CSAPP-two" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/02/17/CSAPP-two/" class="article-date">
@@ -97,7 +235,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/17/CSAPP-two/" data-id="ck8l78qcv0000r4sneqjruvpq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/17/CSAPP-two/" data-id="ck8mcz8w40004pwsnfe602vgw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li></ul>
@@ -150,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/06/CSAPP-七/" data-id="ck8l78qd40004r4sni6obvbb2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/06/CSAPP-七/" data-id="ck8mcz8vz0001pwsn82ftgrrm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/七-链接/">七 链接</a></li></ul>
@@ -231,7 +369,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/分享/" data-id="ck8l78qd9000ar4sn1izmqxuh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/分享/" data-id="ck8mcz8we000hpwsnj6zld35z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -274,7 +412,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ck8l78qd00001r4snd5wrz3ok" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ck8mcz8vq0000pwsnt2qvg319" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css小知识点/">css小知识点</a></li></ul>
@@ -361,7 +499,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ck8l78qd60005r4sntfz2ogk0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ck8mcz8w50005pwsnub32qr9l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js中的this/">js中的this</a></li></ul>
@@ -473,7 +611,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/18/js闭包/" data-id="ck8l78qds000yr4sntyb6fucs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/18/js闭包/" data-id="ck8mcz8wy0011pwsnogj9lwys" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js闭包/">js闭包</a></li></ul>
@@ -533,7 +671,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/排序/" data-id="ck8l78qde000fr4snae3erq1i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/排序/" data-id="ck8mcz8wa000bpwsncsov6u3w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/经典排序/">经典排序</a></li></ul>
@@ -623,7 +761,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ck8l78qdb000br4sn2by13n3z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ck8mcz8w9000apwsnc8tkdwld" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li></ul>
@@ -635,56 +773,12 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/09/30/hello-world/" class="article-date">
-  <time datetime="2019-09-30T02:35:50.198Z" itemprop="datePublished">2019-09-30</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/30/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/30/hello-world/" data-id="ck8l78qd70006r4sn16p88nqt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -704,7 +798,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css小知识点/">css小知识点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/经典排序/">经典排序</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css小知识点/">css小知识点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/经典排序/">经典排序</a></li></ul>
     </div>
   </div>
 
@@ -714,7 +808,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/css小知识点/" style="font-size: 10px;">css小知识点</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/经典排序/" style="font-size: 10px;">经典排序</a>
+      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的面向对象/" style="font-size: 10px;">-js中的面向对象</a> <a href="/tags/css小知识点/" style="font-size: 10px;">css小知识点</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/经典排序/" style="font-size: 10px;">经典排序</a>
     </div>
   </div>
 
@@ -723,7 +817,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
     </div>
   </div>
 
@@ -736,6 +830,14 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       <ul>
         
           <li>
+            <a href="/2020/04/05/生成器和promise/">生成器</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/04/面向对象与原型/">面向对象的封装继承</a>
+          </li>
+        
+          <li>
             <a href="/2020/02/17/CSAPP-two/">CSAPP two</a>
           </li>
         
@@ -745,14 +847,6 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
         
           <li>
             <a href="/2019/12/15/分享/">分享</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/22/css/">css</a>
-          </li>
-        
-          <li>
-            <a href="/2019/10/19/js中this的用法/">js中this的用法</a>
           </li>
         
       </ul>
