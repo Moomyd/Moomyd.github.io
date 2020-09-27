@@ -66,6 +66,220 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-render-props" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/27/render-props/" class="article-date">
+  <time datetime="2020-09-27T15:04:21.000Z" itemprop="datePublished">2020-09-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/27/render-props/">render props</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> “render prop” 是指一种在 React 组件之间使用一个值为函数的 prop 共享代码的简单技术</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/09/27/render-props/" data-id="ckflaetmw000bc4sn5bds8bcs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/props/">props</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-React-Hooks" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/21/React-Hooks/" class="article-date">
+  <time datetime="2020-09-21T14:58:23.000Z" itemprop="datePublished">2020-09-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/21/React-Hooks/">React Hooks</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Hooks 是一项新功能提案，可让您在不编写类的情况下使用 state(状态) 和其他 React 功能。</p>
+<h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><h4 id="在组件之间重用有状态逻辑很困难"><a href="#在组件之间重用有状态逻辑很困难" class="headerlink" title="在组件之间重用有状态逻辑很困难"></a>在组件之间重用有状态逻辑很困难</h4><p>React并没有为组件提供一种可重复使用行为的方法（例如，将其关联到 store 里）。如果你已经使用了 React 一段时间，你可能会熟悉 render props(渲染属性) 和 高阶组件的模式尝试解决这个问题。但是这些模式要求您在使用它们时重构组件，这可能很麻烦并且使代码更难以跟踪。如果你看一下 React DevTools 中典型的 React 应用程序，你可能会发现一个包含提供者，消费者，高阶组件，渲染属性和其他抽象层的组件所包裹起来的组件。虽然我们可以 在 DevTools 中过滤它们 ，但这会引出了一个更深层次的基本问题：React 需要一个更好的原语来共享有状态逻辑。<br>使用 Hook ，您可以从组件中提取有状态逻辑，以便可以独立测试并重用。Hooks 允许您在不更改组件层次结构的情况下重用有状态逻辑。 这样可以轻松地在许多组件个之间或与社区共享 Hooks 。</p>
+<h4 id="复杂的组件变得难以理解"><a href="#复杂的组件变得难以理解" class="headerlink" title="复杂的组件变得难以理解"></a>复杂的组件变得难以理解</h4><p>我们常常不得不维护一些组件，这些组件一开始很简单，但后来却变成了一堆难以管理的有状态逻辑和副作用。每个生命周期方法通常包含一组不相关的逻辑。例如，组件可能在componentDidMount 和 componentDidUpdate中执行一些数据获取。然而，相同的 componentDidMount 方法可能还包含一些不相关的逻辑，它们设置事件监听器，并在 componentWillUnmount 中执行清理。一起更改的相互关联的代码会被分离，但是完全不相关的代码最终会组合在一个方法中。这很容易引入错误和不一致。<br>在许多情况下，将这些组件分解成更小的组件是不可能的，因为有状态逻辑到处都是。测试它们也很困难。这也是许多人喜欢将 React 与单独的状态管理库结合使用的原因之一。然而，这通常会引入太多的抽象，需要在不同的文件之间跳转，并且使得重用组件更加困难。</p>
+<h4 id="人和机器都容易混淆的-类-class"><a href="#人和机器都容易混淆的-类-class" class="headerlink" title="人和机器都容易混淆的 类(class)"></a>人和机器都容易混淆的 类(class)</h4><p>类组件可能会鼓励无意识的模式，使这些优化回退到较慢的路径。类(class)也为今天的工具提出了问题。例如，类不能很好地压缩，并且它们使得热更新加载变得片状和不可靠。我们希望提供一种 API，使代码更可能的留在可优化的路径上。<br>为了解决这些问题，Hooks 允许您在没有类的情况下使用更多 React 的功能。 从概念上讲，React 组件一直更接近函数。 Hooks 拥抱函数，但不会牺牲 React 的实际精神。 Hooks 提供了对命令式逃生舱的访问，并且不需要您学习复杂的函数式或反应式编程技术。</p>
+<h2 id="State-Hook"><a href="#State-Hook" class="headerlink" title="State Hook"></a>State Hook</h2><p>Hook 是一些可以让你在函数组件里“钩入” React state 及生命周期等特性的函数。Hook 不能在 class 组件中使用 —— 这使得你不使用 class 也能使用 React。<br>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState &#125; from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">function Example() &#123;</span><br><span class="line">  // 声明一个叫 &quot;count&quot; 的 state 变量</span><br><span class="line">  const [count, setCount] = useState(0);</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;p&gt;You clicked &#123;count&#125; times&lt;/p&gt;</span><br><span class="line">      &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;</span><br><span class="line">        Click me</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>等价class</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Example extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      count: 0</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;p&gt;You clicked &#123;this.state.count&#125; times&lt;/p&gt;</span><br><span class="line">        &lt;button onClick=&#123;() =&gt; this.setState(&#123; count: this.state.count + 1 &#125;)&#125;&gt;</span><br><span class="line">          Click me</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>React函数组件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const Example = (props) =&gt; &#123;</span><br><span class="line">  // 你可以在这使用 Hook</span><br><span class="line">  return &lt;div /&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Example(props) &#123;</span><br><span class="line">  // 你可以在这使用 Hook</span><br><span class="line">  return &lt;div /&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>之前叫“无状态组件”引入了使用React state的能力叫做“函数组件”<br>useState定义了一个“state”变量（count）它与class中的this.state一样。里面唯一的参数就是初始state。不同于 class 的是，我们可以按照需要使用数字或字符串对其进行赋值，而不一定是对象。返回值为：当前 state 以及更新 state 的函数。这就是我们写 const [count, setCount] = useState() 的原因。这与 class 里面 this.state.count 和 this.setState 类似，唯一区别就是你需要成对的获取它们。</p>
+<h2 id="Effect-Hook"><a href="#Effect-Hook" class="headerlink" title="Effect Hook"></a>Effect Hook</h2><p>useEffect 就是一个 Effect Hook，给函数组件增加了操作副作用（数据获取、订阅或者手动修改过 DOM）的能力。它跟 class 组件中的 componentDidMount、componentDidUpdate 和 componentWillUnmount 具有相同的用途，只不过被合并成了一个 API。<br>当你调用 useEffect 时，就是在告诉 React 在完成对 DOM 的更改后运行你的“副作用”函数。由于副作用函数是在组件内声明的，所以它们可以访问到组件的 props 和 state。默认情况下，React 会在每次渲染后调用副作用函数 —— 包括第一次渲染的时候。<br>副作用函数还可以通过返回一个函数来指定如何“清除”副作用。</p>
+<h3 id="无需清除的-effect"><a href="#无需清除的-effect" class="headerlink" title="无需清除的 effect"></a>无需清除的 effect</h3><p>有时候，我们只想在 React 更新 DOM 之后运行一些额外的代码。比如发送网络请求，手动变更 DOM，记录日志，这些都是常见的无需清除的操作。因为我们在执行完这些操作之后，就可以忽略他们了。让我们对比一下使用 class 和 Hook 都是怎么实现这些副作用的。<br>在class中示例：<br>这是一个 React 计数器的 class 组件。它在 React 对 DOM 进行操作之后，立即更新了 document 的 title 属性<br>我们希望在组件加载和更新时执行同样的操作。从概念上说，我们希望它在每次渲染之后执行 —— 但 React 的 class 组件没有提供这样的方法。即使我们提取出一个方法，我们还是要在两个地方调用它。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Example extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.state = &#123;</span><br><span class="line">      count: 0</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    document.title = `You clicked $&#123;this.state.count&#125; times`;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidUpdate() &#123;</span><br><span class="line">    document.title = `You clicked $&#123;this.state.count&#125; times`;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;p&gt;You clicked &#123;this.state.count&#125; times&lt;/p&gt;</span><br><span class="line">        &lt;button onClick=&#123;() =&gt; this.setState(&#123; count: this.state.count + 1 &#125;)&#125;&gt;</span><br><span class="line">          Click me</span><br><span class="line">        &lt;/button&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Hook示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState, useEffect &#125; from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">function Example() &#123;</span><br><span class="line">  const [count, setCount] = useState(0);</span><br><span class="line"></span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    document.title = `You clicked $&#123;count&#125; times`;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;p&gt;You clicked &#123;count&#125; times&lt;/p&gt;</span><br><span class="line">      &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;</span><br><span class="line">        Click me</span><br><span class="line">      &lt;/button&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用这个 Hook，你可以告诉 React 组件需要在渲染后执行某些操作。React 会保存你传递的函数（我们将它称之为 “effect”），并且在执行 DOM 更新之后调用它。在这个 effect 中，我们设置了 document 的 title 属性，不过我们也可以执行数据获取或调用其他命令式的 API。<br>将 useEffect 放在组件内部让我们可以在 effect 中直接访问 count state 变量（或其他 props）。我们不需要特殊的 API 来读取它 —— 它已经保存在函数作用域中。Hook 使用了 JavaScript 的闭包机制，而不用在 JavaScript 已经提供了解决方案的情况下，还引入特定的 React API。<br>默认情况下，它在第一次渲染之后和每次更新之后都会执行。<br>每次我们重新渲染，都会生成新的 effect，替换掉之前的。某种意义上讲，effect 更像是渲染结果的一部分 —— 每个 effect “属于”一次特定的渲染。<br>与 componentDidMount 或 componentDidUpdate 不同，使用 useEffect 调度的 effect 不会阻塞浏览器更新屏幕，这让你的应用看起来响应更快。</p>
+<h3 id="需要清除的effect"><a href="#需要清除的effect" class="headerlink" title="需要清除的effect"></a>需要清除的effect</h3><p>有一些副作用是需要清除的。例如订阅外部数据源。这种情况下，清除工作是非常重要的，可以防止引起内存泄露<br>使用class示例：<br>在 React class 中，你通常会在 componentDidMount 中设置订阅，并在 componentWillUnmount 中清除它。例如，假设我们有一个 ChatAPI 模块，它允许我们订阅好友的在线状态。以下是我们如何使用 class 订阅和显示该状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class FriendStatus extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.state = &#123; isOnline: null &#125;;</span><br><span class="line">    this.handleStatusChange = this.handleStatusChange.bind(this);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    ChatAPI.subscribeToFriendStatus(</span><br><span class="line">      this.props.friend.id,</span><br><span class="line">      this.handleStatusChange</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  componentWillUnmount() &#123;</span><br><span class="line">    ChatAPI.unsubscribeFromFriendStatus(</span><br><span class="line">      this.props.friend.id,</span><br><span class="line">      this.handleStatusChange</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  handleStatusChange(status) &#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      isOnline: status.isOnline</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    if (this.state.isOnline === null) &#123;</span><br><span class="line">      return &apos;Loading...&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    return this.state.isOnline ? &apos;Online&apos; : &apos;Offline&apos;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你会注意到 componentDidMount 和 componentWillUnmount 之间相互对应。使用生命周期函数迫使我们拆分这些逻辑代码，即使这两部分代码都作用于相同的副作用。<br>使用hook示例：<br>你可能认为需要单独的 effect 来执行清除操作。但由于添加和删除订阅的代码的紧密性，所以 useEffect 的设计是在同一个地方执行。如果你的 effect 返回一个函数，React 将会在执行清除操作时调用它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState, useEffect &#125; from &apos;react&apos;;</span><br><span class="line"></span><br><span class="line">function FriendStatus(props) &#123;</span><br><span class="line">  const [isOnline, setIsOnline] = useState(null);</span><br><span class="line"></span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    function handleStatusChange(status) &#123;</span><br><span class="line">      setIsOnline(status.isOnline);</span><br><span class="line">    &#125;</span><br><span class="line">    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);</span><br><span class="line">    // Specify how to clean up after this effect:</span><br><span class="line">    return function cleanup() &#123;</span><br><span class="line">      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  if (isOnline === null) &#123;</span><br><span class="line">    return &apos;Loading...&apos;;</span><br><span class="line">  &#125;</span><br><span class="line">  return isOnline ? &apos;Online&apos; : &apos;Offline&apos;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这是 effect 可选的清除机制。每个 effect 都可以返回一个清除函数。如此可以将添加和移除订阅的逻辑放在一起。它们都属于 effect 的一部分。<br>React 会在组件卸载的时候执行清除effect操作。正如之前学到的，effect 在每次渲染的时候都会执行。这就是为什么 React 会在执行当前 effect 之前对上一个 effect 进行清除。<br>并不是必须为 effect 中返回的函数命名。这里我们将其命名为 cleanup 是为了表明此函数的目的，但其实也可以返回一个箭头函数或者给起一个别的名字。</p>
+<h3 id="使用effect的提示"><a href="#使用effect的提示" class="headerlink" title="使用effect的提示"></a>使用effect的提示</h3><p>使用多个 Effect 实现关注点分离.React 将按照 effect 声明的顺序依次调用组件中的每一个 effect。<br>每次重新渲染时执行effect的清除阶段。调用一个新的 effect 之前对前一个 effect 进行清理。此默认行为保证了一致性，避免了在 class 组件中因为没有处理更新逻辑而导致常见的 bug。<br>如果某些特定值在两次重渲染之间没有发生变化，你可以通知 React 跳过对 effect 的调用，只要传递数组作为 useEffect 的第二个可选参数即可<br>effect 的清除机制可以避免 componentDidUpdate 和 componentWillUnmount 中的重复，同时让相关的代码关联更加紧密，帮助我们避免一些 bug。我们还看到了我们如何根据 effect 的功能分隔他们，这是在 class 中无法做到的。</p>
+<h2 id="Hook使用规则"><a href="#Hook使用规则" class="headerlink" title="Hook使用规则"></a>Hook使用规则</h2><ul>
+<li>只能在函数最外层调用 Hook。不要在循环、条件判断或者子函数中调用。</li>
+<li>只能在 React 的函数组件中调用 Hook。不要在其他 JavaScript 函数中调用。<br>React依靠Hook的调用顺序去知道state对应的useState<h2 id="自定义Hook"><a href="#自定义Hook" class="headerlink" title="自定义Hook"></a>自定义Hook</h2>当我们想在两个函数之间共享逻辑时，我们会把它提取到第三个函数中。而组件和 Hook 都是函数，所以也同样适用这种方式。<br>自定义 Hook 是一个函数，其名称以 “use” 开头，函数内部可以调用其他的 Hook。<br>自定义 Hook 是一种自然遵循 Hook 设计的约定，而并不是 React 的特性。<br>自定义 Hook 是一种重用状态逻辑的机制(例如设置为订阅并存储当前值)，所以每次使用自定义 Hook 时，其中的所有 state 和副作用都是完全隔离的。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/09/21/React-Hooks/" data-id="ckflaetnt0014c4sn0mnh322n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hooks/">Hooks</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-React核心设计思想" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/09/17/React核心设计思想/" class="article-date">
+  <time datetime="2020-09-17T14:48:53.000Z" itemprop="datePublished">2020-09-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React/">React</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/17/React核心设计思想/">React&#39;s core design ideas</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="声明式渲染"><a href="#声明式渲染" class="headerlink" title="声明式渲染"></a>声明式渲染</h2><h3 id="主要的编程范式："><a href="#主要的编程范式：" class="headerlink" title="主要的编程范式："></a>主要的编程范式：</h3><ul>
+<li>命令式编程：命令“机器”如何去做事情(how)，这样不管你想要的是什么(what)，它都会按照你的命令实现。</li>
+<li>声明式编程：告诉“机器”你想要的是什么(what)，让机器想出如何去做(how)。<h3 id="模板渲染"><a href="#模板渲染" class="headerlink" title="模板渲染"></a>模板渲染</h3>渲染：模板 =&gt; HTML =&gt; 页面视图<br>发生在服务器的叫后端模板渲染<br>发生在客户端的叫前端模板渲染<h3 id="React声明式渲染"><a href="#React声明式渲染" class="headerlink" title="React声明式渲染"></a>React声明式渲染</h3>和普通模板不同的是，React 模板写在 JS 文件中，而不是 html 的 <code>&lt;script&gt;</code>标签中。能使用所有 JS 语法，而不只有模板语法，所以更加灵活。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function formatName(user) &#123;</span><br><span class="line">  return user.firstName + &apos; &apos; + user.lastName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 数据</span><br><span class="line">const user = &#123;</span><br><span class="line">  firstName: &apos;Harper&apos;,</span><br><span class="line">  lastName: &apos;Perez&apos;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 模板</span><br><span class="line">const element = (</span><br><span class="line">  &lt;h1&gt;</span><br><span class="line">    Hello, &#123;formatName(user)&#125;!</span><br><span class="line">  &lt;/h1&gt;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">// 渲染</span><br><span class="line">ReactDOM.render(</span><br><span class="line">  element,</span><br><span class="line">  document.getElementById(&apos;root&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>React 可局部渲染，且只渲染改变了的数据。纯模板只能整体渲染。<br>高效的局部渲染意味着，开发者 只需要维护可变的数据 state (what) ，让 react 框架帮助我们处理 DOM 操作(what)。<br>通过 setState 告诉 react 什么数据变了，React 会自动更新数据改变部分的视图</p>
+<h3 id="完成的渲染流程"><a href="#完成的渲染流程" class="headerlink" title="完成的渲染流程"></a>完成的渲染流程</h3><p>初始化的渲染流程分为 3 步。</p>
+<p>第一步，开发者使用 JSX 语法写 React，babel 会将 JSX 编译为浏览器能识别的 React JS 语法。这一步，一般配合 webpack 在本地进行。</p>
+<p>第二步，执行 ReactDOM.render 函数，渲染出虚拟DOM。</p>
+<p>第三步，react 将虚拟DOM，渲染成真实的DOM。</p>
+<p>页面更新的流程同样也是 3 步。</p>
+<p>第一步，当页面需要更新时，通过声明式的方法，调用 setState 告诉 react。</p>
+<p>第二步，react 自动调用组件的 render 方法，渲染出虚拟 DOM。</p>
+<p>第三步，react 会通过 diffing 算法，对比当前虚拟 DOM 和需要更新的虚拟 DOM 有什么区别。然后重新渲染区别部分的真实 DOM。<br><img src="../../pictures/ReactRender .png"></p>
+<h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><p>以函数作为主要载体的编程方式，用函数去拆解、抽象一般的表达式，最小‘可视’单位是函数的一种编码规范，重点体现‘函数式’，<br>React并没有使用太多函数式编程(Functional Programming)的思想，但是React周边的工具（比如Redux）很多却使用了这种的思想</p>
+<h3 id="函数式第一公民"><a href="#函数式第一公民" class="headerlink" title="函数式第一公民"></a>函数式第一公民</h3><p>在JavaScript的世界里，函数可以作为参数传递，函数可以赋值给一个变量，一个函数的执行结果也可以是一个函数，因为在JavaScript里面，函数也是对象，所以函数是第一公民。</p>
+<h3 id="数据是不可变的-Immutable"><a href="#数据是不可变的-Immutable" class="headerlink" title="数据是不可变的(Immutable)"></a>数据是不可变的(Immutable)</h3><p>在纯种的函数式编程语言中，数据是不可变的，或者说没有变量这个概念，所有的数据一旦产生，就不能改变其中的值，如果要改变，那就只能生成一个新的数据。<br>在React中，强调一个组件不能去修改传入的prop值，也是遵循Immutable的原则。<br>在Redux中，更是强调Immutable的作用，每个reducer不能够修改state，只能返回一个新的state。<br>Immutable是个好原则，可以让代码更容易维护，当你看到一个变量的时候，可以放心假设这个变量代表的值不会被篡改，否则，你就会很操心。<br>保持Immutable的代价就会有一些空间和时间损耗</p>
+<h3 id="强制使用纯函数"><a href="#强制使用纯函数" class="headerlink" title="强制使用纯函数"></a>强制使用纯函数</h3><p>所谓纯函数，就是和数学概念上的函数一样的函数，没有任何副作用，输出完全由输入决定。对于相同的输入，永远会得到相同的输出，而且没有任何可观察的副作用，也不依赖外部环境的状态。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 不纯的</span><br><span class="line">var minimum = 21;</span><br><span class="line">var checkAge = function(age) &#123;</span><br><span class="line">return age &gt;= minimum;</span><br><span class="line">&#125;;</span><br><span class="line">// 纯的</span><br><span class="line">var checkAge = function(age) &#123;</span><br><span class="line">var minimum = 21;</span><br><span class="line">return age &gt;= minimum;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 不纯的</span><br><span class="line">var count = 1</span><br><span class="line">function add() &#123;</span><br><span class="line">    return count + 1</span><br><span class="line">&#125;</span><br><span class="line">// 纯的</span><br><span class="line">function add() &#123;</span><br><span class="line">    var count = 1</span><br><span class="line">    return count + 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不纯的版本中，函数 的结果将取决于 外部变量 甚至 修改外部变量。从而增加了认知负荷，有时候甚至引发bug,这就是为什么我们刚开始写js时,总有人警告我们不要设置全局变量。<br>在纯函数中他们总只着眼于自己的一亩三分地，不会给别人(程序员)添麻烦。<br>在JavaScript中，虽然我们可以通过一些手段（比如强制让this变成undefined)来避免副作用，但是JavaScript本身就是一个弱类型没有副作用检查的语言，所以没法强制使用纯函数，基本还是要靠程序员自觉。<br>在React中，组件的render函数应该是一个纯函数（你要非说只需要是一个幂等函数，也行），只有这样，组件渲染的结果才只和state/props有关系，遵循UI=f(state)这个公式。<br>在Redux，reducer必须是一个纯函数，也是函数式编程的要求。</p>
+<h3 id="支持函数递归调用"><a href="#支持函数递归调用" class="headerlink" title="支持函数递归调用"></a>支持函数递归调用</h3><p>JavaScript当然支持递归，不过，对于原教旨主义的函数式编程语言，根本不存在for/while这样的循环语句，需要循环执行就要靠递归。</p>
+<h3 id="函数只接受一个参数"><a href="#函数只接受一个参数" class="headerlink" title="函数只接受一个参数"></a>函数只接受一个参数</h3><p>JavaScript语言没有限制一个函数的参数个数，所以这一点上JavaScript也不够原教旨主义，不过，知道函数式编程有这样一个规矩，可以帮助我们理解为什么Redux的一些代码写成很奇怪的样子。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>JavaScript不是一个严格意义上的函数式编程语言，但是如果我们不把“函数式编程”当做一个语言特性，只是当做一种“风格”，那么JavaScript就非常适合使用这种风格<br>React的“函数式”特征，不光体现在要求render是一个纯函数上，还存在于其他的细节之中，比如函数式的setState<br>Redux是非常“函数式”的一个库，可以说，要理解Redux，你就需要了解函数式编程。</p>
+<h2 id="react组件化"><a href="#react组件化" class="headerlink" title="react组件化"></a>react组件化</h2><h3 id="组件化基本原理"><a href="#组件化基本原理" class="headerlink" title="组件化基本原理"></a>组件化基本原理</h3><p>react把注意力放在UI层，将页面分成一些细块，这些块就是组件，组件之间的组合嵌套就形成最后的网页界面。和其他很多前端框架一样，它们主要解决了前端组件化的问题。</p>
+<h3 id="区分容器组件和可视化组件"><a href="#区分容器组件和可视化组件" class="headerlink" title="区分容器组件和可视化组件"></a>区分容器组件和可视化组件</h3><p>Presentational称为可视化组件，也就是我们用来渲染到页面上可以被看见的组件，它只负责根据父组件传来的props渲染视图；<br>Container称为容器组件，它总是作为可视化组件的父级组件出现，通常作用是给可视化组件准备数据，充当支架。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">const User = (user) =&gt; &#123;    //这个User组件就是可视化组件，只负责渲染相关</span><br><span class="line">    &lt;li&gt;</span><br><span class="line">        &lt;img src=&#123;user.pic&#125; /&gt;</span><br><span class="line">        &lt;a href=&#123;user.link&#125;&gt;user detail info&lt;/a&gt;</span><br><span class="line">    &lt;/li&gt;</span><br><span class="line">&#125;</span><br><span class="line">class UserList extends React.Component &#123;    //UserList组件为容器组件，ajax请求数据</span><br><span class="line">    constructor() &#123;</span><br><span class="line">        this.state = &#123;</span><br><span class="line">            userArr: []</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    componentWillMount() &#123;</span><br><span class="line">        //ajax获取用户列表数据</span><br><span class="line">        this.setState(&#123;</span><br><span class="line">            userArr: users</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;ul&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                this.props.userArr.map((user) =&gt; &#123;</span><br><span class="line">                    return &lt;User user=&#123;user&#125; key=&#123;user.id&#125;&gt;&lt;/User&gt;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            &lt;/ul&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用setState需要注意的问题"><a href="#使用setState需要注意的问题" class="headerlink" title="使用setState需要注意的问题"></a>使用setState需要注意的问题</h3><p>setState()方法是react中用来修改状态的内置方法，而且是必须的方式。也就是说不能使用this.state来修改组件的状态。this.state是不可变的。文档中提到setState执行总是会触发一次重绘，所以使用过程中有一些需要注意的地方。</p>
+<h4 id="setState是异步的，没有任何同步性的保证"><a href="#setState是异步的，没有任何同步性的保证" class="headerlink" title="setState是异步的，没有任何同步性的保证"></a>setState是异步的，没有任何同步性的保证</h4><p>在开发过程中，我们可能会在 setState 之后立即去拿 this.state 中的某个属性，但是发现该值并没有修改过来。官方说法是，为了性能上的优化，采用了 Batch 思想，会收集“一波” state 的变化，统一进行处理。为了解决这个问题 setState 可以有以下两种写法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//第一种</span><br><span class="line">this.setState((prevState, props) =&gt; &#123;</span><br><span class="line">  return &#123;counter: prevState.counter + props.step&#125;;</span><br><span class="line">&#125;);</span><br><span class="line">//第二种</span><br><span class="line">this.setState(&#123;</span><br><span class="line">    counter: newVal</span><br><span class="line">&#125;, () =&gt; &#123;</span><br><span class="line">    //callback，会在state修改完成后执行</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>或者在生命周期 componentDidUpdate 函数中处理state修改后的逻辑。</p>
+<h4 id="setState会造成不必要的渲染"><a href="#setState会造成不必要的渲染" class="headerlink" title="setState会造成不必要的渲染"></a>setState会造成不必要的渲染</h4><p>由于setState每执行一次都会出发一次重绘，但实际上很多渲染都是浪费的。我们可能只需要更新一个子组件，但却会导致很大面积的组件重新render。</p>
+<h4 id="setState只管理渲染相关的数据"><a href="#setState只管理渲染相关的数据" class="headerlink" title="setState只管理渲染相关的数据"></a>setState只管理渲染相关的数据</h4><p>与渲染无关的数据，例如id号、临时变量等数据并不会影响ui渲染，可能只是用来做标记或与后端交互，那么这些值的修改不应该用setState去重绘。可以使用 localStorage 或者第三方状态管理库，如MobX。</p>
+<h3 id="绑定this的问题"><a href="#绑定this的问题" class="headerlink" title="绑定this的问题"></a>绑定this的问题</h3><p>this指向、执行上下文一直都是js中不可避免会遇到的问题。在react中，对this绑定的处理有很多种方案，总结大致有以下这些：</p>
+<ul>
+<li>使用ES5 createClass 方法创建组件自动绑定this(已经被放弃)</li>
+<li>在渲染时使用bind方法绑定</li>
+<li>在渲染时使用箭头函数绑定</li>
+<li>在 constructor 构造函数中绑定</li>
+<li>使用 等号 加 箭头函数 绑定<h4 id="渲染时绑定"><a href="#渲染时绑定" class="headerlink" title="渲染时绑定"></a>渲染时绑定</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;User onClick = &#123;this.selectUser.bind(this)&#125;&gt;&lt;/User&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>这种方式很常规，并且能够很好的解决this绑定问题；但同时带来了另一个问题：每次重新渲染组件时都会创建一个新的函数。虽然听起来好像很严重，但实际上对性能的损耗并不明显。</p>
+<h4 id="渲染时使用箭头函数"><a href="#渲染时使用箭头函数" class="headerlink" title="渲染时使用箭头函数"></a>渲染时使用箭头函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;User onClick = &#123;e =&gt; this.selectUser(e)&#125;&gt;&lt;/User&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="在constructor中绑定"><a href="#在constructor中绑定" class="headerlink" title="在constructor中绑定"></a>在constructor中绑定</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class User extends Component &#123;</span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.selectUser = this.selectUser.bind(this);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为构造函数只会在组件第一次挂载时执行，所以整个生命周期中只会执行一次。在构造函数中对方法进行this绑定，就不会像前面的方法那样重复创建新函数而造成性能问题。但是如果方法很多的时候，这个构造函数的可读性就很差了。</p>
+<h3 id="设定-propTypes-和-defaultProps"><a href="#设定-propTypes-和-defaultProps" class="headerlink" title="设定 propTypes 和 defaultProps"></a>设定 propTypes 和 defaultProps</h3><p>这两个都是react组件的静态属性，所有组件都应该有这两个属性； propTypes 用来规定每个 props 的类型，而 defaultProps 则是给 props 填充默认值。在15.3版本之前，propTypes 在 React 对象中定义了，但之后的版本则需要使用第三方库 prop-types 来替代。配置了这两个属性后，如果传递的 props 类型错误会在浏览器报错，可以让使用组件的人清晰的看到问题。同时它们也起到了文档的作用。</p>
+<h2 id="组合vs继承"><a href="#组合vs继承" class="headerlink" title="组合vs继承"></a>组合vs继承</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/09/17/React核心设计思想/" data-id="ckflaetnv0015c4snwd24b77l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React的核心设计思想/">React的核心设计思想</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-生成器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/05/生成器/" class="article-date">
@@ -98,7 +312,7 @@
 <p>最后，这个程序依次输出的是test1.test2和test3.在定义函数的时候在function后面加一个*表示这是一个生成器函数，并通过关键字yield返回相应的值，可以通过它来指定调用迭代器的next()方法时的返回值及返回顺序。并且，对于生成器函数来说，它不会像普通函数一样停止执行，而是当一个值的请求到来后，生成器就会从上次离开的地方继续开始执行。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">myGenertor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> bb = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line">    bb++;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">let</span> aa <span class="keyword">of</span> myGenertor())&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(aa)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
-<p>从上面这个例子可知，第一次调用myGenenrtor这个生成器函数的时候，首先定义了一个名为bb的变量并且初始化为1，然后将这个值返回。第二次调用的时候，生成器不会像普通函数那样，再次从函数的开始执行，而是从上次执行的语句之后又开始执行b++，并返回此时bb的值为2.然后继续这个过程，返回的值是3</p>
+<p>从上面这个例子可知，第一次调用myGenenrtor这个生成器函数的时候，首先定义了一个名为bb的变量并且初始化为1，然后将这个值返回。第二次调用的时候，生成器不会像普通函数那样，再次从函数的开始执行，而是从上次执行的语句之后又开始执行b++，并返回此时bb的值为2.然后继续这个过程，返回的值是2</p>
 <h3 id="通过迭代对象控制生成器"><a href="#通过迭代对象控制生成器" class="headerlink" title="通过迭代对象控制生成器"></a>通过迭代对象控制生成器</h3><p>在 JavaScript 中，迭代器是一个对象，它定义一个序列，并在终止时可能返回一个返回值。 更具体地说，迭代器是通过使用 next() 方法实现 Iterator protocol 的任何一个对象，该方法返回具有两个属性的对象： value，这是序列中的 next 值；和 done ，如果已经迭代到序列中的最后一个值，则它为 true 。如果 value 和 done 一起存在，则它是迭代器的返回值。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">myGenertor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> bb = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line">    bb++;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> myIterator = myGenertor();</span><br><span class="line"><span class="built_in">console</span>.log(myIterator);</span><br><span class="line"><span class="built_in">console</span>.log(myIterator.next())</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myIterator.next())</span><br><span class="line"><span class="built_in">console</span>.log(myIterator.next())</span><br><span class="line"><span class="comment">//执行的结果为</span></span><br><span class="line"><span class="comment">//&#123;&#125;</span></span><br><span class="line"><span class="comment">//&#123; value: 1, done: false &#125;</span></span><br><span class="line"><span class="comment">//&#123; value: 2, done: false &#125;</span></span><br><span class="line"><span class="comment">//&#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -113,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/05/生成器/" data-id="ck8md10550000mwsnht837cul" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/05/生成器/" data-id="ckflaetns0013c4sn0ajda5wb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -192,7 +406,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/04/面向对象与原型/" data-id="ck8mcz8wz0012pwsnhx3do2xk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/04/面向对象与原型/" data-id="ckflaetny0019c4snh59s0lz2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li></ul>
@@ -235,7 +449,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/17/CSAPP-two/" data-id="ck8mcz8w40004pwsnfe602vgw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/17/CSAPP-two/" data-id="ckflaetma0000c4snwav6ak8a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li></ul>
@@ -288,7 +502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/06/CSAPP-七/" data-id="ck8mcz8vz0001pwsn82ftgrrm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/06/CSAPP-七/" data-id="ckflaetmh0001c4snkmy5eobw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/七-链接/">七 链接</a></li></ul>
@@ -369,7 +583,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/分享/" data-id="ck8mcz8we000hpwsnj6zld35z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/分享/" data-id="ckflaetn2000hc4sn9vtjho8t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -412,7 +626,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ck8mcz8vq0000pwsnt2qvg319" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ckflaetmm0004c4snar1y0len" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css小知识点/">css小知识点</a></li></ul>
@@ -499,272 +713,10 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ck8mcz8w50005pwsnub32qr9l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ckflaetmq0006c4snual7ue75" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js中的this/">js中的this</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-js闭包" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/18/js闭包/" class="article-date">
-  <time datetime="2019-10-18T15:46:11.000Z" itemprop="datePublished">2019-10-18</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/js/">-js</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/18/js闭包/">js闭包</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="闭包是函数和生命该函数的词法环境的组合"><a href="#闭包是函数和生命该函数的词法环境的组合" class="headerlink" title="闭包是函数和生命该函数的词法环境的组合"></a>闭包是函数和生命该函数的词法环境的组合</h3><h2 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h2><p>要理解闭包，首先就要理解js中的变量的作用域<br>变量的作用域无非两种：全局变量和局部变量<br>函数内部可以直接读取全局变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var n=2;</span><br><span class="line"> </span><br><span class="line">　　function f1()&#123;</span><br><span class="line">　　　　alert(n);</span><br><span class="line">　　&#125;</span><br><span class="line"> </span><br><span class="line">　　f1(); // 2</span><br></pre></td></tr></table></figure>
-
-<p>函数外部无法读取函数内的局部变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function f1()&#123;</span><br><span class="line">　　var n=2;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">alert(n); // error</span><br></pre></td></tr></table></figure>
-
-<p>注意：函数内部声明变量的时候，一定要使用var命令。如果不用的话，你实际上声明了一个全局变量！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function f1()&#123;</span><br><span class="line">　　n=2;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">f1();</span><br><span class="line"> </span><br><span class="line">alert(n); // 2</span><br></pre></td></tr></table></figure>
-
-<h2 id="如何从外部读取局部变量"><a href="#如何从外部读取局部变量" class="headerlink" title="如何从外部读取局部变量"></a>如何从外部读取局部变量</h2><p>大家思考一下，如果我们需要得到函数的局部变量该怎么办呢？<br>那就是在函数的内部，再定义一个函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function f1()&#123;</span><br><span class="line"> </span><br><span class="line">　　n=2;</span><br><span class="line"> </span><br><span class="line">　　function f2()&#123;</span><br><span class="line">　　　　alert(n); // 2</span><br><span class="line">　　&#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上面的代码中，函数f2就被包括在函数f1内部，这时f1内部的所有局部变量，对f2都是可见的。但是反过来就不行，f2内部的局部变量，对f1 就是不可见的。这就是Javascript语言特有的“链式作用域”结构（chain scope），<br>子对象会一级一级地向上寻找所有父对象的变量。所以，父对象的所有变量，对子对象都是可见的，反之则不成立。<br>既然f2可以读取f1中的局部变量，那么只要把f2作为返回值，我们不就可以在f1外部读取它的内部变量了吗！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function makeFunc() &#123;</span><br><span class="line">    var name = &quot;Mozilla&quot;;</span><br><span class="line">    function displayName() &#123;</span><br><span class="line">        alert(name);</span><br><span class="line">    &#125;</span><br><span class="line">    return displayName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var myFunc = makeFunc();</span><br><span class="line">myFunc();</span><br></pre></td></tr></table></figure>
-
-<h2 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h2><p>像上面代码中f2就是闭包<br>第一眼看上去，也许不能直观的看出这段代码能够正常运行。在一些编程语言中，函数中的局部变量仅在函数的执行期间可用。一旦 makeFunc() 执行完毕，我们会认为 name 变量将不能被访问。然而，因为代码运行得没问题，所以很显然在 JavaScript 中并不是这样的。<br>JavaScript中的函数会形成闭包。 闭包是由函数以及创建该函数的词法环境组合而成。这个环境包含了这个闭包创建时所能访问的所有局部变量。在我们的例子中，myFunc 是执行 makeFunc 时创建的 displayName 函数实例的引用，而 displayName 实例仍可访问其词法作用域中的变量，即可以访问到 name 。由此，当 myFunc 被调用时，name 仍可被访问，其值 Mozilla 就被传递到alert中。</p>
-<p>由于在Javascript语言中，只有函数内部的子函数才能读取局部变量，因此可以把闭包简单理解成“定义在一个函数内部的函数”。</p>
-<p>所以，在本质上，闭包就是将函数内部和函数外部连接起来的一座桥梁。</p>
-<p>下面是一个更有意思的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function makeAdder(x) &#123;</span><br><span class="line">  return function(y) &#123;</span><br><span class="line">    return x + y;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var add5 = makeAdder(5);</span><br><span class="line">var add10 = makeAdder(10);</span><br><span class="line"></span><br><span class="line">console.log(add5(2));  // 7</span><br><span class="line">console.log(add10(2)); // 12</span><br></pre></td></tr></table></figure>
-
-<p>在这个示例中，我们定义了 makeAdder(x) 函数，它接受一个参数 x ，并返回一个新的函数。返回的函数接受一个参数 y，并返回x+y的值。</p>
-<p>从本质上讲，makeAdder 是一个函数工厂 — 他创建了将指定的值和它的参数相加求和的函数。在上面的示例中，我们使用函数工厂创建了两个新函数 — 一个将其参数和 5 求和，另一个和 10 求和。</p>
-<p>add5 和 add10 都是闭包。它们共享相同的函数定义，但是保存了不同的词法环境。在 add5 的环境中，x 为 5。而在 add10 中，x 则为 10。</p>
-<h2 id="闭包的用途"><a href="#闭包的用途" class="headerlink" title="闭包的用途"></a>闭包的用途</h2><p>闭包很有用，因为它允许将函数与其所操作的某些数据（环境）关联起来。这显然类似于面向对象编程。在面向对象编程中，对象允许我们将某些数据（对象的属性）与一个或者多个方法相关联。<br>因此，通常你使用只有一个方法的对象的地方，都可以使用闭包。</p>
-<p>在 Web 中，你想要这样做的情况特别常见。大部分我们所写的 JavaScript 代码都是基于事件的 — 定义某种行为，然后将其添加到用户触发的事件之上（比如点击或者按键）。我们的代码通常作为回调：为响应事件而执行的函数。</p>
-<p>假如，我们想在页面上添加一些可以调整字号的按钮。一种方法是以像素为单位指定 body 元素的 font-size，然后通过相对的 em 单位设置页面中其它元素（例如header）的字号：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">body &#123;</span><br><span class="line">  font-family: Helvetica, Arial, sans-serif;</span><br><span class="line">  font-size: 12px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">h1 &#123;</span><br><span class="line">  font-size: 1.5em;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">h2 &#123;</span><br><span class="line">  font-size: 1.2em;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们的文本尺寸调整按钮可以修改 body 元素的 font-size 属性，由于我们使用相对单位，页面中的其它元素也会相应地调整。<br>以下是js代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function makeSizer(size) &#123;</span><br><span class="line">  return function() &#123;</span><br><span class="line">    document.body.style.fontSize = size + &apos;px&apos;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var size12 = makeSizer(12);</span><br><span class="line">var size14 = makeSizer(14);</span><br><span class="line">var size16 = makeSizer(16);</span><br></pre></td></tr></table></figure>
-
-<p>size12，size14 和 size16 三个函数将分别把 body 文本调整为 12，14，16 像素。我们可以将它们分别添加到按钮的点击事件上。如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">document.getElementById(&apos;size-12&apos;).onclick = size12;</span><br><span class="line">document.getElementById(&apos;size-14&apos;).onclick = size14;</span><br><span class="line">document.getElementById(&apos;size-16&apos;).onclick = size16;</span><br><span class="line"></span><br><span class="line">//html</span><br><span class="line">&lt;p&gt;Some paragraph text&lt;/p&gt;</span><br><span class="line">&lt;h1&gt;some heading 1 text&lt;/h1&gt;    &lt;h2&gt;some heading 2 text&lt;/h2&gt;</span><br><span class="line">&lt;a href=&quot;#&quot; id=&quot;size-12&quot;&gt;12&lt;/a&gt;</span><br><span class="line">&lt;a href=&quot;#&quot; id=&quot;size-14&quot;&gt;14&lt;/a&gt;</span><br><span class="line">&lt;a href=&quot;#&quot; id=&quot;size-16&quot;&gt;16&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-
-<h3 id="用闭包模拟私有方法"><a href="#用闭包模拟私有方法" class="headerlink" title="用闭包模拟私有方法"></a>用闭包模拟私有方法</h3><p>编程语言中，比如 Java，是支持将方法声明为私有的，即它们只能被同一个类中的其它方法所调用。</p>
-<p>而 JavaScript 没有这种原生支持，但我们可以使用闭包来模拟私有方法。私有方法不仅仅有利于限制对代码的访问：还提供了管理全局命名空间的强大能力，避免非核心的方法弄乱了代码的公共接口部分。</p>
-<p>下面的示例展现了如何使用闭包来定义公共函数，并令其可以访问私有函数和变量。这个方式也称为 模块模式（module pattern）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">var Counter = (function() &#123;</span><br><span class="line">  var privateCounter = 0;</span><br><span class="line">  function changeBy(val) &#123;</span><br><span class="line">    privateCounter += val;</span><br><span class="line">  &#125;</span><br><span class="line">  return &#123;</span><br><span class="line">    increment: function() &#123;</span><br><span class="line">      changeBy(1);</span><br><span class="line">    &#125;,</span><br><span class="line">    decrement: function() &#123;</span><br><span class="line">      changeBy(-1);</span><br><span class="line">    &#125;,</span><br><span class="line">    value: function() &#123;</span><br><span class="line">      return privateCounter;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;   </span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">console.log(Counter.value()); /* logs 0 */</span><br><span class="line">Counter.increment();</span><br><span class="line">Counter.increment();</span><br><span class="line">console.log(Counter.value()); /* logs 2 */</span><br><span class="line">Counter.decrement();</span><br><span class="line">console.log(Counter.value()); /* logs 1 */</span><br></pre></td></tr></table></figure>
-
-<p>在之前的示例中，每个闭包都有它自己的词法环境；而这次我们只创建了一个词法环境，为三个函数所共享：Counter.increment，Counter.decrement 和 Counter.value。</p>
-<p>该共享环境创建于一个立即执行的匿名函数体内。这个环境中包含两个私有项：名为 privateCounter 的变量和名为 changeBy 的函数。这两项都无法在这个匿名函数外部直接访问。必须通过匿名函数返回的三个公共函数访问。</p>
-<p>闭包最大的用途有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。</p>
-<p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function f1()&#123;</span><br><span class="line"> </span><br><span class="line">　　var n=999;</span><br><span class="line"> </span><br><span class="line">　　nAdd=function()&#123;n+=1&#125;</span><br><span class="line"> </span><br><span class="line">　　function f2()&#123;</span><br><span class="line">　　　　alert(n);</span><br><span class="line">　　&#125;</span><br><span class="line"> </span><br><span class="line">　　return f2;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">var result=f1();</span><br><span class="line"> </span><br><span class="line">result(); // 999</span><br><span class="line"> </span><br><span class="line">nAdd();</span><br><span class="line"> </span><br><span class="line">result(); // 1000</span><br></pre></td></tr></table></figure>
-
-<p>在这段代码中，result实际上就是闭包f2函数。它一共运行了两次，第一次的值是999，第二次的值是1000。这证明了，函数f1中的局部变量n一直保存在内存中，并没有在f1调用后被自动清除。</p>
-<p>为什么会这样呢？原因就在于f1是f2的父函数，而f2被赋给了一个全局变量，这导致f2始终在内存中，而f2的存在依赖于f1，因此f1也始终在内存中，不会在调用结束后，被垃圾回收机制（garbage collection）回收。</p>
-<p>注意：“nAdd=function(){n+=1}”这一行，首先在nAdd前面没有使用var关键字，因此 nAdd是一个全局变量，而不是局部变量。其次，nAdd的值是一个匿名函数（anonymous function），而这个匿名函数本身也是一个闭包，所以nAdd相当于是一个setter，可以在函数外部对函数内部的局部变量进行操作。</p>
-<h2 id="闭包的注意事项"><a href="#闭包的注意事项" class="headerlink" title="闭包的注意事项"></a>闭包的注意事项</h2><p>1）由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的局部变量全部删除。</p>
-<p>2）闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。</p>
-<h3 id="一个常见错误"><a href="#一个常见错误" class="headerlink" title="一个常见错误"></a>一个常见错误</h3><p>参考下面代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">//html</span><br><span class="line">&lt;p id=&quot;help&quot;&gt;Helpful notes will appear here&lt;/p&gt;</span><br><span class="line">&lt;p&gt;E-mail: &lt;input type=&quot;text&quot; id=&quot;email&quot; name=&quot;email&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;Name: &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot;&gt;&lt;/p&gt;</span><br><span class="line">&lt;p&gt;Age: &lt;input type=&quot;text&quot; id=&quot;age&quot; name=&quot;age&quot;&gt;&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">//js</span><br><span class="line">function showHelp(help) &#123;</span><br><span class="line">  document.getElementById(&apos;help&apos;).innerHTML = help;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function setupHelp() &#123;</span><br><span class="line">  var helpText = [</span><br><span class="line">      &#123;&apos;id&apos;: &apos;email&apos;, &apos;help&apos;: &apos;Your e-mail address&apos;&#125;,</span><br><span class="line">      &#123;&apos;id&apos;: &apos;name&apos;, &apos;help&apos;: &apos;Your full name&apos;&#125;,</span><br><span class="line">      &#123;&apos;id&apos;: &apos;age&apos;, &apos;help&apos;: &apos;Your age (you must be over 16)&apos;&#125;</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">  for (var i = 0; i &lt; helpText.length; i++) &#123;</span><br><span class="line">    var item = helpText[i];</span><br><span class="line">    document.getElementById(item.id).onfocus = function() &#123;</span><br><span class="line">      showHelp(item.help);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setupHelp();</span><br></pre></td></tr></table></figure>
-
-<p>数组 helpText 中定义了三个有用的提示信息，每一个都关联于对应的文档中的input 的 ID。通过循环这三项定义，依次为相应input添加了一个 onfocus  事件处理函数，以便显示帮助信息。</p>
-<p>运行这段代码后，您会发现它没有达到想要的效果。无论焦点在哪个input上，显示的都是关于年龄的信息。</p>
-<p>原因是赋值给 onfocus 的是闭包。这些闭包是由他们的函数定义和在 setupHelp 作用域中捕获的环境所组成的。这三个闭包在循环中被创建，但他们共享了同一个词法作用域，在这个作用域中存在一个变量item。这是因为变量help使用var进行声明，由于变量提升，所以具有函数作用域。当onfocus的回调执行时，item.help的值被决定。由于循环在事件触发之前早已执行完毕，变量对象item（被三个闭包所共享）已经指向了helpText的最后一项。</p>
-<p>解决这个问题的一种方案是使用更多的闭包：特别是使用前面所述的函数工厂：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">function showHelp(help) &#123;</span><br><span class="line">  document.getElementById(&apos;help&apos;).innerHTML = help;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function makeHelpCallback(help) &#123;</span><br><span class="line">  return function() &#123;</span><br><span class="line">    showHelp(help);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function setupHelp() &#123;</span><br><span class="line">  var helpText = [</span><br><span class="line">      &#123;&apos;id&apos;: &apos;email&apos;, &apos;help&apos;: &apos;Your e-mail address&apos;&#125;,</span><br><span class="line">      &#123;&apos;id&apos;: &apos;name&apos;, &apos;help&apos;: &apos;Your full name&apos;&#125;,</span><br><span class="line">      &#123;&apos;id&apos;: &apos;age&apos;, &apos;help&apos;: &apos;Your age (you must be over 16)&apos;&#125;</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">  for (var i = 0; i &lt; helpText.length; i++) &#123;</span><br><span class="line">    var item = helpText[i];</span><br><span class="line">    document.getElementById(item.id).onfocus = makeHelpCallback(item.help);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setupHelp();</span><br></pre></td></tr></table></figure>
-
-<p>这段代码可以如我们所期望的那样工作。所有的回调不再共享同一个环境， makeHelpCallback 函数为每一个回调创建一个新的词法环境。在这些环境中，help 指向 helpText 数组中对应的字符串。</p>
-<p>另一种方法使用了匿名闭包：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">function showHelp(help) &#123;</span><br><span class="line">  document.getElementById(&apos;help&apos;).innerHTML = help;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function setupHelp() &#123;</span><br><span class="line">  var helpText = [</span><br><span class="line">      &#123;&apos;id&apos;: &apos;email&apos;, &apos;help&apos;: &apos;Your e-mail address&apos;&#125;,</span><br><span class="line">      &#123;&apos;id&apos;: &apos;name&apos;, &apos;help&apos;: &apos;Your full name&apos;&#125;,</span><br><span class="line">      &#123;&apos;id&apos;: &apos;age&apos;, &apos;help&apos;: &apos;Your age (you must be over 16)&apos;&#125;</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">  for (var i = 0; i &lt; helpText.length; i++) &#123;</span><br><span class="line">    (function() &#123;</span><br><span class="line">       var item = helpText[i];</span><br><span class="line">       document.getElementById(item.id).onfocus = function() &#123;</span><br><span class="line">         showHelp(item.help);</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;)(); // 马上把当前循环项的item与事件回调相关联起来</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setupHelp();</span><br><span class="line"></span><br><span class="line">//避免使用过多的闭包可以用let关键词</span><br><span class="line">function showHelp(help) &#123;</span><br><span class="line">  document.getElementById(&apos;help&apos;).innerHTML = help;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function setupHelp() &#123;</span><br><span class="line">  var helpText = [</span><br><span class="line">      &#123;&apos;id&apos;: &apos;email&apos;, &apos;help&apos;: &apos;Your e-mail address&apos;&#125;,</span><br><span class="line">      &#123;&apos;id&apos;: &apos;name&apos;, &apos;help&apos;: &apos;Your full name&apos;&#125;,</span><br><span class="line">      &#123;&apos;id&apos;: &apos;age&apos;, &apos;help&apos;: &apos;Your age (you must be over 16)&apos;&#125;</span><br><span class="line">    ];</span><br><span class="line"></span><br><span class="line">  for (var i = 0; i &lt; helpText.length; i++) &#123;</span><br><span class="line">    let item = helpText[i];</span><br><span class="line">    document.getElementById(item.id).onfocus = function() &#123;</span><br><span class="line">      showHelp(item.help);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setupHelp();</span><br></pre></td></tr></table></figure>
-
-<p>这个例子使用let而不是var，因此每个闭包都绑定了块作用域的变量，这意味着不再需要额外的闭包。</p>
-<h2 id="性能考量"><a href="#性能考量" class="headerlink" title="性能考量"></a>性能考量</h2><p>如果不是某些特定任务需要使用闭包，在其它函数中创建函数是不明智的，因为闭包在处理速度和内存消耗方面对脚本性能具有负面影响。</p>
-<p>例如，在创建新的对象或者类时，方法通常应该关联于对象的原型，而不是定义到对象的构造器中。原因是这将导致每次构造器被调用时，方法都会被重新赋值一次（也就是，每个对象的创建）。</p>
-<p>参考文章：</p>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">闭包</a></p>
-<p><a href="https://www.jb51.net/article/24101.htm" target="_blank" rel="noopener">深入理解js闭包</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/18/js闭包/" data-id="ck8mcz8wy0011pwsnogj9lwys" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js闭包/">js闭包</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-排序" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/14/排序/" class="article-date">
-  <time datetime="2019-10-14T13:42:26.000Z" itemprop="datePublished">2019-10-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/数据结构/">数据结构</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/14/排序/">排序</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>是按关键字的非递减或非递增顺序对一组记录重新进行整队的操作</p>
-<h3 id="判断排序是否稳定："><a href="#判断排序是否稳定：" class="headerlink" title="判断排序是否稳定："></a>判断排序是否稳定：</h3><p>以键为基准，对拥有相同键的两个数据，如果排序可能会改变数据的相对位置，则排序是不稳定的</p>
-<p>选择排序、快速排序、希尔排序、堆排序不是稳定的排序算法，而冒泡排序、插入排序、归并排序和基数排序是稳定的排序算法</p>
-<p>参考文章：<a href="https://www.cnblogs.com/codingmylife/archive/2012/10/21/2732980.html" target="_blank" rel="noopener">稳定排序和不稳定排序</a></p>
-<h3 id="根据排序过程中设计的存储器的不同可以分为："><a href="#根据排序过程中设计的存储器的不同可以分为：" class="headerlink" title="根据排序过程中设计的存储器的不同可以分为："></a>根据排序过程中设计的存储器的不同可以分为：</h3><p>(1)内部排序：在排序过程中不使用计算及外部存储器的排序过程<br>(2)外部排序：在排序过程中需要对外存进行访问的排序</p>
-<p>内部排序：　　</p>
-<ol>
-<li>插入排序<br>　　1）直接插入排序<br>　　2）希尔排序</li>
-<li>选择排序<br>　　1）简单选择排序<br>　　2）堆排序</li>
-<li>交换排序<br>　　1）冒泡排序<br>　　2）快速排序</li>
-<li>归并排序</li>
-<li>基数排序</li>
-</ol>
-<p>外部排序：外部排序最常用的算法是多路归并排序，即将原文件分解成多个能够一次性装入内存的部分分别把每一部分调入内存完成排序。然后，对已经排序的子文件进行归并排序。一般来说外排序分为两个步骤:预处理和合并排序。</p>
-<h2 id="简单排序方法"><a href="#简单排序方法" class="headerlink" title="简单排序方法"></a>简单排序方法</h2><h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">typedef int KeyType;</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    KeyType key;</span><br><span class="line">    InfoType otherinfo;</span><br><span class="line">&#125;RcdType;</span><br><span class="line">const MAXSIZE=20;</span><br><span class="line">typedef struct&#123;</span><br><span class="line">    RcdType r[MAXSIZE+1];</span><br><span class="line">    int length;</span><br><span class="line">&#125;SqList;</span><br><span class="line">void SelectSort(SqList &amp;L)</span><br><span class="line">&#123;</span><br><span class="line">    RcdType W;</span><br><span class="line">    int j,k,i;</span><br><span class="line">    for(i=1;i&lt;L.length;i++)&#123;</span><br><span class="line">        j=i;</span><br><span class="line">        for(k=i+1;k&lt;=L.length;k++)</span><br><span class="line">            if ( L.r[k].key &lt; L.r[j].key )  j =k ;</span><br><span class="line">        if ( i!=j ) </span><br><span class="line">             &#123; W=L.r[j]; L.r[j] =L.r[i]; L.r[i] = W;&#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两种基本操作：1 比较两个关键字大小 2 将元素从一个位置移动到另一个位置<br>时间复杂度为 O(n^2)</p>
-<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>参考文章：<a href="https://www.cnblogs.com/skywang12345/p/3602162.html" target="_blank" rel="noopener">堆排序</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/排序/" data-id="ck8mcz8wa000bpwsncsov6u3w" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/经典排序/">经典排序</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-搭建博客" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/10/14/搭建博客/" class="article-date">
-  <time datetime="2019-10-14T12:38:53.000Z" itemprop="datePublished">2019-10-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/日志/">-日志</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/14/搭建博客/">搭建博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h2><p>可以去官网下载<br>通过 node -v 测试是否成功</p>
-<h2 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1.安装Git"></a>1.安装Git</h2><h2 id="2-注册github账号"><a href="#2-注册github账号" class="headerlink" title="2.注册github账号"></a>2.注册github账号</h2><p>注册完之后记得添加SSH Key</p>
-<h1 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h1><h2 id="1-安装Hexo"><a href="#1-安装Hexo" class="headerlink" title="1.安装Hexo"></a>1.安装Hexo</h2><p>在本地新建一个Blog的文件夹，右键选择Git bash<br><img src="https://img-blog.csdn.net/20160331173337966"><br>输入指令安装hexo：<br><img src="https://img-blog.csdn.net/20160331174515127"><br>等安装完毕，通过输入hexo的命令来测试Hexo是否安装成功，若成功如下：<br><img src="https://img-blog.csdn.net/20160331174612127"></p>
-<p>接着初始化Hexo<br>hexo init hexo<br><img src="https://img-blog.csdn.net/20160331174810425"><br>初始化成功会显示：<br><img src="https://img-blog.csdn.net/20160331174935191"></p>
-<p>这时在你刚才创建的Blog里面会多出一个hexo文件<br><img scr="https://img-blog.csdn.net/20160331175135145"></p>
-<p>进入hexo目录输入指令npm install 安装依赖文件以及部署形成文件打开hexo目录：<br>打开hexo目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd hexo</span><br></pre></td></tr></table></figure>
-
-<p>安装依赖文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
-
-<p>部署形成文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
-
-<img src="https://img-blog.csdn.net/20160331182208672">
-最后运行server 跑起hexo服务
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
-
-<img src="https://img-blog.csdn.net/20160331182812581">
-
-<p>这时根据提示运行 <a href="http://loalhost:4000/" target="_blank" rel="noopener">http://loalhost:4000/</a>. 可以看到默认的博客<br>到这里 hexo 安装完毕</p>
-<h2 id="配置githubPage"><a href="#配置githubPage" class="headerlink" title="配置githubPage"></a>配置githubPage</h2><p>登录github点击“New repository”新建一个仓库<br>输入仓库名：你的github名称.github.io（必须）然后creat</p>
-<h3 id="启用github-page"><a href="#启用github-page" class="headerlink" title="启用github page"></a>启用github page</h3><p>点击右边的“Setting”菜单进入设置，点击 Lauch…<br><img src="https://img-blog.csdn.net/20160401105726342"><br>点击 continue to layouts<br>之后选择一个随意的模板点击“publish page”发布 github默认生成的一个静态站点<br><img src="https://img-blog.csdn.net/20160401112025991"></p>
-<h2 id="将本地hexo项目托管到github"><a href="#将本地hexo项目托管到github" class="headerlink" title="将本地hexo项目托管到github"></a>将本地hexo项目托管到github</h2><p>打开修改hexo目录下配置文件_config.yml<br>编辑最后面的deploy属性 加入代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type: git   repository: git@github.com:WX-JIN/WX-JIN.github.io.git   branch: master</span><br></pre></td></tr></table></figure>
-
-<p>type使用是git。<br>repository属性改成你的刚才创建仓库git地址。<br>地址为这里的：<img src="../../pictures/address.png"><br>分支branch填写master。</p>
-<p>这边说下本地网站配置文件 _config.yml</p>
-<p>网站的配置文件，你可以在这里配置一些基本信息，这里列举部分关键配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Hexo Configuration ## Docs: https://hexo.io/docs/configuration.html ## Source: https://github.com/hexojs/hexo/  # Site title: Dududzai’s Blog #网站的标题 subtitle: life is struggle #副标题 description: life is struggle #描述 author: examble #作者信息 avatar: /images/avatar.png #头像，图片位置在相应主题目录下的images language: zh-Hans #中文简体 email: 85268837@qq.com timezone:  # Extensions ## Plugins: https://hexo.io/plugins/ ## Themes: https://hexo.io/themes/ theme: next #配置主题，这里使用next主题 stylus:   compress: true #自适应布局  # Deployment ## Docs: https://hexo.io/docs/deployment.html deploy:   type: git #部署环境，基于hexo+githubpage,所以这里使用git。注意：不同版本的hexo，type有可能不同，3.x以后应使用git,具体参看官方文档   repository: git@github.com:username/username.github.io.git #git仓库地址，替换成你的username即可，其他保持不变，后面会提到如何创建git仓库   branch: master</span><br></pre></td></tr></table></figure>
-
-<p>根据自己的需要更改</p>
-<h2 id="写一篇文章（例如hello）"><a href="#写一篇文章（例如hello）" class="headerlink" title="写一篇文章（例如hello）"></a>写一篇文章（例如hello）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;hello&quot;</span><br></pre></td></tr></table></figure>
-
-<p>用编辑器打开hello.md文件编写完后保存</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">title: hello</span><br><span class="line">date: 2015-07-01 22:37:23</span><br><span class="line">categories:</span><br><span class="line">  - 日志</span><br><span class="line">  - 二级目录</span><br><span class="line">tags:</span><br><span class="line">  - hello</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">摘要:</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">正文:</span><br></pre></td></tr></table></figure>
-
-<h2 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h2><h3 id="设置git身份信息"><a href="#设置git身份信息" class="headerlink" title="设置git身份信息"></a>设置git身份信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;你的用户名&quot;</span><br><span class="line">$ git config --global user.email &quot;你的邮箱&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="安装hexo-deployer-git插件"><a href="#安装hexo-deployer-git插件" class="headerlink" title="安装hexo-deployer-git插件"></a>安装hexo-deployer-git插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
-
-<img src="https://img-blog.csdn.net/20160401113212168">
-
-<h3 id="部署你本地的主题到github上"><a href="#部署你本地的主题到github上" class="headerlink" title="部署你本地的主题到github上"></a>部署你本地的主题到github上</h3><p>更新发布博客</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$hexo d -g</span><br></pre></td></tr></table></figure>
-
-<p>就成功啦！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ck8mcz8w9000apwsnc8tkdwld" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li></ul>
 
     </footer>
   </div>
@@ -788,7 +740,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSAPP/">-CSAPP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">-css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">-js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/日志/">-日志</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSAPP/">-CSAPP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">-css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">-js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/日志/">-日志</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a></li></ul>
     </div>
   </div>
 
@@ -798,7 +750,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css小知识点/">css小知识点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/经典排序/">经典排序</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hooks/">Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React的核心设计思想/">React的核心设计思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css小知识点/">css小知识点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/经典排序/">经典排序</a></li></ul>
     </div>
   </div>
 
@@ -808,7 +760,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的面向对象/" style="font-size: 10px;">-js中的面向对象</a> <a href="/tags/css小知识点/" style="font-size: 10px;">css小知识点</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/经典排序/" style="font-size: 10px;">经典排序</a>
+      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的面向对象/" style="font-size: 10px;">-js中的面向对象</a> <a href="/tags/Hooks/" style="font-size: 10px;">Hooks</a> <a href="/tags/React的核心设计思想/" style="font-size: 10px;">React的核心设计思想</a> <a href="/tags/css小知识点/" style="font-size: 10px;">css小知识点</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/props/" style="font-size: 10px;">props</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/经典排序/" style="font-size: 10px;">经典排序</a>
     </div>
   </div>
 
@@ -817,7 +769,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
     </div>
   </div>
 
@@ -830,23 +782,23 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       <ul>
         
           <li>
+            <a href="/2020/09/27/render-props/">render props</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/21/React-Hooks/">React Hooks</a>
+          </li>
+        
+          <li>
+            <a href="/2020/09/17/React核心设计思想/">React&#39;s core design ideas</a>
+          </li>
+        
+          <li>
             <a href="/2020/04/05/生成器/">生成器</a>
           </li>
         
           <li>
             <a href="/2020/04/04/面向对象与原型/">面向对象的封装继承</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/17/CSAPP-two/">CSAPP two</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/06/CSAPP-七/">CSAPP 七</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/15/分享/">分享</a>
           </li>
         
       </ul>
