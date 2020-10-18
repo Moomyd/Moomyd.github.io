@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="zmy&#39;s Blog">
 <meta property="og:description" content="层叠当声明冲突时，层叠依据三种条件解决冲突：  样式表来源 选择器优先级 源码顺序样式表的来源自己定义的样式表属于作者样式表。浏览器默认样式叫用户代理样式表。有些浏览器允许用户定义一个用户样式表，优先级介于前两者之间。在后面加上！important会被标记为重要的声明。优先级最高。理解优先级浏览器将优先级分为：HTML行内样式和选择器样式行内样式：如果用HTML的style属性写样式这个声明只会作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-14T16:20:17.319Z">
+<meta property="og:updated_time" content="2020-10-18T15:56:17.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基础回顾">
 <meta name="twitter:description" content="层叠当声明冲突时，层叠依据三种条件解决冲突：  样式表来源 选择器优先级 源码顺序样式表的来源自己定义的样式表属于作者样式表。浏览器默认样式叫用户代理样式表。有些浏览器允许用户定义一个用户样式表，优先级介于前两者之间。在后面加上！important会被标记为重要的声明。优先级最高。理解优先级浏览器将优先级分为：HTML行内样式和选择器样式行内样式：如果用HTML的style属性写样式这个声明只会作">
@@ -99,7 +99,7 @@
 <ul>
 <li>样式表来源</li>
 <li>选择器优先级</li>
-<li>源码顺序<h3 id="样式表的来源"><a href="#样式表的来源" class="headerlink" title="样式表的来源"></a>样式表的来源</h3>自己定义的样式表属于作者样式表。浏览器默认样式叫用户代理样式表。有些浏览器允许用户定义一个用户样式表，优先级介于前两者之间。<br>在后面加上！important会被标记为重要的声明。优先级最高。<h3 id="理解优先级"><a href="#理解优先级" class="headerlink" title="理解优先级"></a>理解优先级</h3>浏览器将优先级分为：HTML行内样式和选择器样式<br>行内样式：如果用HTML的style属性写样式这个声明只会作用于当前元素，会覆盖任何来自样式表或者<code>&lt;style&gt;</code>标签的样式。<br>选择器优先级：ID选择器&gt;类选择器&gt;标签（类型）选择器</li>
+<li>源码顺序<h3 id="样式表的来源"><a href="#样式表的来源" class="headerlink" title="样式表的来源"></a>样式表的来源</h3>自己定义的样式表属于作者样式表。浏览器默认样式叫用户代理样式表。有些浏览器允许用户定义一个用户样式表，优先级介于前两者之间。<br>在后面加上！important会被标记为重要的声明。优先级最高。<h3 id="理解优先级"><a href="#理解优先级" class="headerlink" title="理解优先级"></a>理解优先级</h3>浏览器将优先级分为：HTML行内样式和选择器样式<br>行内样式：如果用HTML的style属性写样式这个声明只会作用于当前元素，会覆盖任何来自样式表或者<code>&lt;style&gt;</code>标签的样式。<br>选择器优先级：ID选择器&gt;类选择器&gt;标签（类型）选择器<br>伪类选择器（：hover）和属性选择器（[type=”input”]）与一个类选择器优先级相同<br>通用选择器（*）和组合器（&gt;+=）对优先级没有影响<h3 id="源码顺序"><a href="#源码顺序" class="headerlink" title="源码顺序"></a>源码顺序</h3>如果两个声明的来源和优先级相同，其中一个声明在样式表中引入较晚，或者位于页面较晚引入的样式表中，则胜出。</li>
 </ul>
 
       
