@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="zmy&#39;s Blog">
 <meta property="og:description" content="对比    单页面应用 多页面应用    组成 一个外壳页面和多个页面片段组成 多个页面构成   资源共用(css,js) 共用，只需在外壳部分加载 不共用，每个页面都需要加载   刷新方式 页面局部刷新或更改 整页刷新   url模式 a.com/#/pageone a.com/pageone.html   用户体验 页面片段间切换快体验良好 页面切换加载缓慢，流畅度不够，用户体验比较差   转">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-23T16:11:40.618Z">
+<meta property="og:updated_time" content="2020-10-26T15:50:07.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单页应用">
 <meta name="twitter:description" content="对比    单页面应用 多页面应用    组成 一个外壳页面和多个页面片段组成 多个页面构成   资源共用(css,js) 共用，只需在外壳部分加载 不共用，每个页面都需要加载   刷新方式 页面局部刷新或更改 整页刷新   url模式 a.com/#/pageone a.com/pageone.html   用户体验 页面片段间切换快体验良好 页面切换加载缓慢，流畅度不够，用户体验比较差   转">
@@ -219,17 +219,62 @@
 <td align="center"></td>
 </tr>
 <tr>
+<td align="left">* hash值的变化不会导致浏览器向服务器发送请求</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* location.hash可以获取hash值</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* hashchange是hash值发生改变调用的函数</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
 <td align="left">优缺点：</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">* 优点：浏览器兼容性较好</td>
+<td align="left">* 优点：</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">* 缺点：路径在井号 # 的后面，比较丑</td>
+<td align="left">实现简单，兼容性好（兼容到ie8）；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">绝大多数前端框架均提供了给予hash的路由实现；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">不需要服务器端进行任何设置和开发；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">除了资源加载和ajax请求以外，不会发起其他请求</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* 缺点：对于部分需要重定向的操作，后端无法获取hash部分内容，导致后台无法取得url中的数据，典型的例子就是微信公众号的oauth验证；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">服务器端无法准确跟踪前端路由信息；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">对于需要锚点功能的需求会与目前路由机制冲突</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
@@ -244,7 +289,22 @@
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">* 优点：路径比较正规，没有井号 #</td>
+<td align="left">* 优点：对于重定向过程中不会丢失url中的参数，后端可以拿到这部分数据；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">绝大多数前段框架均提供了browser的路由实现；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">后端可以准确跟踪路由信息；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">可以使用history.state来获取当前url对应的状态信息</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
@@ -258,7 +318,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/22/单页应用/" data-id="ckgmfry7l000b3gsn2epiwmav" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/22/单页应用/" data-id="ckgqpwf5e000u1ksnsefo4rb0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单页应用/">单页应用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路由/">路由</a></li></ul>
@@ -268,6 +328,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2020/10/26/React-Router-基础/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          React-Router 基础
+        
+      </div>
+    </a>
   
   
     <a href="/2020/09/27/render-props/" id="article-nav-older" class="article-nav-link-wrap">
@@ -298,7 +367,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hooks/">Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React的核心设计思想/">React的核心设计思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css1/">css1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单页应用/">单页应用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由/">路由</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hooks/">Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React的核心设计思想/">React的核心设计思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css1/">css1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单页应用/">单页应用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由/">路由</a></li></ul>
     </div>
   </div>
 
@@ -308,7 +377,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的面向对象/" style="font-size: 10px;">-js中的面向对象</a> <a href="/tags/Hooks/" style="font-size: 10px;">Hooks</a> <a href="/tags/React的核心设计思想/" style="font-size: 10px;">React的核心设计思想</a> <a href="/tags/css1/" style="font-size: 10px;">css1</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/props/" style="font-size: 10px;">props</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/单页应用/" style="font-size: 10px;">单页应用</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/路由/" style="font-size: 10px;">路由</a>
+      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的面向对象/" style="font-size: 10px;">-js中的面向对象</a> <a href="/tags/Hooks/" style="font-size: 10px;">Hooks</a> <a href="/tags/React的核心设计思想/" style="font-size: 10px;">React的核心设计思想</a> <a href="/tags/css1/" style="font-size: 10px;">css1</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/props/" style="font-size: 10px;">props</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/单页应用/" style="font-size: 10px;">单页应用</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/路由/" style="font-size: 10px;">路由</a>
     </div>
   </div>
 
@@ -330,6 +399,10 @@
       <ul>
         
           <li>
+            <a href="/2020/10/26/React-Router-基础/">React-Router 基础</a>
+          </li>
+        
+          <li>
             <a href="/2020/10/22/单页应用/">单页应用</a>
           </li>
         
@@ -343,10 +416,6 @@
         
           <li>
             <a href="/2020/09/17/React核心设计思想/">React&#39;s core design ideas</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/05/生成器/">生成器</a>
           </li>
         
       </ul>
