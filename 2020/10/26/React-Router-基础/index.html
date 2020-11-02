@@ -7,18 +7,18 @@
   
   <title>React-Router 基础 | zmy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="React Router 是完整的 React 路由解决方案路由匹配原理：路由拥有三个属性来决定是否匹配一个url：  嵌套关系（树形结构，router深度优先遍历匹配路由） 路径语法特殊符号： :paramName – 匹配一段位于 /、? 或 # 之后的 URL。 命中的部分将被作为一个参数 () – 在它内部的内容被认为是可选的 – 匹配任意字符（非贪婪的）直到命中下一个字符或者整个 URL">
+  <meta name="description" content="React Router 是完整的 React 路由解决方案 路由匹配原理：路由拥有三个属性来决定是否匹配一个url：  嵌套关系（树形结构，router深度优先遍历匹配路由） 路径语法特殊符号： :paramName – 匹配一段位于 /、? 或 # 之后的 URL。 命中的部分将被作为一个参数 () – 在它内部的内容被认为是可选的 – 匹配任意字符（非贪婪的）直到命中下一个字符或者整个 UR">
 <meta name="keywords" content="基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React-Router 基础">
 <meta property="og:url" content="http://yoursite.com/2020/10/26/React-Router-基础/index.html">
 <meta property="og:site_name" content="zmy&#39;s Blog">
-<meta property="og:description" content="React Router 是完整的 React 路由解决方案路由匹配原理：路由拥有三个属性来决定是否匹配一个url：  嵌套关系（树形结构，router深度优先遍历匹配路由） 路径语法特殊符号： :paramName – 匹配一段位于 /、? 或 # 之后的 URL。 命中的部分将被作为一个参数 () – 在它内部的内容被认为是可选的 – 匹配任意字符（非贪婪的）直到命中下一个字符或者整个 URL">
+<meta property="og:description" content="React Router 是完整的 React 路由解决方案 路由匹配原理：路由拥有三个属性来决定是否匹配一个url：  嵌套关系（树形结构，router深度优先遍历匹配路由） 路径语法特殊符号： :paramName – 匹配一段位于 /、? 或 # 之后的 URL。 命中的部分将被作为一个参数 () – 在它内部的内容被认为是可选的 – 匹配任意字符（非贪婪的）直到命中下一个字符或者整个 UR">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-02T01:49:31.397Z">
+<meta property="og:updated_time" content="2020-11-02T13:38:01.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React-Router 基础">
-<meta name="twitter:description" content="React Router 是完整的 React 路由解决方案路由匹配原理：路由拥有三个属性来决定是否匹配一个url：  嵌套关系（树形结构，router深度优先遍历匹配路由） 路径语法特殊符号： :paramName – 匹配一段位于 /、? 或 # 之后的 URL。 命中的部分将被作为一个参数 () – 在它内部的内容被认为是可选的 – 匹配任意字符（非贪婪的）直到命中下一个字符或者整个 URL">
+<meta name="twitter:description" content="React Router 是完整的 React 路由解决方案 路由匹配原理：路由拥有三个属性来决定是否匹配一个url：  嵌套关系（树形结构，router深度优先遍历匹配路由） 路径语法特殊符号： :paramName – 匹配一段位于 /、? 或 # 之后的 URL。 命中的部分将被作为一个参数 () – 在它内部的内容被认为是可选的 – 匹配任意字符（非贪婪的）直到命中下一个字符或者整个 UR">
   
     <link rel="alternate" href="/atom.xml" title="zmy&#39;s Blog" type="application/atom+xml">
   
@@ -95,7 +95,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>React Router 是完整的 React 路由解决方案<br>路由匹配原理：<br>路由拥有三个属性来决定是否匹配一个url：</p>
+        <p>React Router 是完整的 React 路由解决方案</p>
+<h2 id="路由匹配原理："><a href="#路由匹配原理：" class="headerlink" title="路由匹配原理："></a>路由匹配原理：</h2><p>路由拥有三个属性来决定是否匹配一个url：</p>
 <ul>
 <li>嵌套关系（树形结构，router深度优先遍历匹配路由）</li>
 <li>路径语法<br>特殊符号：<ul>
@@ -105,7 +106,7 @@
 </ul>
 </li>
 <li>– 匹配任意字符（非贪婪的）直到命中下一个字符或者整个 URL 的末尾，并创建一个 splat 参数</li>
-<li>优先级 路由算法会根据定义的顺序自顶向下匹配路由。当你拥有两个兄弟路由节点配置时，你必须确认前一个路由不会匹配后一个路由中的路径。<br>React Router是建立在history之上的</li>
+<li>优先级 路由算法会根据定义的顺序自顶向下匹配路由。当你拥有两个兄弟路由节点配置时，你必须确认前一个路由不会匹配后一个路由中的路径。<h2 id="React-Router是建立在history之上的"><a href="#React-Router是建立在history之上的" class="headerlink" title="React Router是建立在history之上的"></a>React Router是建立在history之上的</h2>一个 history 知道如何去监听浏览器地址栏的变化，并解析这个 URL 转化为 location 对象，然后 router 使用它匹配到路由，最后正确地渲染对应的组件。<br>常用的history形式：<br>browserHistory： 是使用浏览器中的 History API 来处理 URL（使用 React Router 推荐的 history）。浏览器提供相应的接口来修改浏览器的历史记录。需要服务器配置<br>hashHistory： 是使用 URL 中的 hash（#）部分去创建路由。不需要服务器配置。 hash 部分并不会被浏览器发送到服务端<br>createMemoryHistory：必须创建，适合测试<h2 id="默认路由（IndexRoute）"><a href="#默认路由（IndexRoute）" class="headerlink" title="默认路由（IndexRoute）"></a>默认路由（IndexRoute）</h2>如果需要在 Home 路由被渲染后才激活的指向 / 的链接，请使用 <code>&lt;IndexLink to=&quot;/&quot;&gt;Home&lt;/IndexLink&gt;</code></li>
 </ul>
 
       

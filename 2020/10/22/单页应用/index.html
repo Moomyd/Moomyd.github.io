@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="zmy&#39;s Blog">
 <meta property="og:description" content="对比    单页面应用 多页面应用    组成 一个外壳页面和多个页面片段组成 多个页面构成   资源共用(css,js) 共用，只需在外壳部分加载 不共用，每个页面都需要加载   刷新方式 页面局部刷新或更改 整页刷新   url模式 a.com/#/pageone a.com/pageone.html   用户体验 页面片段间切换快体验良好 页面切换加载缓慢，流畅度不够，用户体验比较差   转">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-02T01:49:31.397Z">
+<meta property="og:updated_time" content="2020-11-02T05:07:29.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单页应用">
 <meta name="twitter:description" content="对比    单页面应用 多页面应用    组成 一个外壳页面和多个页面片段组成 多个页面构成   资源共用(css,js) 共用，只需在外壳部分加载 不共用，每个页面都需要加载   刷新方式 页面局部刷新或更改 整页刷新   url模式 a.com/#/pageone a.com/pageone.html   用户体验 页面片段间切换快体验良好 页面切换加载缓慢，流畅度不够，用户体验比较差   转">
@@ -304,36 +304,28 @@
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">history API 是 H5 提供的新特性，允许开发者直接更改前端路由，即更新浏览器 URL 地址而不重新发起请求。</td>
+<td align="left">HTML5的History API为浏览器的全局history对象增加了该扩展方法。它是一个浏览器的一个接口，在window对象中提供了onpopstate事件来监听历史栈的改变，只要历史栈有信息发生改变的话，就会触发该事件。</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">* 优点：对于重定向过程中不会丢失url中的参数，后端可以拿到这部分数据；</td>
+<td align="left">history提供了两个操作历史栈的API:</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">绝大多数前段框架均提供了browser的路由实现；</td>
-<td align="right"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="left">后端可以准确跟踪路由信息；</td>
-<td align="right"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="left">可以使用history.state来获取当前url对应的状态信息</td>
-<td align="right"></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="left">* 缺点：兼容性不如 hash，且需要服务端支持，否则一刷新页面就404了</td>
+<td align="left">history.pushState(data[,title][,url]);  向历史记录中追加一条记录</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 </tbody></table>
+<p>history.replaceState(data[,title][,url]);  替换当前页在历史记录中的信息。<br>优点：</p>
+<ul>
+<li>对于重定向过程中不会丢失url中的参数，后端可以拿到这部分数据；</li>
+<li>绝大多数前段框架均提供了browser的路由实现；</li>
+<li>后端可以准确跟踪路由信息；</li>
+<li>可以使用history.state来获取当前url对应的状态信息<br>缺点：兼容性不如 hash，且需要服务端支持，否则一刷新页面就404了</li>
+</ul>
 
       
     </div>
