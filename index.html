@@ -92,7 +92,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>React Router 是完整的 React 路由解决方案</p>
+        <p>React Router 是完整的 React 路由解决方案<br>路由匹配原理：<br>路由拥有三个属性来决定是否匹配一个url：</p>
+<ul>
+<li>嵌套关系（树形结构，router深度优先遍历匹配路由）</li>
+<li>路径语法<br>特殊符号：<ul>
+<li>:paramName – 匹配一段位于 /、? 或 # 之后的 URL。 命中的部分将被作为一个参数</li>
+<li>() – 在它内部的内容被认为是可选的</li>
+<li>– 匹配任意字符（非贪婪的）直到命中下一个字符或者整个 URL 的末尾，并创建一个 splat 参数</li>
+</ul>
+</li>
+<li>– 匹配任意字符（非贪婪的）直到命中下一个字符或者整个 URL 的末尾，并创建一个 splat 参数</li>
+<li>优先级 路由算法会根据定义的顺序自顶向下匹配路由。当你拥有两个兄弟路由节点配置时，你必须确认前一个路由不会匹配后一个路由中的路径。<br>React Router是建立在history之上的</li>
+</ul>
 
       
     </div>
@@ -259,6 +270,11 @@
 <td align="center"></td>
 </tr>
 <tr>
+<td align="left">改变hash不会触发页面跳转，因为hash链接是当前页面中的某个片段，所以如果hash有变化，那么页面将会滚动到hash所连接的位置。但是页面中如果不存在hash对应的片段，则没有任何效果。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
 <td align="left">* hash值的变化不会导致浏览器向服务器发送请求</td>
 <td align="right"></td>
 <td align="center"></td>
@@ -274,47 +290,62 @@
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">优缺点：</td>
+<td align="left">优点：</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">* 优点：</td>
+<td align="left">* 实现简单，兼容性好（兼容到ie8）；</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">实现简单，兼容性好（兼容到ie8）；</td>
+<td align="left">* 绝大多数前端框架均提供了给予hash的路由实现；</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">绝大多数前端框架均提供了给予hash的路由实现；</td>
+<td align="left">* 不需要服务器端进行任何设置和开发；</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">不需要服务器端进行任何设置和开发；</td>
+<td align="left">* 除了资源加载和ajax请求以外，不会发起其他请求</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">除了资源加载和ajax请求以外，不会发起其他请求</td>
+<td align="left">缺点：</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">* 缺点：对于部分需要重定向的操作，后端无法获取hash部分内容，导致后台无法取得url中的数据，典型的例子就是微信公众号的oauth验证；</td>
+<td align="left">* 对于部分需要重定向的操作，后端无法获取hash部分内容，导致后台无法取得url中的数据，典型的例子就是微信公众号的oauth验证；</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">服务器端无法准确跟踪前端路由信息；</td>
+<td align="left">* 服务器端无法准确跟踪前端路由信息；</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
 <tr>
-<td align="left">对于需要锚点功能的需求会与目前路由机制冲突</td>
+<td align="left">* 对于需要锚点功能的需求会与目前路由机制冲突</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">hash 和 pushState 对比：</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">1. hash只能修改url的片段标识符的部分。并且必须从#号开始，但是pushState且能修改路径、查询参数和片段标识符。pushState比hash更符合前端路由的访问方式，更加优雅(因为不带#号)。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">2. hash必须和原先的值不同，才能新增会话浏览历史的记录，但是pushState可以新增相同的url的记录</td>
 <td align="right"></td>
 <td align="center"></td>
 </tr>
