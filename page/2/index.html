@@ -66,6 +66,85 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-分享" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/15/分享/" class="article-date">
+  <time datetime="2019-12-15T00:37:49.000Z" itemprop="datePublished">2019-12-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/js/">-js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/15/分享/">分享</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h2><p>Javascript和其他编程语言相比比较随意，所以Javascript代码中充满各种奇葩的写法，有时雾里看花，当然，能理解各型各色的写法也是对javascript语言特性更进一步的深入理解。其中( function(){…} )()和( function (){…} () )是两种javascript立即执行函数的常见写法。</p>
+<pre><code> 概念理解：函数声明、函数表达式、匿名函数
+
+1、 函数声明：function fnName () {…};使用function关键字声明一个函数，再指定一个函数名，叫函数声明。
+
+2、函数表达式 var fnName = function () {…};使用function关键字声明一个函数，但未给函数命名，最后将匿名函数赋予一个变量，叫函数表达式，这是最常见的函数表达式语法形式。
+
+3、匿名函数：function () {}; 使用function关键字声明一个函数，但未给函数命名，所以叫匿名函数，匿名函数属于函数表达式，匿名函数有很多作用，赋予一个变量则创建函数，赋予一个事件则成为事件处理程序或创建闭包等等。
+
+ 其中函数声明和函数表达式不同：
+
+1、Javascript引擎在解析javascript代码时会‘函数声明提升&apos;（Function declaration Hoisting）当前执行环境（作用域）上的函数声明，而函数表达式必须等到Javascirtp引擎执行到它所在行时，才会从上而下一行一行地解析函数表达式。
+
+2、函数表达式后面可以加括号立即调用该函数，函数声明不可以，只能以fnName()形式调用。</code></pre><p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">fnName();</span><br><span class="line">function fnName()&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line">//正常，因为‘提升&apos;了函数声明，函数调用可在函数声明之前</span><br><span class="line">  </span><br><span class="line">fnName();</span><br><span class="line">var fnName=function()&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line">//报错，变量fnName还未保存对函数的引用，函数调用必须在函数表达式之后</span><br><span class="line"> </span><br><span class="line">var fnName=function()&#123;</span><br><span class="line">  alert(&apos;Hello World&apos;);</span><br><span class="line">&#125;();</span><br><span class="line">//函数表达式后面加括号，当javascript引擎解析到此处时能立即调用函数</span><br><span class="line">function fnName()&#123;</span><br><span class="line">  alert(&apos;Hello World&apos;);</span><br><span class="line">&#125;();</span><br><span class="line">//不会报错，但是javascript引擎只解析函数声明，忽略后面的括号，函数声明不会被调用</span><br><span class="line">function()&#123;</span><br><span class="line">  console.log(&apos;Hello World&apos;); </span><br><span class="line">&#125;();</span><br><span class="line">//语法错误，虽然匿名函数属于函数表达式，但是未进行赋值操作，</span><br><span class="line">//所以javascript引擎将开头的function关键字当做函数声明，报错：要求需要一个函数名</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>在理解了一些函数基本概念后，回头看看( function(){…} )()和( function (){…} () )这两种立即执行函数的写法，最初我以为是一个括号包裹匿名函数，并后面加个括号立即调用函数，当时不知道为什么要加括号，后来明白，要在函数体后面加括号就能立即调用，则这个函数必须是函数表达式，不能是函数声明。</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出123,使用（）运算符</span><br><span class="line">&#125;)(123);</span><br><span class="line">  </span><br><span class="line">(function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出1234，使用（）运算符</span><br><span class="line">&#125;(1234));</span><br><span class="line">  </span><br><span class="line">!function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出12345,使用！运算符</span><br><span class="line">&#125;(12345);</span><br><span class="line">  </span><br><span class="line">+function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出123456,使用+运算符</span><br><span class="line">&#125;(123456);</span><br><span class="line">  </span><br><span class="line">-function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出1234567,使用-运算符</span><br><span class="line">&#125;(1234567);</span><br><span class="line">  </span><br><span class="line">var fn=function(a)&#123;</span><br><span class="line">  console.log(a);  //firebug输出12345678，使用=运算符</span><br><span class="line">&#125;(12345678)</span><br></pre></td></tr></table></figure>
+
+<pre><code>可以看到输出结果，在function前面加！、+、 -甚至是逗号等到都可以起到函数定义后立即执行的效果，而（）、！、+、-、=等运算符，都将函数声明转换成函数表达式，消除了javascript引擎识别函数表达式和函数声明的歧义，告诉javascript引擎这是一个函数表达式，不是函数声明，可以在后面加括号，并立即执行函数的代码。加括号是最安全的做法，因为！、+、-等运算符还会和函数的返回值进行运算，有时造成不必要的麻烦。
+
+Javascript中没用私有作用域的概念，如果在多人开发的项目上，你在全局或局部作用域中声明了一些变量，可能会被其他人不小心用同名的变量给覆盖掉，根据javascript函数作用域链的特性，可以使用这种技术可以模仿一个私有作用域，用匿名函数作为一个“容器”，“容器”内部可以访问外部的变量，而外部环境不能访问“容器”内部的变量，所以( function(){…} )()内部定义的变量不会和外部的变量发生冲突，俗称“匿名包裹器”或“命名空间”。
+
+JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,undefined){…jquery代码…} (window)中，在全局作用域中调用JQuery代码时，可以达到保护JQuery内部变量的作用。</code></pre><h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p>回调函数：通过函数指针调用的函数，回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外一方调用的，用于该事件或条件的响应<br>一、前奏<br>在谈回调函数之前，先看下下面两段代码：<br>不妨猜测一下代码的结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function say (value) &#123;</span><br><span class="line">    alert(value);</span><br><span class="line">&#125;</span><br><span class="line">alert(say);</span><br><span class="line">alert(say(&apos;hi js.&apos;));</span><br></pre></td></tr></table></figure>
+
+<p>如果你测试了，就会发现：</p>
+<p>只写变量名  say   返回的将会是 say方法本身，以字符串的形式表现出来。<br>而在变量名后加()如say()返回的就会使say方法调用后的结果，这里是弹出value的值。</p>
+<p>二、js中函数可以作为参数传递<br>再看下面的两段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function say (value) &#123;</span><br><span class="line">    alert(value);</span><br><span class="line">&#125;</span><br><span class="line">function execute (someFunction, value) &#123;</span><br><span class="line">    someFunction(value);</span><br><span class="line">&#125;</span><br><span class="line">execute(say, &apos;hi js.&apos;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function execute (someFunction, value) &#123;</span><br><span class="line">    someFunction(value);</span><br><span class="line">&#125;</span><br><span class="line">execute(function(value)&#123;alert(value);&#125;, &apos;hi js.&apos;);</span><br></pre></td></tr></table></figure>
+
+<p>上面第一段代码是将say方法作为参数传递给execute方法<br>第二段代码则是直接将匿名函数作为参数传递给execute方法</p>
+<p>实际上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function say (value) &#123;</span><br><span class="line">    alert(value);</span><br><span class="line">&#125;</span><br><span class="line">// 注意看下面,直接写say方法的方法名与下面的匿名函数可以认为是一个东西</span><br><span class="line">// 这样再看上面两段代码是不是对函数可以作为参数传递就更加清晰了</span><br><span class="line">say;</span><br><span class="line"></span><br><span class="line">function (value) &#123;</span><br><span class="line">    alert(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的say或者匿名函数就被称为回调函数。<br>1<br>三、回调函数易混淆点——传参<br>如果回调函数需要传参，如何做到，这里介绍两种解决方案。<br>将回调函数的参数作为与回调函数同等级的参数进行传递<br><img src="https://img-blog.csdn.net/20170210133828574?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYmFpZHVfMzIyNjIzNzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
+<p>回调函数的参数在调用回调函数内部创建<br><img src="https://img-blog.csdn.net/20170210134724086?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYmFpZHVfMzIyNjIzNzM=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/15/分享/" data-id="ckh7v3skg000o3gsn3vp149la" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-css" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/22/css/" class="article-date">
@@ -104,7 +183,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ckgqpwf3j00061ksn6dpktyoi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ckh7v3sk1000a3gsnmzs6egrq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css1/">css1</a></li></ul>
@@ -191,7 +270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ckgqpwf3r000a1ksnf25kkf0o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ckh7v3sk3000b3gsn6ujygm7z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js中的this/">js中的this</a></li></ul>
@@ -303,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/18/js闭包/" data-id="ckgqpwf6a001j1ksnkzgf1176" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/18/js闭包/" data-id="ckh7v3sl7001i3gsnkewlz122" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js闭包/">js闭包</a></li></ul>
@@ -393,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ckgqpwf5u00121ksn85io3n5l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ckh7v3ske000m3gsne9rmxv3c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li></ul>
@@ -444,7 +523,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/30/hello-world/" data-id="ckgqpwf3f00051ksn4mbypty8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/30/hello-world/" data-id="ckh7v3sjx00063gsnu03bbu0g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -479,7 +558,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hooks/">Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React的核心设计思想/">React的核心设计思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css1/">css1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单页应用/">单页应用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由/">路由</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hooks/">Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React的核心设计思想/">React的核心设计思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css1/">css1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单页应用/">单页应用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由/">路由</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级用法/">高级用法</a></li></ul>
     </div>
   </div>
 
@@ -489,7 +568,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的面向对象/" style="font-size: 10px;">-js中的面向对象</a> <a href="/tags/Hooks/" style="font-size: 10px;">Hooks</a> <a href="/tags/React的核心设计思想/" style="font-size: 10px;">React的核心设计思想</a> <a href="/tags/css1/" style="font-size: 10px;">css1</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/props/" style="font-size: 10px;">props</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/单页应用/" style="font-size: 10px;">单页应用</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/路由/" style="font-size: 10px;">路由</a>
+      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的面向对象/" style="font-size: 10px;">-js中的面向对象</a> <a href="/tags/Hooks/" style="font-size: 10px;">Hooks</a> <a href="/tags/React的核心设计思想/" style="font-size: 10px;">React的核心设计思想</a> <a href="/tags/css1/" style="font-size: 10px;">css1</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/props/" style="font-size: 10px;">props</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/单页应用/" style="font-size: 10px;">单页应用</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/路由/" style="font-size: 10px;">路由</a> <a href="/tags/高级用法/" style="font-size: 10px;">高级用法</a>
     </div>
   </div>
 
@@ -498,7 +577,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
     </div>
   </div>
 
@@ -509,6 +588,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/11/02/React-Router-高级/">React-Router 高级</a>
+          </li>
         
           <li>
             <a href="/2020/10/26/React-Router-基础/">React-Router 基础</a>
@@ -524,10 +607,6 @@
         
           <li>
             <a href="/2020/09/21/React-Hooks/">React Hooks</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/17/React核心设计思想/">React&#39;s core design ideas</a>
           </li>
         
       </ul>
