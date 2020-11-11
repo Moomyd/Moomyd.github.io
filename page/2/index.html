@@ -66,6 +66,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CSAPP-七" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/06/CSAPP-七/" class="article-date">
+  <time datetime="2020-02-06T10:22:53.000Z" itemprop="datePublished">2020-02-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CSAPP/">-CSAPP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/06/CSAPP-七/">CSAPP 七</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h1><p>将各种代码和数据片段收集并组合成为一个单一文件的过程，这个文件可被加载（复制）到内存并执行<br>链接器：分离编译<br>学习链接：<br>理解连接器将帮助你构造大型程序，理解链接器如何解析应用引用，什么是库以及链接器如何使用库来解析引用<br>理解链接器帮助避免一些危险的编程错误<br>理解链接将帮助你理解语言的作用域规则是如何实现的<br>理解链接将帮助你理解其他重要的系统概念，例如加载和运行程序、虚拟内存、分页、内存映射<br>理解链接将使你能够利用共享库<br>编译器驱动程序：.c -&gt; .i -&gt; .s -&gt; .o -&gt; 链接器 -&gt;prog -&gt; 加载器（可执行文件prog中的代码和数据复制到内存然后将控制转移到程序的开头）<br>为了构造可执行文件，链接器的两个主要任务：<br>符号解析，将每一个符号引用和一个符号定义关联起来<br>重定义<br>关于链接器的一些基本事实：<br>目标文件纯粹是字节块的集合。这些块中有些包含程序代码，有些包含程序数据，而其他的则包含引导链接器和加载器的数据结构。链接器将这些块连接起来确定被连接块的运行时位置，并且修改代码和数据块中的各种位置。链接器对目标机器了解甚少，产生目标文件的编译器和汇编器已经完成了大部分工作<br>目标文件的三种形式：<br>可重定位目标文件。包含二进制代码和数据<br>可执行目标文件。包含二进制代码和数据其形式可以被直接复制到内存并执行<br>共享目标文件。一种特殊类型的可重定位目标文件，可以在加载或运行时被动态的加载进内存并链接<br>可重定义目标文件的三个伪节：<br>ABS不该被重定义的符号<br>UNDEF未定义的符号在本目标模块引用在其他地方定义<br>COMMON未初始化的全局变量<br>.bss未初始化的静态变量以及初始化为0的全局或静态变量</p>
+<h2 id="符号解析"><a href="#符号解析" class="headerlink" title="符号解析"></a>符号解析</h2><p>链接器解析符号引用的方法是将每个引用与它输入的可重定位目标文件的符号表中的一个确定的符号定义关联起来<br>函数和已经初始化的全局变量是强符号，未初始化的全局变量是弱符号<br>处理多重定义的符号名：<br>1.不允许有多个同名的强符号<br>2.如果一个强符号和多个弱符号同名则选择强符号<br>3.如果有多个弱符号同名那么从弱中任意选择一个</p>
+<h3 id="与静态库链接"><a href="#与静态库链接" class="headerlink" title="与静态库链接"></a>与静态库链接</h3><p>将所有相关的目标模块打包成为一个单独的文件叫做静态库，用作链接器的输入</p>
+<h3 id="链接器用静态库来解析引用"><a href="#链接器用静态库来解析引用" class="headerlink" title="链接器用静态库来解析引用"></a>链接器用静态库来解析引用</h3><p>一个可重定位目标文件的集合E（这个集合中的文件会被合并起来形成可执行文件）<br>一个未解析的符号（引用了尚未定义）集合U<br>一个在前面输入文件中已经定义的符号集合D</p>
+<h2 id="重定位"><a href="#重定位" class="headerlink" title="重定位"></a>重定位</h2><p>合并输入模块，并为每个符号分配运行时地址</p>
+<ul>
+<li>重定位节和符号定义，合并相同类型的节，完成时程序中每条指令和全局变量都有唯一的运行时的内存地址了</li>
+<li>重定位节中的符号引用<h3 id="重定位条目"><a href="#重定位条目" class="headerlink" title="重定位条目"></a>重定位条目</h3>告诉链接器在将目标文件合并成可执行文件时如何修改这个引用。<br>代码的重定位条目放在.rel.text中 已初始化数据的重定位条目放在.rel.data中<br>ELF中两种最近本的重定位类型：</li>
+<li>R_X86_64_PC32重定位一个使用32位pc相对地址的引用</li>
+<li>R_X86_64_32重定位一个使用32位绝对地址的引用<h3 id="重定位符号引用"><a href="#重定位符号引用" class="headerlink" title="重定位符号引用"></a>重定位符号引用</h3><h2 id="可执行目标文件"><a href="#可执行目标文件" class="headerlink" title="可执行目标文件"></a>可执行目标文件</h2></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/02/06/CSAPP-七/" data-id="ckhdjq5l70004n4sntqbm4rc9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/七-链接/">七 链接</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-分享" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/15/分享/" class="article-date">
@@ -135,7 +188,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/分享/" data-id="ckh7v3skg000o3gsn3vp149la" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/分享/" data-id="ckhdjq5lv000rn4snte69hclq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -183,7 +236,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ckh7v3sk1000a3gsnmzs6egrq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ckhdjq5lj000fn4snfh2zxeoo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css1/">css1</a></li></ul>
@@ -270,7 +323,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ckh7v3sk3000b3gsn6ujygm7z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ckhdjq5ln000hn4sn51tbayh0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js中的this/">js中的this</a></li></ul>
@@ -382,7 +435,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/18/js闭包/" data-id="ckh7v3sl7001i3gsnkewlz122" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/18/js闭包/" data-id="ckhdjq5ms001rn4snd991vn5a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js闭包/">js闭包</a></li></ul>
@@ -472,7 +525,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ckh7v3ske000m3gsne9rmxv3c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ckhdjq5lt000nn4sn8mogrt5y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li></ul>
@@ -523,7 +576,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/30/hello-world/" data-id="ckh7v3sjx00063gsnu03bbu0g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/30/hello-world/" data-id="ckhdjq5lg000bn4snte2d6g0q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -548,7 +601,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSAPP/">-CSAPP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">-css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">-js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/日志/">-日志</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-router/">React-router</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CSAPP/">-CSAPP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/css/">-css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">-js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/日志/">-日志</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React/">React</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-Redux/">React-Redux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/React-router/">React-router</a></li></ul>
     </div>
   </div>
 
@@ -558,7 +611,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hooks/">Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React的核心设计思想/">React的核心设计思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css1/">css1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单页应用/">单页应用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由/">路由</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级用法/">高级用法</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hooks/">Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React的核心设计思想/">React的核心设计思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux基础/">Redux基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css1/">css1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单页应用/">单页应用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状态管理/">状态管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由/">路由</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级用法/">高级用法</a></li></ul>
     </div>
   </div>
 
@@ -568,7 +621,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的面向对象/" style="font-size: 10px;">-js中的面向对象</a> <a href="/tags/Hooks/" style="font-size: 10px;">Hooks</a> <a href="/tags/React的核心设计思想/" style="font-size: 10px;">React的核心设计思想</a> <a href="/tags/css1/" style="font-size: 10px;">css1</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/props/" style="font-size: 10px;">props</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/单页应用/" style="font-size: 10px;">单页应用</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/路由/" style="font-size: 10px;">路由</a> <a href="/tags/高级用法/" style="font-size: 10px;">高级用法</a>
+      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的面向对象/" style="font-size: 10px;">-js中的面向对象</a> <a href="/tags/Hooks/" style="font-size: 10px;">Hooks</a> <a href="/tags/React的核心设计思想/" style="font-size: 10px;">React的核心设计思想</a> <a href="/tags/Redux基础/" style="font-size: 10px;">Redux基础</a> <a href="/tags/css1/" style="font-size: 10px;">css1</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/props/" style="font-size: 10px;">props</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/单页应用/" style="font-size: 10px;">单页应用</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/状态管理/" style="font-size: 10px;">状态管理</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/路由/" style="font-size: 10px;">路由</a> <a href="/tags/高级用法/" style="font-size: 10px;">高级用法</a>
     </div>
   </div>
 
@@ -590,6 +643,10 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       <ul>
         
           <li>
+            <a href="/2020/11/07/Redux基础部分/">Redux基础部分</a>
+          </li>
+        
+          <li>
             <a href="/2020/11/02/React-Router-高级/">React-Router 高级</a>
           </li>
         
@@ -603,10 +660,6 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
         
           <li>
             <a href="/2020/09/27/render-props/">render props</a>
-          </li>
-        
-          <li>
-            <a href="/2020/09/21/React-Hooks/">React Hooks</a>
           </li>
         
       </ul>
