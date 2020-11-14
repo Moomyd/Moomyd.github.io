@@ -5,20 +5,20 @@
   
 
   
-  <title>基础回顾 | zmy&#39;s Blog</title>
+  <title>Redux基础 | zmy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="层叠当声明冲突时，层叠依据三种条件解决冲突：  样式表来源 选择器优先级 源码顺序样式表的来源自己定义的样式表属于作者样式表。浏览器默认样式叫用户代理样式表。有些浏览器允许用户定义一个用户样式表，优先级介于前两者之间。在后面加上！important会被标记为重要的声明。优先级最高。理解优先级浏览器将优先级分为：HTML行内样式和选择器样式行内样式：如果用HTML的style属性写样式这个声明只会作">
-<meta name="keywords" content="css1">
+  <meta name="description" content="Redux概述什么是ReduxRedux是一种模式和库，用于使用称为“操作”的事件来管理和更新应用程序状态。它用作需要在整个应用程序中使用的状态的集中存储，其规则确保只能以可预测的方式更新状态。 为什么使用ReduxRedux提供的模式和工具使您更容易理解何时，何地，为什么以及如何更新应用程序中的状态，以及在发生这些更改时应用程序逻辑将如何表现。Redux指导您编写可预测和可测试的代码，这有助于使">
+<meta name="keywords" content="三大基本原则">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基础回顾">
-<meta property="og:url" content="http://yoursite.com/2019/11/22/css/index.html">
+<meta property="og:title" content="Redux基础">
+<meta property="og:url" content="http://yoursite.com/2020/11/14/Redux基础/index.html">
 <meta property="og:site_name" content="zmy&#39;s Blog">
-<meta property="og:description" content="层叠当声明冲突时，层叠依据三种条件解决冲突：  样式表来源 选择器优先级 源码顺序样式表的来源自己定义的样式表属于作者样式表。浏览器默认样式叫用户代理样式表。有些浏览器允许用户定义一个用户样式表，优先级介于前两者之间。在后面加上！important会被标记为重要的声明。优先级最高。理解优先级浏览器将优先级分为：HTML行内样式和选择器样式行内样式：如果用HTML的style属性写样式这个声明只会作">
+<meta property="og:description" content="Redux概述什么是ReduxRedux是一种模式和库，用于使用称为“操作”的事件来管理和更新应用程序状态。它用作需要在整个应用程序中使用的状态的集中存储，其规则确保只能以可预测的方式更新状态。 为什么使用ReduxRedux提供的模式和工具使您更容易理解何时，何地，为什么以及如何更新应用程序中的状态，以及在发生这些更改时应用程序逻辑将如何表现。Redux指导您编写可预测和可测试的代码，这有助于使">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-20T15:45:43.715Z">
+<meta property="og:updated_time" content="2020-11-14T05:45:01.029Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基础回顾">
-<meta name="twitter:description" content="层叠当声明冲突时，层叠依据三种条件解决冲突：  样式表来源 选择器优先级 源码顺序样式表的来源自己定义的样式表属于作者样式表。浏览器默认样式叫用户代理样式表。有些浏览器允许用户定义一个用户样式表，优先级介于前两者之间。在后面加上！important会被标记为重要的声明。优先级最高。理解优先级浏览器将优先级分为：HTML行内样式和选择器样式行内样式：如果用HTML的style属性写样式这个声明只会作">
+<meta name="twitter:title" content="Redux基础">
+<meta name="twitter:description" content="Redux概述什么是ReduxRedux是一种模式和库，用于使用称为“操作”的事件来管理和更新应用程序状态。它用作需要在整个应用程序中使用的状态的集中存储，其规则确保只能以可预测的方式更新状态。 为什么使用ReduxRedux提供的模式和工具使您更容易理解何时，何地，为什么以及如何更新应用程序中的状态，以及在发生这些更改时应用程序逻辑将如何表现。Redux指导您编写可预测和可测试的代码，这有助于使">
   
     <link rel="alternate" href="/atom.xml" title="zmy&#39;s Blog" type="application/atom+xml">
   
@@ -69,16 +69,12 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-css" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Redux基础" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/22/css/" class="article-date">
-  <time datetime="2019-11-22T13:21:19.000Z" itemprop="datePublished">2019-11-22</time>
+    <a href="/2020/11/14/Redux基础/" class="article-date">
+  <time datetime="2020-11-14T04:55:22.000Z" itemprop="datePublished">2020-11-14</time>
 </a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/css/">-css</a>
-  </div>
-
   </div>
   <div class="article-inner">
     
@@ -87,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      基础回顾
+      Redux基础
     </h1>
   
 
@@ -95,22 +91,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="层叠"><a href="#层叠" class="headerlink" title="层叠"></a>层叠</h2><p>当声明冲突时，层叠依据三种条件解决冲突：</p>
-<ul>
-<li>样式表来源</li>
-<li>选择器优先级</li>
-<li>源码顺序<h3 id="样式表的来源"><a href="#样式表的来源" class="headerlink" title="样式表的来源"></a>样式表的来源</h3>自己定义的样式表属于作者样式表。浏览器默认样式叫用户代理样式表。有些浏览器允许用户定义一个用户样式表，优先级介于前两者之间。<br>在后面加上！important会被标记为重要的声明。优先级最高。<h3 id="理解优先级"><a href="#理解优先级" class="headerlink" title="理解优先级"></a>理解优先级</h3>浏览器将优先级分为：HTML行内样式和选择器样式<br>行内样式：如果用HTML的style属性写样式这个声明只会作用于当前元素，会覆盖任何来自样式表或者<code>&lt;style&gt;</code>标签的样式。<br>选择器优先级：ID选择器&gt;类选择器&gt;标签（类型）选择器<br>伪类选择器（：hover）和属性选择器（[type=”input”]）与一个类选择器优先级相同<br>通用选择器（*）和组合器（&gt;+=）对优先级没有影响<h3 id="源码顺序"><a href="#源码顺序" class="headerlink" title="源码顺序"></a>源码顺序</h3>如果两个声明的来源和优先级相同，其中一个声明在样式表中引入较晚，或者位于页面较晚引入的样式表中，则胜出。<br>链接样式：link链接、visited访问、hover悬停、active激活<br>层叠最终选择一个值来渲染元素，就是层叠值<h3 id="经验法则"><a href="#经验法则" class="headerlink" title="经验法则"></a>经验法则</h3></li>
-<li>在选择器中不要用ID</li>
-<li>不要轻易使用！important<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2>如果一个元素的某个属性没有层叠值，则可能会继承某个祖先元素的值。<br>可以被继承：与文本相关，列表属性和表格边框属性<h2 id="特殊值"><a href="#特殊值" class="headerlink" title="特殊值"></a>特殊值</h2>inherit用来继承其父元素的值<br>initial重置为默认值<h2 id="相对单位"><a href="#相对单位" class="headerlink" title="相对单位"></a>相对单位</h2>css为网页带来了后期绑定</li>
+        <h2 id="Redux概述"><a href="#Redux概述" class="headerlink" title="Redux概述"></a>Redux概述</h2><h3 id="什么是Redux"><a href="#什么是Redux" class="headerlink" title="什么是Redux"></a>什么是Redux</h3><p>Redux是一种模式和库，用于使用称为“操作”的事件来管理和更新应用程序状态。它用作需要在整个应用程序中使用的状态的集中存储，其规则确保只能以可预测的方式更新状态。</p>
+<h3 id="为什么使用Redux"><a href="#为什么使用Redux" class="headerlink" title="为什么使用Redux"></a>为什么使用Redux</h3><p>Redux提供的模式和工具使您更容易理解何时，何地，为什么以及如何更新应用程序中的状态，以及在发生这些更改时应用程序逻辑将如何表现。Redux指导您编写可预测和可测试的代码，这有助于使您确信应用程序将按预期运行。</p>
+<h3 id="何时使用Redux"><a href="#何时使用Redux" class="headerlink" title="何时使用Redux"></a>何时使用Redux</h3><ul>
+<li>您在应用程序中的许多地方都有大量的应用程序状态</li>
+<li>应用状态会随着时间而频繁更新</li>
+<li>更新该状态的逻辑可能很复杂</li>
+<li>该应用程序具有中型或大型代码库，可能被许多人使用</li>
 </ul>
+<h2 id="三大基本原则"><a href="#三大基本原则" class="headerlink" title="三大基本原则"></a>三大基本原则</h2><h3 id="单一数据源"><a href="#单一数据源" class="headerlink" title="单一数据源"></a>单一数据源</h3><p>整个应用的 state 被储存在一棵 object tree 中，并且这个 object tree 只存在于唯一一个 store 中。</p>
+<p>这让同构应用开发变得容易。来自服务端的state可以不需要编写许多代码就被序列化并注入客户端。单一的state tree也让调试变得容易。撤销重做等功能也变得容易。</p>
+<h3 id="State只读"><a href="#State只读" class="headerlink" title="State只读"></a>State只读</h3><p>唯一改变 state 的方法就是触发 action，action 是一个用于描述已发生事件的普通对象。</p>
+<p>这样确保了视图和网络请求都不能直接修改 state，相反它们只能表达想要修改的意图。因为所有的修改都被集中化处理，且严格按照一个接一个的顺序执行，因此不用担心竞争。</p>
+<h3 id="使用纯函数执行修改"><a href="#使用纯函数执行修改" class="headerlink" title="使用纯函数执行修改"></a>使用纯函数执行修改</h3><p>Reducer用来描述action如何改变state tree。reducer必须是纯函数。它接收先前的 state 和 action，并返回新的 state，不可以有副作用。</p>
+<p>刚开始你可以只有一个 reducer，随着应用变大，你可以把它拆成多个小的 reducers，分别独立地操作 state tree 的不同部分，因为 reducer 只是函数，你可以控制它们被调用的顺序，传入附加数据，甚至编写可复用的 reducer 来处理一些通用任务，如分页器。</p>
+<h2 id="Redux基本使用"><a href="#Redux基本使用" class="headerlink" title="Redux基本使用"></a>Redux基本使用</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> action1 =&#123;</span><br><span class="line">    type:<span class="string">''</span>,</span><br><span class="line">    data</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//也可以定义action creator函数</span></span><br><span class="line"><span class="keyword">const</span> learnReduxAction = <span class="function"><span class="params">data</span> =&gt;</span>&#123;</span><br><span class="line">    type:<span class="string">''</span>,</span><br><span class="line">    data</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//使用dispatch派发action</span></span><br><span class="line">store.dispatch(action1);</span><br><span class="line">store.dispatch(learnReduxAction(data));</span><br><span class="line"><span class="comment">//编写reducer函数(纯函数)更新数据</span></span><br><span class="line"><span class="keyword">const</span> updateState = <span class="function"><span class="keyword">function</span> (<span class="params">preState=&#123;&#125;,action</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    <span class="keyword">return</span> newState;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//合理拆分reducer</span></span><br><span class="line"><span class="keyword">let</span> finalReducer= combineReducers(&#123;reducers&#125;);</span><br><span class="line"><span class="comment">//创建store</span></span><br><span class="line"><span class="keyword">const</span> store=createStore(reducer,preloadedState,enhancer);</span><br></pre></td></tr></table></figure>
+
+<h2 id="搭配react"><a href="#搭配react" class="headerlink" title="搭配react"></a>搭配react</h2><p>Redux 的 React 绑定库是基于 容器组件和展示组件相分离 的开发思想。</p>
+<p>展示组件描述如何展现（骨架样式等）不可以直接使用Redux。数据来源于props</p>
+<p>容器组件描述如何运行（数据获取、状态更新）。数据来源于监听Redux state。容器组件就是使用 store.subscribe() 从 Redux state 树中读取部分数据，并通过 props 来把这些数据提供给要渲染的组件。你可以手工来开发容器组件，但建议使用 React Redux 库的 connect() 方法来生成，这个方法做了性能优化来避免很多不必要的重复渲染。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ckhhcofsb000hkcsnhr828k7z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/11/14/Redux基础/" data-id="ckhhcofrz000akcsnmtroeijg" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css1/">css1</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/三大基本原则/">三大基本原则</a></li></ul>
 
     </footer>
   </div>
@@ -118,19 +125,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/12/15/分享/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          分享
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/10/19/js中this的用法/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/11/11/Redux中间件/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">js中this的用法</div>
+      <div class="article-nav-title">Redux中间件</div>
     </a>
   
 </nav>

@@ -7,18 +7,18 @@
   
   <title>Redux中间件 | zmy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。 中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。">
-<meta name="keywords" content="中间件">
+  <meta name="description" content="Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。 中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。 异步操作的基本思路Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以">
+<meta name="keywords" content="中间件,异步操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redux中间件">
 <meta property="og:url" content="http://yoursite.com/2020/11/11/Redux中间件/index.html">
 <meta property="og:site_name" content="zmy&#39;s Blog">
-<meta property="og:description" content="Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。 中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。">
+<meta property="og:description" content="Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。 中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。 异步操作的基本思路Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-11-12T15:50:15.222Z">
+<meta property="og:updated_time" content="2020-11-14T07:09:50.229Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux中间件">
-<meta name="twitter:description" content="Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。 中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。">
+<meta name="twitter:description" content="Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。 中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。 异步操作的基本思路Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以">
   
     <link rel="alternate" href="/atom.xml" title="zmy&#39;s Blog" type="application/atom+xml">
   
@@ -97,14 +97,37 @@
       
         <p>Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。</p>
 <p>中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。</p>
+<h2 id="异步操作的基本思路"><a href="#异步操作的基本思路" class="headerlink" title="异步操作的基本思路"></a>异步操作的基本思路</h2><p>Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。</p>
+<p>同步操作只要发出一种 Action 即可，异步操作的差别是它要发出三种 Action。</p>
+<ul>
+<li>操作发起时的 Action</li>
+<li>操作成功时的 Action</li>
+<li>操作失败时的 Action</li>
+</ul>
+<p>三种 Action 可以有两种不同的写法。名称相同，参数不同和名称不同。<br>除了 Action 种类不同，异步操作的 State 也要进行改造，反映不同的操作状态。</p>
+<ul>
+<li>操作开始时，送出一个 Action，触发 State 更新为”正在操作”状态，View 重新渲染</li>
+<li>操作结束后，再送出一个 Action，触发 State 更新为”操作结束”状态，View 再一次重新渲染<h2 id="redux-thunk中间件"><a href="#redux-thunk中间件" class="headerlink" title="redux-thunk中间件"></a>redux-thunk中间件</h2>Thunk是基本Redux副作用逻辑的推荐中间件，其中包括需要访问存储的复杂同步逻辑以及简单的异步逻辑（如AJAX请求）。<br>redux-thunk的思想：接受一个返回函数的action creator。如果这个action creator 返回的是一个函数，就执行它，如果不是，就按照原来的next(action)执行。可以在返回函数中执行一些异步操作。</li>
+</ul>
+<p>用法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; applyMiddleware, createStore &#125; <span class="keyword">from</span> <span class="string">'redux'</span>;</span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">'redux-thunk'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = createStore(</span><br><span class="line">    reducers, </span><br><span class="line">    applyMiddleware(thunk)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>直接将thunk中间件引入，放在applyMiddleware方法之中，传入createStore方法，就完成了store.dispatch()的功能增强。即可以在reducer中进行一些异步的操作。</p>
+<p>applyMiddleware就是Redux的一个原生方法，将所有中间件组成一个数组，依次执行。</p>
+<h2 id="redux-promise中间件"><a href="#redux-promise中间件" class="headerlink" title="redux-promise中间件"></a>redux-promise中间件</h2><p>和redux-actions一起处理异步的action。因为我们使用createAction后返回的是一个对象，而不是一个函数，就会导致redux-thunk的代码没有起到作用。可以使用redux-promise来处理这类情况。</p>
+<p>redux-thunk中间件，它会去判断action是否是一个函数，如果是就执行。<br>而redux-promise中间件，他会在dispatch时，判断如果action不是类似</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  type：<span class="string">''</span>,</span><br><span class="line">  payload： <span class="string">''</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样的结构就是FSA，然后判断是否为promise对象，如果是就执行action.then</p>
+<h2 id="redux-saga中间件"><a href="#redux-saga中间件" class="headerlink" title="redux-saga中间件"></a>redux-saga中间件</h2><p>之前的异步处理是用redux-thunk + redux-actions + redux-promise。而redux-saga是用Generator来处理异步</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/11/11/Redux中间件/" data-id="ckhf0eou900047ssnybs4ly9g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/11/11/Redux中间件/" data-id="ckhhcofrt0005kcsntchpak6b" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/中间件/">中间件</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/中间件/">中间件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异步操作/">异步操作</a></li></ul>
 
     </footer>
   </div>
@@ -112,10 +135,19 @@
     
 <nav id="article-nav">
   
+    <a href="/2020/11/14/Redux基础/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Redux基础
+        
+      </div>
+    </a>
   
-    <a href="/2020/11/07/Redux基础部分/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2020/11/07/状态管理/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Redux基础部分</div>
+      <div class="article-nav-title">状态管理</div>
     </a>
   
 </nav>
@@ -141,7 +173,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hooks/">Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React的核心设计思想/">React的核心设计思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redux基础/">Redux基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css1/">css1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单页应用/">单页应用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状态管理/">状态管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由/">路由</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级用法/">高级用法</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hooks/">Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React的核心设计思想/">React的核心设计思想</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css1/">css1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js中的this/">js中的this</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js闭包/">js闭包</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/props/">props</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/七-链接/">七 链接</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/三大基本原则/">三大基本原则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中间件/">中间件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单页应用/">单页应用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/基础/">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异步操作/">异步操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/状态管理方案/">状态管理方案</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由/">路由</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高级用法/">高级用法</a></li></ul>
     </div>
   </div>
 
@@ -151,7 +183,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的面向对象/" style="font-size: 10px;">-js中的面向对象</a> <a href="/tags/Hooks/" style="font-size: 10px;">Hooks</a> <a href="/tags/React的核心设计思想/" style="font-size: 10px;">React的核心设计思想</a> <a href="/tags/Redux基础/" style="font-size: 10px;">Redux基础</a> <a href="/tags/css1/" style="font-size: 10px;">css1</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/props/" style="font-size: 10px;">props</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/单页应用/" style="font-size: 10px;">单页应用</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/状态管理/" style="font-size: 10px;">状态管理</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/路由/" style="font-size: 10px;">路由</a> <a href="/tags/高级用法/" style="font-size: 10px;">高级用法</a>
+      <a href="/tags/Windows下搭建博客/" style="font-size: 10px;">-Windows下搭建博客</a> <a href="/tags/js中的面向对象/" style="font-size: 10px;">-js中的面向对象</a> <a href="/tags/Hooks/" style="font-size: 10px;">Hooks</a> <a href="/tags/React的核心设计思想/" style="font-size: 10px;">React的核心设计思想</a> <a href="/tags/css1/" style="font-size: 10px;">css1</a> <a href="/tags/js中的this/" style="font-size: 10px;">js中的this</a> <a href="/tags/js闭包/" style="font-size: 10px;">js闭包</a> <a href="/tags/props/" style="font-size: 10px;">props</a> <a href="/tags/七-链接/" style="font-size: 10px;">七 链接</a> <a href="/tags/三大基本原则/" style="font-size: 10px;">三大基本原则</a> <a href="/tags/中间件/" style="font-size: 10px;">中间件</a> <a href="/tags/单页应用/" style="font-size: 10px;">单页应用</a> <a href="/tags/基础/" style="font-size: 10px;">基础</a> <a href="/tags/异步操作/" style="font-size: 10px;">异步操作</a> <a href="/tags/状态管理方案/" style="font-size: 10px;">状态管理方案</a> <a href="/tags/第二章-信息的表示和处理/" style="font-size: 10px;">第二章 信息的表示和处理</a> <a href="/tags/路由/" style="font-size: 10px;">路由</a> <a href="/tags/高级用法/" style="font-size: 10px;">高级用法</a>
     </div>
   </div>
 
@@ -173,11 +205,15 @@
       <ul>
         
           <li>
+            <a href="/2020/11/14/Redux基础/">Redux基础</a>
+          </li>
+        
+          <li>
             <a href="/2020/11/11/Redux中间件/">Redux中间件</a>
           </li>
         
           <li>
-            <a href="/2020/11/07/Redux基础部分/">Redux基础部分</a>
+            <a href="/2020/11/07/状态管理/">状态管理</a>
           </li>
         
           <li>
@@ -186,10 +222,6 @@
         
           <li>
             <a href="/2020/10/26/React-Router-基础/">React-Router 基础</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/22/单页应用/">单页应用</a>
           </li>
         
       </ul>
