@@ -66,6 +66,81 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-生成器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/04/05/生成器/" class="article-date">
+  <time datetime="2020-04-04T17:29:39.912Z" itemprop="datePublished">2020-04-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/js/">js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/05/生成器/">未来函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="生成器函数"><a href="#生成器函数" class="headerlink" title="生成器函数"></a>生成器函数</h2><p>生成器（generator）是一种特殊类型的函数。当从头到尾运行标准函数时，它最多只生成一个值。然而生成器函数会在几次运行请求中暂停，因此每次运行都可能会生成一个值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">myGenertor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">yield</span> <span class="string">'test1'</span>;</span><br><span class="line">   <span class="keyword">yield</span> <span class="string">'test2'</span>;</span><br><span class="line">   <span class="keyword">yield</span> <span class="string">'test3'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> aa <span class="keyword">of</span> myGenertor())&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(aa)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//test1、test2、test3</span></span><br></pre></td></tr></table></figure>
+
+<p>在定义函数的时候在function后面加一个*表示这是一个生成器函数，并通过关键字yield返回相应的值，可以通过它来指定调用迭代器的next()方法时的返回值及返回顺序。并且，对于生成器函数来说，它不会像普通函数一样停止执行，而是当一个值的请求到来后，生成器就会从上次离开的地方继续开始执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">myGenertor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> bb = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line">    bb++;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"> <span class="keyword">for</span>(<span class="keyword">let</span> aa <span class="keyword">of</span> myGenertor())&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(aa)</span><br><span class="line"> &#125;<span class="comment">//1、2、2</span></span><br></pre></td></tr></table></figure>
+
+<p>从上面这个例子可知，第一次调用myGenenrtor这个生成器函数的时候，首先定义了一个名为bb的变量并且初始化为1，然后将这个值返回。第二次调用的时候，生成器不会像普通函数那样，再次从函数的开始执行，而是从上次执行的语句之后又开始执行b++，并返回此时bb的值为2.然后继续这个过程，返回的值是2</p>
+<h2 id="通过迭代对象控制生成器"><a href="#通过迭代对象控制生成器" class="headerlink" title="通过迭代对象控制生成器"></a>通过迭代对象控制生成器</h2><p>在 JavaScript 中，迭代器是一个对象，它定义一个序列，并在终止时可能返回一个返回值。 更具体地说，迭代器是通过使用 next() 方法实现 Iterator protocol 的任何一个对象，该方法返回具有两个属性的对象： value，这是序列中的 next 值；和 done ，如果已经迭代到序列中的最后一个值，则它为 true 。如果 value 和 done 一起存在，则它是迭代器的返回值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">myGenertor</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> bb = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line">    bb++;</span><br><span class="line">    <span class="keyword">yield</span> bb;</span><br><span class="line"> &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">var</span> myIterator = myGenertor();</span><br><span class="line"><span class="built_in">console</span>.log(myIterator);</span><br><span class="line"><span class="built_in">console</span>.log(myIterator.next())</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(myIterator.next())</span><br><span class="line"><span class="built_in">console</span>.log(myIterator.next())</span><br><span class="line"><span class="comment">//执行的结果为</span></span><br><span class="line"><span class="comment">//&#123;&#125;</span></span><br><span class="line"><span class="comment">//&#123; value: 1, done: false &#125;</span></span><br><span class="line"><span class="comment">//&#123; value: 2, done: false &#125;</span></span><br><span class="line"><span class="comment">//&#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>在上面这个例子中，依然定义了一个生成器函数myGenertor，接下来调用这个生成器函数，就创建了一个迭代器。对这个对象执行接口方法next(),当代码执行到yield关键字的时候，生成一个中间结果并且返回一个新的对象，其中封装了一个结果值和指示完成的指示器。每当生成器生成一个值之后，生成器就会非阻塞挂起，等待下一次请求的到达。当没有可执行的代码的时候，生成器就会返回一个value为“undefined”，done为true的值，表示他的状态已完成。</p>
+<h2 id="利用生成器函数把执行权交给下一个生成器"><a href="#利用生成器函数把执行权交给下一个生成器" class="headerlink" title="利用生成器函数把执行权交给下一个生成器"></a>利用生成器函数把执行权交给下一个生成器</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">g1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">g2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">yield</span>* g1();</span><br><span class="line">  <span class="keyword">yield</span> <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> iterator = g2();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: 1, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: 2, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: 3, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: 4, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: 5, done: false &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(iterator.next()); <span class="comment">// &#123; value: undefined, done: true &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>​ 上面这个实例中，在迭代器上使用yield*操作符，程序会跳转到另一个生成器上执行，这一切对于最初调用的迭代器而言都是透明的。</p>
+<h2 id="生成器异常和处理"><a href="#生成器异常和处理" class="headerlink" title="生成器异常和处理"></a>生成器异常和处理</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">myGenerator</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">yield</span> <span class="string">"hello"</span>;</span><br><span class="line">    &#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"出错了！！"</span> + e)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> test1 = myGenerator();</span><br><span class="line"><span class="built_in">console</span>.log(test1.next());</span><br><span class="line">test1.throw(<span class="string">"迭代器抛出了一个错误"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//  运行结果：</span></span><br><span class="line"><span class="comment">// &#123; value: 'hello', done: false &#125;</span></span><br><span class="line"><span class="comment">// 出错了！！迭代器抛出了一个错误</span></span><br></pre></td></tr></table></figure>
+
+<p>这里将生成器中全部的代码装入try-catch块中去。在创建了迭代器之后，通过调用迭代器中的throw方法抛出异常，并利用生成器函数中的catch语句进行异常的接受和处理。</p>
+<h2 id="生成器的内部构成"><a href="#生成器的内部构成" class="headerlink" title="生成器的内部构成"></a>生成器的内部构成</h2><ul>
+<li>挂起开始</li>
+<li>执行</li>
+<li>挂起让渡，在生成器执行中遇到一个yield表达式，会创建一个包含返回值的新对象，随后挂起</li>
+<li>完成</li>
+</ul>
+<p>当我们从生成器中取得控制权后，生成器的执行环境上下文一直都保存着。</p>
+<h2 id="使用promise"><a href="#使用promise" class="headerlink" title="使用promise"></a>使用promise</h2><p>promise对象是对我们现在未得到但将来会得到值的占位符，是我们最终能够得知异步计算结果的一种保证。</p>
+<p>回调函数处理异步的问题：错误难以处理，执行连续步骤非常棘手，执行许多并行任务很复杂。</p>
+<p>promise经历的状态：</p>
+<ul>
+<li>等待也称为未实现</li>
+<li>如果resolve被调用，进入完成状态，在该状态下获得了承诺的值</li>
+<li>如果reject调用或者一个未处理的异常发生，进入拒绝状态</li>
+</ul>
+<p>promise.all接受一个 promises数组，如果都成功返回成功<br>promise.race只关心第一个成功的promise</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/04/05/生成器/" data-id="ckhkn9xmi0013iwsnu6lh8w2l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/promise/">promise</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/生成器/">生成器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-面向对象与原型" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/04/面向对象与原型/" class="article-date">
@@ -135,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/04/04/面向对象与原型/" data-id="ckhhcofv5001ykcsnsqc4ymju" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/04/04/面向对象与原型/" data-id="ckhkn9xo70024iwsnd1o2x10k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js中的面向对象/">-js中的面向对象</a></li></ul>
@@ -178,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/17/CSAPP-two/" data-id="ckhhcofra0000kcsn6v9wtf1c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/17/CSAPP-two/" data-id="ckhkn9xkt0000iwsn5jfky0d9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/第二章-信息的表示和处理/">第二章 信息的表示和处理</a></li></ul>
@@ -231,7 +306,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/02/06/CSAPP-七/" data-id="ckhhcofri0001kcsnqmg964q8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/02/06/CSAPP-七/" data-id="ckhkn9xlf0006iwsn4kachmc5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/七-链接/">七 链接</a></li></ul>
@@ -312,7 +387,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/15/分享/" data-id="ckhhcofsv000rkcsn36ouh55a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/15/分享/" data-id="ckhkn9xm9000uiwsn0ombaalo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -360,7 +435,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ckhhcofsb000hkcsnhr828k7z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/22/css/" data-id="ckhkn9xll000biwsnsj81uhh8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css1/">css1</a></li></ul>
@@ -447,7 +522,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ckhhcofs6000fkcsn00qhtqes" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/19/js中this的用法/" data-id="ckhkn9xm1000oiwsnq1rpy77g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js中的this/">js中的this</a></li></ul>
@@ -559,7 +634,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/18/js闭包/" data-id="ckhhcofv1001xkcsnoqkxtv9r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/18/js闭包/" data-id="ckhkn9xo50023iwsnud43jsg4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js闭包/">js闭包</a></li></ul>
@@ -649,7 +724,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ckhhcofsy000skcsnoms0yz3n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/10/14/搭建博客/" data-id="ckhkn9xmc000yiwsn9m22d19m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows下搭建博客/">-Windows下搭建博客</a></li></ul>
@@ -700,7 +775,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/30/hello-world/" data-id="ckhhcofs1000bkcsn4ap1ccuj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/30/hello-world/" data-id="ckhkn9xlx000miwsn479opkj6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -767,6 +842,10 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
       <ul>
         
           <li>
+            <a href="/2020/11/16/dva-js/">dva.js</a>
+          </li>
+        
+          <li>
             <a href="/2020/11/14/Redux基础/">Redux基础</a>
           </li>
         
@@ -780,10 +859,6 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
         
           <li>
             <a href="/2020/11/02/React-Router-高级/">React-Router 高级</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/26/React-Router-基础/">React-Router 基础</a>
           </li>
         
       </ul>

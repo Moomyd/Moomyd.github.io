@@ -5,15 +5,22 @@
   
 
   
-  <title>Tag: 生成器 | zmy&#39;s Blog</title>
+  <title>dva.js | zmy&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zmy&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/tags/生成器/index.html">
+  <meta name="description" content="dva是什么dva是一个机遇redux和redux-saga的数据流方案，为了简化开发体验，额外内置了react-router和fetch。也可以理解一个为一个轻量级的应用框架。 dva = React-Router + Redux + Redux-sagadva做了3件重要的事情：  把 store 及 saga 统一为一个 model 的概念, 写在一个 js 文件里面 增加了一个 Subsc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dva.js">
+<meta property="og:url" content="http://yoursite.com/2020/11/16/dva-js/index.html">
 <meta property="og:site_name" content="zmy&#39;s Blog">
+<meta property="og:description" content="dva是什么dva是一个机遇redux和redux-saga的数据流方案，为了简化开发体验，额外内置了react-router和fetch。也可以理解一个为一个轻量级的应用框架。 dva = React-Router + Redux + Redux-sagadva做了3件重要的事情：  把 store 及 saga 统一为一个 model 的概念, 写在一个 js 文件里面 增加了一个 Subsc">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/11/pictures/dva.png">
+<meta property="og:image" content="http://yoursite.com/2020/11/pictures/dva2.png">
+<meta property="og:updated_time" content="2020-11-16T14:18:44.399Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zmy&#39;s Blog">
+<meta name="twitter:title" content="dva.js">
+<meta name="twitter:description" content="dva是什么dva是一个机遇redux和redux-saga的数据流方案，为了简化开发体验，额外内置了react-router和fetch。也可以理解一个为一个轻量级的应用框架。 dva = React-Router + Redux + Redux-sagadva做了3件重要的事情：  把 store 及 saga 统一为一个 model 的概念, 写在一个 js 文件里面 增加了一个 Subsc">
+<meta name="twitter:image" content="http://yoursite.com/2020/11/pictures/dva.png">
   
     <link rel="alternate" href="/atom.xml" title="zmy&#39;s Blog" type="application/atom+xml">
   
@@ -64,40 +71,77 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2020/04/05/生成器/" class="archive-article-date">
-  <time datetime="2020-04-04T17:29:39.912Z" itemprop="datePublished">Apr 5</time>
+        <section id="main"><article id="post-dva-js" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/11/16/dva-js/" class="article-date">
+  <time datetime="2020-11-15T16:01:37.000Z" itemprop="datePublished">2020-11-16</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/React-Redux/">React-Redux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/04/05/生成器/">未来函数</a>
+    <h1 class="article-title" itemprop="name">
+      dva.js
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="dva是什么"><a href="#dva是什么" class="headerlink" title="dva是什么"></a>dva是什么</h2><p>dva是一个机遇redux和redux-saga的数据流方案，为了简化开发体验，额外内置了react-router和fetch。也可以理解一个为一个轻量级的应用框架。</p>
+<p>dva = React-Router + Redux + Redux-saga<br><img src="../../pictures/dva.png"><br>dva做了3件重要的事情：</p>
+<ol>
+<li>把 store 及 saga 统一为一个 model 的概念, 写在一个 js 文件里面</li>
+<li>增加了一个 Subscriptions, 用于收集其他来源的 action</li>
+<li>model 写法很简约, 类似于 DSL 或者 RoR</li>
+</ol>
+<img src="../../pictures/dva2.png">
 
+<h3 id="app-Model"><a href="#app-Model" class="headerlink" title="app.Model"></a>app.Model</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = dva();</span><br><span class="line"></span><br><span class="line">app.model(</span><br><span class="line">  &#123;</span><br><span class="line">  namespace: <span class="string">'count'</span>,</span><br><span class="line">  state: <span class="number">0</span>,</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    add(state) &#123; <span class="keyword">return</span> state + <span class="number">1</span> &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  effects: &#123;</span><br><span class="line">    *addAfter1Second(action, &#123; call, put &#125;) &#123;</span><br><span class="line">      <span class="keyword">yield</span> call(delay, <span class="number">1000</span>);</span><br><span class="line">      <span class="keyword">yield</span> put(&#123; <span class="attr">type</span>: <span class="string">'add'</span> &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">app.router(<span class="function"><span class="params">()</span> =&gt;</span> &lt;App /&gt;);</span><br><span class="line">app.start('#root');</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>namespace: 当前 Model 的名称。整个应用的 State，由多个小的 Model 的 State 以 namespace 为 key 合成</p>
+</li>
+<li><p>state: 该 Model 当前的状态。数据保存在这里，直接决定了视图层的输出</p>
+</li>
+<li><p>reducers: Action 处理器，处理同步动作，用来算出最新的 State</p>
+</li>
+<li><p>effects：Action 处理器，处理异步动作</p>
+<p>dva 的源码核心部分包含两部分，dva 和 dva-core。前者用高阶组件 React-redux 实现了 view 层，后者是用 redux-saga 解决了 model 层。</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/11/16/dva-js/" data-id="ckhkn9xl60004iwsngyiri802" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/11/14/Redux基础/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Redux基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         

@@ -18,7 +18,7 @@
 <meta property="og:image" content="http://yoursite.com/2020/11/pictures/middleware.png">
 <meta property="og:image" content="http://yoursite.com/2020/11/pictures/thunk.png">
 <meta property="og:image" content="http://yoursite.com/2020/11/pictures/saga.png">
-<meta property="og:updated_time" content="2020-11-14T07:57:05.336Z">
+<meta property="og:updated_time" content="2020-11-15T16:00:41.696Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux中间件">
 <meta name="twitter:description" content="处理副作用——中间件Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。 中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。 redux增加中间件处理副作用的数据流： 中间件作用：转换异步操作，生成原始的action，">
@@ -137,6 +137,8 @@
 <li><p>call(apply),与js中的类似.call方法调用fn，参数为args，返回一个描述对象</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call(fn, ...args)</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>fork，call会阻塞主线程，fork不会</p>
+</li>
 <li><p>put,redux-saga执行副作用方法转化action时，put这个Effect方法跟redux原始的dispatch相似，都是可以发出action，且发出的action都会被reducer监听到。</p>
 </li>
 <li><p>select,可以再中间件中获取state，对应redux中的getState</p>
@@ -151,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/11/11/Redux中间件/" data-id="ckhhcofrt0005kcsntchpak6b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/11/11/Redux中间件/" data-id="ckhkn9xld0005iwsnab034rk9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/中间件/">中间件</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异步操作/">异步操作</a></li></ul>
@@ -232,6 +234,10 @@
       <ul>
         
           <li>
+            <a href="/2020/11/16/dva-js/">dva.js</a>
+          </li>
+        
+          <li>
             <a href="/2020/11/14/Redux基础/">Redux基础</a>
           </li>
         
@@ -245,10 +251,6 @@
         
           <li>
             <a href="/2020/11/02/React-Router-高级/">React-Router 高级</a>
-          </li>
-        
-          <li>
-            <a href="/2020/10/26/React-Router-基础/">React-Router 基础</a>
           </li>
         
       </ul>
