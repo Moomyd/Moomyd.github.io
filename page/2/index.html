@@ -249,6 +249,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/17/React核心设计思想/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zmy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zmy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/09/17/React核心设计思想/" itemprop="url">React's core design ideas</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-17T22:48:53+08:00">
+                2020-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React/" itemprop="url" rel="index">
+                    <span itemprop="name">React</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="声明式渲染"><a href="#声明式渲染" class="headerlink" title="声明式渲染"></a>声明式渲染</h2><h3 id="主要的编程范式："><a href="#主要的编程范式：" class="headerlink" title="主要的编程范式："></a>主要的编程范式：</h3><ul>
+<li>命令式编程：命令“机器”如何去做事情(how)，这样不管你想要的是什么(what)，它都会按照你的命令实现。</li>
+<li>声明式编程：告诉“机器”你想要的是什么(what)，让机器想出如何去做(how)。<h3 id="模板渲染"><a href="#模板渲染" class="headerlink" title="模板渲染"></a>模板渲染</h3>渲染：模板 =&gt; HTML =&gt; 页面视图<br>发生在服务器的叫后端模板渲染<br>发生在客户端的叫前端模板渲染<h3 id="React声明式渲染"><a href="#React声明式渲染" class="headerlink" title="React声明式渲染"></a>React声明式渲染</h3>和普通模板不同的是，React 模板写在 JS 文件中，而不是 html 的 <code>&lt;script&gt;</code>标签中。能使用所有 JS 语法，而不只有模板语法，所以更加灵活。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatName</span>(<span class="params">user</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> user.firstName + <span class="string">' '</span> + user.lastName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数据</span></span><br><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">  firstName: <span class="string">'Harper'</span>,</span><br><span class="line">  lastName: <span class="string">'Perez'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 模板</span></span><br><span class="line"><span class="keyword">const</span> element = (</span><br><span class="line">  &lt;h1&gt;</span><br><span class="line">    Hello, &#123;formatName(user)&#125;!</span><br><span class="line">  &lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">/</span><span class="regexp">/ 渲染</span></span><br><span class="line"><span class="regexp">ReactDOM.render(</span></span><br><span class="line"><span class="regexp">  element,</span></span><br><span class="line"><span class="regexp">  document.getElementById('root')</span></span><br><span class="line"><span class="regexp">);</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>React 可局部渲染，且只渲染改变了的数据。纯模板只能整体渲染。<br>高效的局部渲染意味着，开发者 只需要维护可变的数据 state (what) ，让 react 框架帮助我们处理 DOM 操作(what)。<br>通过 setState 告诉 react 什么数据变了，React 会自动更新数据改变部分的视图</p>
+<h3 id="完成的渲染流程"><a href="#完成的渲染流程" class="headerlink" title="完成的渲染流程"></a>完成的渲染流程</h3><p>初始化的渲染流程分为 3 步。</p>
+<p>第一步，开发者使用 JSX 语法写 React，babel 会将 JSX 编译为浏览器能识别的 React JS 语法。这一步，一般配合 webpack 在本地进行。</p>
+<p>第二步，执行 ReactDOM.render 函数，渲染出虚拟DOM。</p>
+<p>第三步，react 将虚拟DOM，渲染成真实的DOM。</p>
+<p>页面更新的流程同样也是 3 步。</p>
+<p>第一步，当页面需要更新时，通过声明式的方法，调用 setState 告诉 react。</p>
+<p>第二步，react 自动调用组件的 render 方法，渲染出虚拟 DOM。</p>
+<p>第三步，react 会通过 diffing 算法，对比当前虚拟 DOM 和需要更新的虚拟 DOM 有什么区别。然后重新渲染区别部分的真实 DOM。<br><img src="../../pictures/ReactRender .png"></p>
+<h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><p>以函数作为主要载体的编程方式，用函数去拆解、抽象一般的表达式，最小‘可视’单位是函数的一种编码规范，重点体现‘函数式’，<br>React并没有使用太多函数式编程(Functional Programming)的思想，但是React周边的工具（比如Redux）很多却使用了这种的思想</p>
+<h3 id="函数式第一公民"><a href="#函数式第一公民" class="headerlink" title="函数式第一公民"></a>函数式第一公民</h3><p>在JavaScript的世界里，函数可以作为参数传递，函数可以赋值给一个变量，一个函数的执行结果也可以是一个函数，因为在JavaScript里面，函数也是对象，所以函数是第一公民。</p>
+<h3 id="数据是不可变的-Immutable"><a href="#数据是不可变的-Immutable" class="headerlink" title="数据是不可变的(Immutable)"></a>数据是不可变的(Immutable)</h3><p>在纯种的函数式编程语言中，数据是不可变的，或者说没有变量这个概念，所有的数据一旦产生，就不能改变其中的值，如果要改变，那就只能生成一个新的数据。<br>在React中，强调一个组件不能去修改传入的prop值，也是遵循Immutable的原则。<br>在Redux中，更是强调Immutable的作用，每个reducer不能够修改state，只能返回一个新的state。<br>Immutable是个好原则，可以让代码更容易维护，当你看到一个变量的时候，可以放心假设这个变量代表的值不会被篡改，否则，你就会很操心。<br>保持Immutable的代价就会有一些空间和时间损耗</p>
+<h3 id="强制使用纯函数"><a href="#强制使用纯函数" class="headerlink" title="强制使用纯函数"></a>强制使用纯函数</h3><p>所谓纯函数，就是和数学概念上的函数一样的函数，没有任何副作用，输出完全由输入决定。对于相同的输入，永远会得到相同的输出，而且没有任何可观察的副作用，也不依赖外部环境的状态。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不纯的</span></span><br><span class="line"><span class="keyword">var</span> minimum = <span class="number">21</span>;</span><br><span class="line"><span class="keyword">var</span> checkAge = <span class="function"><span class="keyword">function</span>(<span class="params">age</span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> age &gt;= minimum;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 纯的</span></span><br><span class="line"><span class="keyword">var</span> checkAge = <span class="function"><span class="keyword">function</span>(<span class="params">age</span>) </span>&#123;</span><br><span class="line"><span class="keyword">var</span> minimum = <span class="number">21</span>;</span><br><span class="line"><span class="keyword">return</span> age &gt;= minimum;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不纯的</span></span><br><span class="line"><span class="keyword">var</span> count = <span class="number">1</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> count + <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 纯的</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> count + <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不纯的版本中，函数 的结果将取决于 外部变量 甚至 修改外部变量。从而增加了认知负荷，有时候甚至引发bug,这就是为什么我们刚开始写js时,总有人警告我们不要设置全局变量。<br>在纯函数中他们总只着眼于自己的一亩三分地，不会给别人(程序员)添麻烦。<br>在JavaScript中，虽然我们可以通过一些手段（比如强制让this变成undefined)来避免副作用，但是JavaScript本身就是一个弱类型没有副作用检查的语言，所以没法强制使用纯函数，基本还是要靠程序员自觉。<br>在React中，组件的render函数应该是一个纯函数（你要非说只需要是一个幂等函数，也行），只有这样，组件渲染的结果才只和state/props有关系，遵循UI=f(state)这个公式。<br>在Redux，reducer必须是一个纯函数，也是函数式编程的要求。</p>
+<h3 id="支持函数递归调用"><a href="#支持函数递归调用" class="headerlink" title="支持函数递归调用"></a>支持函数递归调用</h3><p>JavaScript当然支持递归，不过，对于原教旨主义的函数式编程语言，根本不存在for/while这样的循环语句，需要循环执行就要靠递归。</p>
+<h3 id="函数只接受一个参数"><a href="#函数只接受一个参数" class="headerlink" title="函数只接受一个参数"></a>函数只接受一个参数</h3><p>JavaScript语言没有限制一个函数的参数个数，所以这一点上JavaScript也不够原教旨主义，不过，知道函数式编程有这样一个规矩，可以帮助我们理解为什么Redux的一些代码写成很奇怪的样子。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>JavaScript不是一个严格意义上的函数式编程语言，但是如果我们不把“函数式编程”当做一个语言特性，只是当做一种“风格”，那么JavaScript就非常适合使用这种风格<br>React的“函数式”特征，不光体现在要求render是一个纯函数上，还存在于其他的细节之中，比如函数式的setState<br>Redux是非常“函数式”的一个库，可以说，要理解Redux，你就需要了解函数式编程。</p>
+<h2 id="react组件化"><a href="#react组件化" class="headerlink" title="react组件化"></a>react组件化</h2><h3 id="组件化基本原理"><a href="#组件化基本原理" class="headerlink" title="组件化基本原理"></a>组件化基本原理</h3><p>react把注意力放在UI层，将页面分成一些细块，这些块就是组件，组件之间的组合嵌套就形成最后的网页界面。和其他很多前端框架一样，它们主要解决了前端组件化的问题。</p>
+<h3 id="区分容器组件和可视化组件"><a href="#区分容器组件和可视化组件" class="headerlink" title="区分容器组件和可视化组件"></a>区分容器组件和可视化组件</h3><p>Presentational称为可视化组件，也就是我们用来渲染到页面上可以被看见的组件，它只负责根据父组件传来的props渲染视图；<br>Container称为容器组件，它总是作为可视化组件的父级组件出现，通常作用是给可视化组件准备数据，充当支架。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> User = <span class="function">(<span class="params">user</span>) =&gt;</span> &#123;    <span class="comment">//这个User组件就是可视化组件，只负责渲染相关</span></span><br><span class="line">    &lt;li&gt;</span><br><span class="line">        &lt;img src=&#123;user.pic&#125; /&gt;</span><br><span class="line">        &lt;a href=&#123;user.link&#125;&gt;user detail info&lt;<span class="regexp">/a&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>li&gt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserList</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;    <span class="comment">//UserList组件为容器组件，ajax请求数据</span></span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">this</span>.state = &#123;</span><br><span class="line">            userArr: []</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    componentWillMount() &#123;</span><br><span class="line">        <span class="comment">//ajax获取用户列表数据</span></span><br><span class="line">        <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">            userArr: users</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            &lt;ul&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">this</span>.props.userArr.map(<span class="function">(<span class="params">user</span>) =&gt;</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> &lt;User user=&#123;user&#125; key=&#123;user.id&#125;&gt;&lt;/User&gt;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">            &lt;<span class="regexp">/ul&gt;</span></span><br><span class="line"><span class="regexp">        )</span></span><br><span class="line"><span class="regexp">    &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用setState需要注意的问题"><a href="#使用setState需要注意的问题" class="headerlink" title="使用setState需要注意的问题"></a>使用setState需要注意的问题</h3><p>setState()方法是react中用来修改状态的内置方法，而且是必须的方式。也就是说不能使用this.state来修改组件的状态。this.state是不可变的。文档中提到setState执行总是会触发一次重绘，所以使用过程中有一些需要注意的地方。</p>
+<h4 id="setState是异步的，没有任何同步性的保证"><a href="#setState是异步的，没有任何同步性的保证" class="headerlink" title="setState是异步的，没有任何同步性的保证"></a>setState是异步的，没有任何同步性的保证</h4><p>在开发过程中，我们可能会在 setState 之后立即去拿 this.state 中的某个属性，但是发现该值并没有修改过来。官方说法是，为了性能上的优化，采用了 Batch 思想，会收集“一波” state 的变化，统一进行处理。为了解决这个问题 setState 可以有以下两种写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一种</span></span><br><span class="line"><span class="keyword">this</span>.setState(<span class="function">(<span class="params">prevState, props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;<span class="attr">counter</span>: prevState.counter + props.step&#125;;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//第二种</span></span><br><span class="line"><span class="keyword">this</span>.setState(&#123;</span><br><span class="line">    counter: newVal</span><br><span class="line">&#125;, () =&gt; &#123;</span><br><span class="line">    <span class="comment">//callback，会在state修改完成后执行</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>或者在生命周期 componentDidUpdate 函数中处理state修改后的逻辑。</p>
+<h4 id="setState会造成不必要的渲染"><a href="#setState会造成不必要的渲染" class="headerlink" title="setState会造成不必要的渲染"></a>setState会造成不必要的渲染</h4><p>由于setState每执行一次都会出发一次重绘，但实际上很多渲染都是浪费的。我们可能只需要更新一个子组件，但却会导致很大面积的组件重新render。</p>
+<h4 id="setState只管理渲染相关的数据"><a href="#setState只管理渲染相关的数据" class="headerlink" title="setState只管理渲染相关的数据"></a>setState只管理渲染相关的数据</h4><p>与渲染无关的数据，例如id号、临时变量等数据并不会影响ui渲染，可能只是用来做标记或与后端交互，那么这些值的修改不应该用setState去重绘。可以使用 localStorage 或者第三方状态管理库，如MobX。</p>
+<h3 id="绑定this的问题"><a href="#绑定this的问题" class="headerlink" title="绑定this的问题"></a>绑定this的问题</h3><p>this指向、执行上下文一直都是js中不可避免会遇到的问题。在react中，对this绑定的处理有很多种方案，总结大致有以下这些：</p>
+<ul>
+<li>使用ES5 createClass 方法创建组件自动绑定this(已经被放弃)</li>
+<li>在渲染时使用bind方法绑定</li>
+<li>在渲染时使用箭头函数绑定</li>
+<li>在 constructor 构造函数中绑定</li>
+<li>使用 等号 加 箭头函数 绑定<h4 id="渲染时绑定"><a href="#渲染时绑定" class="headerlink" title="渲染时绑定"></a>渲染时绑定</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;User onClick = &#123;<span class="keyword">this</span>.selectUser.bind(<span class="keyword">this</span>)&#125;&gt;&lt;/User&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>这种方式很常规，并且能够很好的解决this绑定问题；但同时带来了另一个问题：每次重新渲染组件时都会创建一个新的函数。虽然听起来好像很严重，但实际上对性能的损耗并不明显。</p>
+<h4 id="渲染时使用箭头函数"><a href="#渲染时使用箭头函数" class="headerlink" title="渲染时使用箭头函数"></a>渲染时使用箭头函数</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        &lt;User onClick = &#123;e =&gt; <span class="keyword">this</span>.selectUser(e)&#125;&gt;&lt;/User&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="在constructor中绑定"><a href="#在constructor中绑定" class="headerlink" title="在constructor中绑定"></a>在constructor中绑定</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">        <span class="keyword">super</span>(props);</span><br><span class="line">        <span class="keyword">this</span>.selectUser = <span class="keyword">this</span>.selectUser.bind(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为构造函数只会在组件第一次挂载时执行，所以整个生命周期中只会执行一次。在构造函数中对方法进行this绑定，就不会像前面的方法那样重复创建新函数而造成性能问题。但是如果方法很多的时候，这个构造函数的可读性就很差了。</p>
+<h3 id="设定-propTypes-和-defaultProps"><a href="#设定-propTypes-和-defaultProps" class="headerlink" title="设定 propTypes 和 defaultProps"></a>设定 propTypes 和 defaultProps</h3><p>这两个都是react组件的静态属性，所有组件都应该有这两个属性； propTypes 用来规定每个 props 的类型，而 defaultProps 则是给 props 填充默认值。在15.3版本之前，propTypes 在 React 对象中定义了，但之后的版本则需要使用第三方库 prop-types 来替代。配置了这两个属性后，如果传递的 props 类型错误会在浏览器报错，可以让使用组件的人清晰的看到问题。同时它们也起到了文档的作用。</p>
+<h2 id="组合vs继承"><a href="#组合vs继承" class="headerlink" title="组合vs继承"></a>组合vs继承</h2>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/05/生成器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1799,143 +1993,11 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zmy">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zmy's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/30/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-30T10:35:50+08:00">
-                2019-09-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1981,7 +2043,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
