@@ -87,14 +87,14 @@
 <meta property="og:site_name" content="zmy&#39;s Blog">
 <meta property="og:description" content="处理副作用——中间件Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。 中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。 redux增加中间件处理副作用的数据流： 中间件作用：转换异步操作，生成原始的action，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2020/11/pictures/middleware.png">
-<meta property="og:image" content="http://yoursite.com/2020/11/pictures/thunk.png">
-<meta property="og:image" content="http://yoursite.com/2020/11/pictures/saga.png">
+<meta property="og:image" content="http://yoursite.com/.com/pictures/middleware.png">
+<meta property="og:image" content="http://yoursite.com/.com/pictures/thunk.png">
+<meta property="og:image" content="http://yoursite.com/.com/pictures/saga.png">
 <meta property="og:updated_time" content="2020-11-15T16:00:41.696Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redux中间件">
 <meta name="twitter:description" content="处理副作用——中间件Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。 中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。 redux增加中间件处理副作用的数据流： 中间件作用：转换异步操作，生成原始的action，">
-<meta name="twitter:image" content="http://yoursite.com/2020/11/pictures/middleware.png">
+<meta name="twitter:image" content="http://yoursite.com/.com/pictures/middleware.png">
 
 
 
@@ -348,7 +348,7 @@
       
         <h2 id="处理副作用——中间件"><a href="#处理副作用——中间件" class="headerlink" title="处理副作用——中间件"></a>处理副作用——中间件</h2><p>Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。</p>
 <p>中间件就是一个函数，对store.dispatch方法进行了改造，在发出 Action 和执行 Reducer 这两步之间，添加了其他功能。</p>
-<p>redux增加中间件处理副作用的数据流：<br><img src="../../pictures/middleware.png"></p>
+<p>redux增加中间件处理副作用的数据流：<br><img src="/.com//../pictures/middleware.png"></p>
 <p>中间件作用：转换异步操作，生成原始的action，这样，reducer函数就能处理相应的action，从而改变state，更新UI。</p>
 <h2 id="异步操作的基本思路"><a href="#异步操作的基本思路" class="headerlink" title="异步操作的基本思路"></a>异步操作的基本思路</h2><p>Action 发出以后，Reducer 立即算出 State，这叫做同步；Action 发出以后，过一段时间再执行 Reducer，这就是异步。</p>
 <p>同步操作只要发出一种 Action 即可，异步操作的差别是它要发出三种 Action。</p>
@@ -367,7 +367,7 @@
 
 <p>直接将thunk中间件引入，放在applyMiddleware方法之中，传入createStore方法，就完成了store.dispatch()的功能增强。即可以在reducer中进行一些异步的操作。</p>
 <p>applyMiddleware就是Redux的一个原生方法，将所有中间件组成一个数组，依次执行。</p>
-<p>大体过程：<br><img src="../../pictures/thunk.png"></p>
+<p>大体过程：<br><img src="/.com//../pictures/thunk.png"></p>
 <h2 id="redux-promise中间件"><a href="#redux-promise中间件" class="headerlink" title="redux-promise中间件"></a>redux-promise中间件</h2><p>和redux-actions一起处理异步的action。因为我们使用createAction后返回的是一个对象，而不是一个函数，就会导致redux-thunk的代码没有起到作用。可以使用redux-promise来处理这类情况。</p>
 <p>redux-thunk中间件，它会去判断action是否是一个函数，如果是就执行。<br>而redux-promise中间件，他会在dispatch时，判断如果action不是类似</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  type：<span class="string">''</span>,</span><br><span class="line">  payload： <span class="string">''</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -376,7 +376,7 @@
 <h2 id="redux-saga中间件"><a href="#redux-saga中间件" class="headerlink" title="redux-saga中间件"></a>redux-saga中间件</h2><p>之前的异步处理是用redux-thunk + redux-actions + redux-promise。<br>但是这样处理有缺点：thunk仅仅做了执行这个函数，并不在乎函数主体内是什么。如果函数内部十分复杂会使返回的action不容易维护。</p>
 <p>而redux-saga是用Generator来处理异步。redux-saga可以起到一个控制器的作用，集中处理边际效用(程序对外部的操作如请求后端等)，并使得异步操作的写法更优雅。</p>
 <h3 id="声明式Effect"><a href="#声明式Effect" class="headerlink" title="声明式Effect"></a>声明式Effect</h3><p>redux-saga中最大的特点就是提供了声明式的Effect，声明式的Effect使得redux-saga监听原始js对象形式的action，并且可以方便单元测试</p>
-<p>大体过程：<br><img src="../../pictures/saga.png"><br>redux-saga中监听到了原始js对象action，并不会马上执行副作用操作，会先通过Effect方法将其转化成一个描述对象，然后再将描述对象，作为标识，再恢复执行副作用函数。</p>
+<p>大体过程：<br><img src="/.com//../pictures/saga.png"><br>redux-saga中监听到了原始js对象action，并不会马上执行副作用操作，会先通过Effect方法将其转化成一个描述对象，然后再将描述对象，作为标识，再恢复执行副作用函数。</p>
 <h3 id="effect提供的方法"><a href="#effect提供的方法" class="headerlink" title="effect提供的方法"></a>effect提供的方法</h3><ul>
 <li><p>take，用来监听action，返回的是监听到的action对象。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> loginAction = &#123;</span><br><span class="line">   type:<span class="string">'login'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> action = <span class="keyword">yield</span> take(<span class="string">'login'</span>);</span><br></pre></td></tr></table></figure>

@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://img-blog.csdn.net/20160331182812581">
 <meta property="og:image" content="https://img-blog.csdn.net/20160401105726342">
 <meta property="og:image" content="https://img-blog.csdn.net/20160401112025991">
-<meta property="og:image" content="http://yoursite.com/2019/10/pictures/address.png">
+<meta property="og:image" content="http://yoursite.com/.com/pictures/address.png">
 <meta property="og:image" content="https://img-blog.csdn.net/20160401113212168">
 <meta property="og:updated_time" content="2019-10-14T13:29:02.747Z">
 <meta name="twitter:card" content="summary">
@@ -381,7 +381,7 @@
 <h2 id="将本地hexo项目托管到github"><a href="#将本地hexo项目托管到github" class="headerlink" title="将本地hexo项目托管到github"></a>将本地hexo项目托管到github</h2><p>打开修改hexo目录下配置文件_config.yml<br>编辑最后面的deploy属性 加入代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type: git   repository: git@github.com:WX-JIN/WX-JIN.github.io.git   branch: master</span><br></pre></td></tr></table></figure>
 
-<p>type使用是git。<br>repository属性改成你的刚才创建仓库git地址。<br>地址为这里的：<img src="../../pictures/address.png"><br>分支branch填写master。</p>
+<p>type使用是git。<br>repository属性改成你的刚才创建仓库git地址。<br>地址为这里的：<img src="/.com//../pictures/address.png"><br>分支branch填写master。</p>
 <p>这边说下本地网站配置文件 _config.yml</p>
 <p>网站的配置文件，你可以在这里配置一些基本信息，这里列举部分关键配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Hexo Configuration ## Docs: https://hexo.io/docs/configuration.html ## Source: https://github.com/hexojs/hexo/  # Site title: Dududzai’s Blog #网站的标题 subtitle: life is struggle #副标题 description: life is struggle #描述 author: examble #作者信息 avatar: /images/avatar.png #头像，图片位置在相应主题目录下的images language: zh-Hans #中文简体 email: 85268837@qq.com timezone:  # Extensions ## Plugins: https://hexo.io/plugins/ ## Themes: https://hexo.io/themes/ theme: next #配置主题，这里使用next主题 stylus:   compress: true #自适应布局  # Deployment ## Docs: https://hexo.io/docs/deployment.html deploy:   type: git #部署环境，基于hexo+githubpage,所以这里使用git。注意：不同版本的hexo，type有可能不同，3.x以后应使用git,具体参看官方文档   repository: git@github.com:username/username.github.io.git #git仓库地址，替换成你的username即可，其他保持不变，后面会提到如何创建git仓库   branch: master</span><br></pre></td></tr></table></figure>

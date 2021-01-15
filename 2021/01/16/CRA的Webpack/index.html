@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="-Creat-react-app -webpack,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在实际的项目开发中，我们通常会使用脚手架来初始化项目。因为配置 Webpack 是一项繁复的工作，所以如果有一个工具可以自动生成配置，就可以大大加速项目的搭建。常用的脚手架，比如 Create React App。这款脚手架是用来初始化 React 项目的，但同样可以用来初始化普通的 JS 项目。 分析npm run eject显示出所有的配置。多出来的config文件如下：  1234567├─">
+<meta name="keywords" content="-Creat-react-app -webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CRA的Webpack">
+<meta property="og:url" content="http://yoursite.com/2021/01/16/CRA的Webpack/index.html">
+<meta property="og:site_name" content="zmy&#39;s Blog">
+<meta property="og:description" content="在实际的项目开发中，我们通常会使用脚手架来初始化项目。因为配置 Webpack 是一项繁复的工作，所以如果有一个工具可以自动生成配置，就可以大大加速项目的搭建。常用的脚手架，比如 Create React App。这款脚手架是用来初始化 React 项目的，但同样可以用来初始化普通的 JS 项目。 分析npm run eject显示出所有的配置。多出来的config文件如下：  1234567├─">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/.com//webpack1.png">
+<meta property="og:image" content="http://yoursite.com/.com//webpack2.png">
+<meta property="og:updated_time" content="2021-01-15T17:55:42.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CRA的Webpack">
+<meta name="twitter:description" content="在实际的项目开发中，我们通常会使用脚手架来初始化项目。因为配置 Webpack 是一项繁复的工作，所以如果有一个工具可以自动生成配置，就可以大大加速项目的搭建。常用的脚手架，比如 Create React App。这款脚手架是用来初始化 React 项目的，但同样可以用来初始化普通的 JS 项目。 分析npm run eject显示出所有的配置。多出来的config文件如下：  1234567├─">
+<meta name="twitter:image" content="http://yoursite.com/.com//webpack1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/01/16/CRA的Webpack/">
+
+
+
+
+
+  <title>CRA的Webpack | zmy's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zmy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">active waste</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/16/CRA的Webpack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zmy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zmy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CRA的Webpack</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-16T01:48:26+08:00">
+                2021-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">-Webpack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在实际的项目开发中，我们通常会使用脚手架来初始化项目。因为配置 Webpack 是一项繁复的工作，所以如果有一个工具可以自动生成配置，就可以大大加速项目的搭建。常用的脚手架，比如 <strong>Create React App</strong>。这款脚手架是用来初始化 React 项目的，但同样可以用来初始化普通的 JS 项目。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>npm run eject显示出所有的配置。多出来的config文件如下：</p>
+<p><img src="/.com//webpack1.png" alt></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── env.js <span class="comment">//获取环境变量</span></span><br><span class="line">├── getHttpsConfig.js <span class="comment">//获取Https配置</span></span><br><span class="line">├── modules.js <span class="comment">//获取alias等</span></span><br><span class="line">├── paths.js <span class="comment">//获取路径信息</span></span><br><span class="line">├── pnpTs.js <span class="comment">//pnp加速</span></span><br><span class="line">├── webpack.config.js <span class="comment">//webpack配置</span></span><br><span class="line">└── webpackDevServer.config.js <span class="comment">//devserver配置</span></span><br></pre></td></tr></table></figure>
+
+<p>这个文件夹中的所有文件都是为了webpack.config.js服务的。对webpack.config.js的拆分：</p>
+<p><img src="/.com//webpack2.png" alt></p>
+<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><p>create-react-app中是通过定义一个 Webpack 工厂函数来实现开发和产品环境区分的，通过之间传入对应的环境参数不同，生成不同环境的打包配置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">webpackEnv</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> isEnvDevelopment = webpackEnv === <span class="string">'development'</span>;</span><br><span class="line">  <span class="keyword">const</span> isEnvProduction = webpackEnv === <span class="string">'production'</span>;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>getStyleLoaders</strong>函数定义了处理css所需要的loaders</p>
+<ul>
+<li>style-loader 通过注入<code>&lt;style&gt;</code>标签将CSS添加到DOM，建议将 style-loader 与 css-loader 结合使用。</li>
+<li>css-loader 解释 @import 和 url() ，会 import/require() 后再解析它们，主要用于将 CSS 转换为JS模块。</li>
+<li>postcss-loader 启用 postcss 来处理 Css，需要另外配置。通过配置不同插件，可以完成非常强大的功能。</li>
+<li>sass-loader 加载 SASS / SCSS 文件并将其编译为 CSS。</li>
+<li>resolve-url-loader 一个Webpack加载器，它基于原始源文件重写url（）语句中的相对路径。</li>
+</ul>
+<p><strong>mode</strong> </p>
+<ul>
+<li>dev:develop //开发模式，不进行优化提升开发效率</li>
+<li>prd:production //生产模式，默认开启代码优化</li>
+</ul>
+<p><strong>bail</strong>编译遇到错误立即终止打包过程</p>
+<p><strong>entry webpack解析入口</strong></p>
+<ul>
+<li>${appIndexJs} 代码入口</li>
+</ul>
+<p><strong>output webpack打包出口</strong></p>
+<ul>
+<li><p>common：publicPath: ${publicUrlOrPath} //可以放置cdn地址</p>
+</li>
+<li><p>dev：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">path: <span class="literal">undefined</span> <span class="comment">//打包进入内存 </span></span><br><span class="line">pathInfo: <span class="literal">true</span></span><br><span class="line">filename: <span class="keyword">static</span>/js/bundle.js<span class="comment">// 文件名</span></span><br><span class="line">chunkFilename: <span class="keyword">static</span>/js/[name].bundle.js <span class="comment">//非入口chunk 文件的名称</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>prd：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">path: $&#123;appBuildPath&#125; <span class="comment">//目标输出目录 path 的绝对路径</span></span><br><span class="line">filename: <span class="keyword">static</span>/js/[name].[contenthash:<span class="number">8</span>].js <span class="comment">//文件名</span></span><br><span class="line">chunkFilename: <span class="keyword">static</span>/js/[name].[contenthash:<span class="number">8</span>].chunk.js <span class="comment">//非入口chunk 文件的名称</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>devtool</strong></p>
+<ul>
+<li>dev：cheap-module-source-map 没有列信息不包含loader的sourcemap</li>
+<li>prd：source-map【ourcemap条目指向原始磁盘位置(Windows上的URL格式)】</li>
+</ul>
+<p><strong>optimization</strong></p>
+<ul>
+<li>minimize:Webpack4 启动的优化配置，一般只在产品环境production设置。</li>
+<li>minimizer: TerserPlugin 压缩js;<br>OptimizeCSSAssetsPlugin 优化压缩css</li>
+<li>splitChunks(自动开启 vendor 和 commons 的分割): chunks: all //动态和非动态模块同时进行优化打包</li>
+</ul>
+<p><strong>resolve</strong></p>
+<ul>
+<li>alias //别名</li>
+<li>extensions //自动解析确定的扩展</li>
+<li>modules //webpack 解析模块时应该搜索的目录</li>
+<li>plugins: ModuleScopePlugin: 限制自己编写的模块只能从src引入;<br>rules</li>
+</ul>
+<p><strong>module</strong></p>
+<ul>
+<li>strictExportPresence:使缺少的导出出现错误而不是警告</li>
+<li>rules:<ul>
+<li>/.bmp/, /.gif/, /.jpe?g/, /.png/ url-loader解析</li>
+<li>js|mjs|jsx|ts|tsx 进行eslint语法检测</li>
+<li>babel-loader，cacheDirectory: true开启缓存</li>
+<li>/.css$/ style-loader MiniCssExtractPlugin css-loader postcss-loader</li>
+<li>/.module.css$/ 开启cssmodule</li>
+<li>同时也支持sass和sassmodule</li>
+</ul>
+</li>
+</ul>
+<p><strong>plugins</strong></p>
+<ul>
+<li>common<ul>
+<li>HtmlWebpackPlugin 打包到Html中</li>
+<li>InterpolateHtmlPlugin 允许在html中加入变量</li>
+<li>ModuleNotFoundPlugin 找不到module提示</li>
+<li>DefinePlugin 定义变量</li>
+<li>ManifestPlugin 资源映射文件</li>
+<li>IgnorePlugin 忽略掉某些包</li>
+<li>ForkTsCheckerWebpackPlugin Ts类型检测</li>
+</ul>
+</li>
+<li>dev<ul>
+<li>HotModuleReplacementPlugin 热更新</li>
+<li>CaseSensitivePathsPlugin 路径区分大小写</li>
+<li>WatchMissingNodeModulesPlugin npm install后不需要重新restart</li>
+</ul>
+</li>
+<li>prd<ul>
+<li>MiniCssExtractPlugin  将css提取到单独的文件</li>
+<li>WorkboxWebpackPlugin  pwa开启servicework</li>
+</ul>
+</li>
+</ul>
+<p><strong>node</strong>:nodejs 标准模块的mock。使 nodejs 编写的程序能够在类似浏览器等环境运行。</p>
+<p><strong>performance</strong>:关闭 bundle 文件大小提示，create react app 使用了自带的 react-dev-utils/FileSizeReporter 插件。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Creat-react-app-webpack/" rel="tag"># -Creat-react-app -webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/11/24/TypeScript/" rel="next" title="TypeScript">
+                <i class="fa fa-chevron-left"></i> TypeScript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zmy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#分析"><span class="nav-number">1.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#详解"><span class="nav-number">1.1.</span> <span class="nav-text">详解</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zmy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

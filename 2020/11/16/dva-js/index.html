@@ -86,13 +86,13 @@
 <meta property="og:site_name" content="zmy&#39;s Blog">
 <meta property="og:description" content="dva是什么dva是一个机遇redux和redux-saga的数据流方案，为了简化开发体验，额外内置了react-router和fetch。也可以理解一个为一个轻量级的应用框架。 dva = React-Router + Redux + Redux-sagadva做了3件重要的事情：  把 store 及 saga 统一为一个 model 的概念, 写在一个 js 文件里面 增加了一个 Subsc">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2020/11/pictures/dva.png">
-<meta property="og:image" content="http://yoursite.com/2020/11/pictures/dva2.png">
+<meta property="og:image" content="http://yoursite.com/.com/pictures/dva.png">
+<meta property="og:image" content="http://yoursite.com/.com/pictures/dva2.png">
 <meta property="og:updated_time" content="2020-11-16T14:18:44.399Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="dva.js">
 <meta name="twitter:description" content="dva是什么dva是一个机遇redux和redux-saga的数据流方案，为了简化开发体验，额外内置了react-router和fetch。也可以理解一个为一个轻量级的应用框架。 dva = React-Router + Redux + Redux-sagadva做了3件重要的事情：  把 store 及 saga 统一为一个 model 的概念, 写在一个 js 文件里面 增加了一个 Subsc">
-<meta name="twitter:image" content="http://yoursite.com/2020/11/pictures/dva.png">
+<meta name="twitter:image" content="http://yoursite.com/.com/pictures/dva.png">
 
 
 
@@ -345,13 +345,13 @@
 
       
         <h2 id="dva是什么"><a href="#dva是什么" class="headerlink" title="dva是什么"></a>dva是什么</h2><p>dva是一个机遇redux和redux-saga的数据流方案，为了简化开发体验，额外内置了react-router和fetch。也可以理解一个为一个轻量级的应用框架。</p>
-<p>dva = React-Router + Redux + Redux-saga<br><img src="../../pictures/dva.png"><br>dva做了3件重要的事情：</p>
+<p>dva = React-Router + Redux + Redux-saga<br><img src="/.com//../pictures/dva.png"><br>dva做了3件重要的事情：</p>
 <ol>
 <li>把 store 及 saga 统一为一个 model 的概念, 写在一个 js 文件里面</li>
 <li>增加了一个 Subscriptions, 用于收集其他来源的 action</li>
 <li>model 写法很简约, 类似于 DSL 或者 RoR</li>
 </ol>
-<img src="../../pictures/dva2.png">
+<img src="/.com//../pictures/dva2.png">
 
 <h3 id="app-Model"><a href="#app-Model" class="headerlink" title="app.Model"></a>app.Model</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> app = dva();</span><br><span class="line"></span><br><span class="line">app.model(</span><br><span class="line">  &#123;</span><br><span class="line">  namespace: <span class="string">'count'</span>,</span><br><span class="line">  state: <span class="number">0</span>,</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    add(state) &#123; <span class="keyword">return</span> state + <span class="number">1</span> &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  effects: &#123;</span><br><span class="line">    *addAfter1Second(action, &#123; call, put &#125;) &#123;</span><br><span class="line">      <span class="keyword">yield</span> call(delay, <span class="number">1000</span>);</span><br><span class="line">      <span class="keyword">yield</span> put(&#123; <span class="attr">type</span>: <span class="string">'add'</span> &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">app.router(<span class="function"><span class="params">()</span> =&gt;</span> &lt;App /&gt;);</span><br><span class="line">app.start('#root');</span><br></pre></td></tr></table></figure>
 

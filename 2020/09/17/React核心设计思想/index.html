@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="zmy&#39;s Blog">
 <meta property="og:description" content="声明式渲染主要的编程范式： 命令式编程：命令“机器”如何去做事情(how)，这样不管你想要的是什么(what)，它都会按照你的命令实现。 声明式编程：告诉“机器”你想要的是什么(what)，让机器想出如何去做(how)。模板渲染渲染：模板 =&amp;gt; HTML =&amp;gt; 页面视图发生在服务器的叫后端模板渲染发生在客户端的叫前端模板渲染React声明式渲染和普通模板不同的是，React 模板写在">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2020/09/pictures/ReactRender%20.png">
+<meta property="og:image" content="http://yoursite.com/.com/pictures/ReactRender%20.png">
 <meta property="og:updated_time" content="2020-09-27T16:08:23.355Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React&#39;s core design ideas">
 <meta name="twitter:description" content="声明式渲染主要的编程范式： 命令式编程：命令“机器”如何去做事情(how)，这样不管你想要的是什么(what)，它都会按照你的命令实现。 声明式编程：告诉“机器”你想要的是什么(what)，让机器想出如何去做(how)。模板渲染渲染：模板 =&amp;gt; HTML =&amp;gt; 页面视图发生在服务器的叫后端模板渲染发生在客户端的叫前端模板渲染React声明式渲染和普通模板不同的是，React 模板写在">
-<meta name="twitter:image" content="http://yoursite.com/2020/09/pictures/ReactRender%20.png">
+<meta name="twitter:image" content="http://yoursite.com/.com/pictures/ReactRender%20.png">
 
 
 
@@ -358,7 +358,7 @@
 <p>页面更新的流程同样也是 3 步。</p>
 <p>第一步，当页面需要更新时，通过声明式的方法，调用 setState 告诉 react。</p>
 <p>第二步，react 自动调用组件的 render 方法，渲染出虚拟 DOM。</p>
-<p>第三步，react 会通过 diffing 算法，对比当前虚拟 DOM 和需要更新的虚拟 DOM 有什么区别。然后重新渲染区别部分的真实 DOM。<br><img src="../../pictures/ReactRender .png"></p>
+<p>第三步，react 会通过 diffing 算法，对比当前虚拟 DOM 和需要更新的虚拟 DOM 有什么区别。然后重新渲染区别部分的真实 DOM。<br><img src="/.com//../pictures/ReactRender .png"></p>
 <h2 id="函数式编程"><a href="#函数式编程" class="headerlink" title="函数式编程"></a>函数式编程</h2><p>以函数作为主要载体的编程方式，用函数去拆解、抽象一般的表达式，最小‘可视’单位是函数的一种编码规范，重点体现‘函数式’，<br>React并没有使用太多函数式编程(Functional Programming)的思想，但是React周边的工具（比如Redux）很多却使用了这种的思想</p>
 <h3 id="函数式第一公民"><a href="#函数式第一公民" class="headerlink" title="函数式第一公民"></a>函数式第一公民</h3><p>在JavaScript的世界里，函数可以作为参数传递，函数可以赋值给一个变量，一个函数的执行结果也可以是一个函数，因为在JavaScript里面，函数也是对象，所以函数是第一公民。</p>
 <h3 id="数据是不可变的-Immutable"><a href="#数据是不可变的-Immutable" class="headerlink" title="数据是不可变的(Immutable)"></a>数据是不可变的(Immutable)</h3><p>在纯种的函数式编程语言中，数据是不可变的，或者说没有变量这个概念，所有的数据一旦产生，就不能改变其中的值，如果要改变，那就只能生成一个新的数据。<br>在React中，强调一个组件不能去修改传入的prop值，也是遵循Immutable的原则。<br>在Redux中，更是强调Immutable的作用，每个reducer不能够修改state，只能返回一个新的state。<br>Immutable是个好原则，可以让代码更容易维护，当你看到一个变量的时候，可以放心假设这个变量代表的值不会被篡改，否则，你就会很操心。<br>保持Immutable的代价就会有一些空间和时间损耗</p>
