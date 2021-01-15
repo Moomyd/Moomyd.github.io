@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="zmy&#39;s Blog">
 <meta property="og:description" content="在实际的项目开发中，我们通常会使用脚手架来初始化项目。因为配置 Webpack 是一项繁复的工作，所以如果有一个工具可以自动生成配置，就可以大大加速项目的搭建。常用的脚手架，比如 Create React App。这款脚手架是用来初始化 React 项目的，但同样可以用来初始化普通的 JS 项目。 分析npm run eject显示出所有的配置。多出来的config文件如下：  1234567├─">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/.com//webpack1.png">
-<meta property="og:image" content="http://yoursite.com/.com//webpack2.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/16/CRA的Webpack/webpack1.png">
+<meta property="og:image" content="http://yoursite.com/2021/01/16/CRA的Webpack/webpack2.png">
 <meta property="og:updated_time" content="2021-01-15T17:55:42.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CRA的Webpack">
 <meta name="twitter:description" content="在实际的项目开发中，我们通常会使用脚手架来初始化项目。因为配置 Webpack 是一项繁复的工作，所以如果有一个工具可以自动生成配置，就可以大大加速项目的搭建。常用的脚手架，比如 Create React App。这款脚手架是用来初始化 React 项目的，但同样可以用来初始化普通的 JS 项目。 分析npm run eject显示出所有的配置。多出来的config文件如下：  1234567├─">
-<meta name="twitter:image" content="http://yoursite.com/.com//webpack1.png">
+<meta name="twitter:image" content="http://yoursite.com/2021/01/16/CRA的Webpack/webpack1.png">
 
 
 
@@ -347,11 +347,11 @@
       
         <p>在实际的项目开发中，我们通常会使用脚手架来初始化项目。因为配置 Webpack 是一项繁复的工作，所以如果有一个工具可以自动生成配置，就可以大大加速项目的搭建。常用的脚手架，比如 <strong>Create React App</strong>。这款脚手架是用来初始化 React 项目的，但同样可以用来初始化普通的 JS 项目。</p>
 <h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>npm run eject显示出所有的配置。多出来的config文件如下：</p>
-<p><img src="/.com//webpack1.png" alt></p>
+<p><img src="/2021/01/16/CRA的Webpack/webpack1.png" alt></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── env.js <span class="comment">//获取环境变量</span></span><br><span class="line">├── getHttpsConfig.js <span class="comment">//获取Https配置</span></span><br><span class="line">├── modules.js <span class="comment">//获取alias等</span></span><br><span class="line">├── paths.js <span class="comment">//获取路径信息</span></span><br><span class="line">├── pnpTs.js <span class="comment">//pnp加速</span></span><br><span class="line">├── webpack.config.js <span class="comment">//webpack配置</span></span><br><span class="line">└── webpackDevServer.config.js <span class="comment">//devserver配置</span></span><br></pre></td></tr></table></figure>
 
 <p>这个文件夹中的所有文件都是为了webpack.config.js服务的。对webpack.config.js的拆分：</p>
-<p><img src="/.com//webpack2.png" alt></p>
+<p><img src="/2021/01/16/CRA的Webpack/webpack2.png" alt></p>
 <h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><p>create-react-app中是通过定义一个 Webpack 工厂函数来实现开发和产品环境区分的，通过之间传入对应的环境参数不同，生成不同环境的打包配置。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">webpackEnv</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> isEnvDevelopment = webpackEnv === <span class="string">'development'</span>;</span><br><span class="line">  <span class="keyword">const</span> isEnvProduction = webpackEnv === <span class="string">'production'</span>;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -482,6 +482,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2021/01/16/image/" rel="prev" title="image">
+                image <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -557,7 +561,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
