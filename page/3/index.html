@@ -249,6 +249,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/14/搭建博客/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zmy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zmy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/14/搭建博客/" itemprop="url">搭建博客</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-14T20:38:53+08:00">
+                2019-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/日志/" itemprop="url" rel="index">
+                    <span itemprop="name">-日志</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h2><p>可以去官网下载<br>通过 node -v 测试是否成功</p>
+<h2 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1.安装Git"></a>1.安装Git</h2><h2 id="2-注册github账号"><a href="#2-注册github账号" class="headerlink" title="2.注册github账号"></a>2.注册github账号</h2><p>注册完之后记得添加SSH Key</p>
+<h1 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h1><h2 id="1-安装Hexo"><a href="#1-安装Hexo" class="headerlink" title="1.安装Hexo"></a>1.安装Hexo</h2><p>在本地新建一个Blog的文件夹，右键选择Git bash<br><img src="https://img-blog.csdn.net/20160331173337966"><br>输入指令安装hexo：<br><img src="https://img-blog.csdn.net/20160331174515127"><br>等安装完毕，通过输入hexo的命令来测试Hexo是否安装成功，若成功如下：<br><img src="https://img-blog.csdn.net/20160331174612127"></p>
+<p>接着初始化Hexo<br>hexo init hexo<br><img src="https://img-blog.csdn.net/20160331174810425"><br>初始化成功会显示：<br><img src="https://img-blog.csdn.net/20160331174935191"></p>
+<p>这时在你刚才创建的Blog里面会多出一个hexo文件<br><img scr="https://img-blog.csdn.net/20160331175135145"></p>
+<p>进入hexo目录输入指令npm install 安装依赖文件以及部署形成文件打开hexo目录：<br>打开hexo目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd hexo</span><br></pre></td></tr></table></figure>
+
+<p>安装依赖文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>部署形成文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+
+<img src="https://img-blog.csdn.net/20160331182208672">
+最后运行server 跑起hexo服务
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<img src="https://img-blog.csdn.net/20160331182812581">
+
+<p>这时根据提示运行 <a href="http://loalhost:4000/" target="_blank" rel="noopener">http://loalhost:4000/</a>. 可以看到默认的博客<br>到这里 hexo 安装完毕</p>
+<h2 id="配置githubPage"><a href="#配置githubPage" class="headerlink" title="配置githubPage"></a>配置githubPage</h2><p>登录github点击“New repository”新建一个仓库<br>输入仓库名：你的github名称.github.io（必须）然后creat</p>
+<h3 id="启用github-page"><a href="#启用github-page" class="headerlink" title="启用github page"></a>启用github page</h3><p>点击右边的“Setting”菜单进入设置，点击 Lauch…<br><img src="https://img-blog.csdn.net/20160401105726342"><br>点击 continue to layouts<br>之后选择一个随意的模板点击“publish page”发布 github默认生成的一个静态站点<br><img src="https://img-blog.csdn.net/20160401112025991"></p>
+<h2 id="将本地hexo项目托管到github"><a href="#将本地hexo项目托管到github" class="headerlink" title="将本地hexo项目托管到github"></a>将本地hexo项目托管到github</h2><p>打开修改hexo目录下配置文件_config.yml<br>编辑最后面的deploy属性 加入代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type: git   repository: git@github.com:WX-JIN/WX-JIN.github.io.git   branch: master</span><br></pre></td></tr></table></figure>
+
+<p>type使用是git。<br>repository属性改成你的刚才创建仓库git地址。<br>地址为这里的：<img src="../../pictures/address.png"><br>分支branch填写master。</p>
+<p>这边说下本地网站配置文件 _config.yml</p>
+<p>网站的配置文件，你可以在这里配置一些基本信息，这里列举部分关键配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Hexo Configuration ## Docs: https://hexo.io/docs/configuration.html ## Source: https://github.com/hexojs/hexo/  # Site title: Dududzai’s Blog #网站的标题 subtitle: life is struggle #副标题 description: life is struggle #描述 author: examble #作者信息 avatar: /images/avatar.png #头像，图片位置在相应主题目录下的images language: zh-Hans #中文简体 email: 85268837@qq.com timezone:  # Extensions ## Plugins: https://hexo.io/plugins/ ## Themes: https://hexo.io/themes/ theme: next #配置主题，这里使用next主题 stylus:   compress: true #自适应布局  # Deployment ## Docs: https://hexo.io/docs/deployment.html deploy:   type: git #部署环境，基于hexo+githubpage,所以这里使用git。注意：不同版本的hexo，type有可能不同，3.x以后应使用git,具体参看官方文档   repository: git@github.com:username/username.github.io.git #git仓库地址，替换成你的username即可，其他保持不变，后面会提到如何创建git仓库   branch: master</span><br></pre></td></tr></table></figure>
+
+<p>根据自己的需要更改</p>
+<h2 id="写一篇文章（例如hello）"><a href="#写一篇文章（例如hello）" class="headerlink" title="写一篇文章（例如hello）"></a>写一篇文章（例如hello）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;hello&quot;</span><br></pre></td></tr></table></figure>
+
+<p>用编辑器打开hello.md文件编写完后保存</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">title: hello</span><br><span class="line">date: 2015-07-01 22:37:23</span><br><span class="line">categories:</span><br><span class="line">  - 日志</span><br><span class="line">  - 二级目录</span><br><span class="line">tags:</span><br><span class="line">  - hello</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">摘要:</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">正文:</span><br></pre></td></tr></table></figure>
+
+<h2 id="发布博客"><a href="#发布博客" class="headerlink" title="发布博客"></a>发布博客</h2><h3 id="设置git身份信息"><a href="#设置git身份信息" class="headerlink" title="设置git身份信息"></a>设置git身份信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &quot;你的用户名&quot;</span><br><span class="line">$ git config --global user.email &quot;你的邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装hexo-deployer-git插件"><a href="#安装hexo-deployer-git插件" class="headerlink" title="安装hexo-deployer-git插件"></a>安装hexo-deployer-git插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<img src="https://img-blog.csdn.net/20160401113212168">
+
+<h3 id="部署你本地的主题到github上"><a href="#部署你本地的主题到github上" class="headerlink" title="部署你本地的主题到github上"></a>部署你本地的主题到github上</h3><p>更新发布博客</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$hexo d -g</span><br></pre></td></tr></table></figure>
+
+<p>就成功啦！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/30/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -418,7 +607,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -429,7 +618,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -440,7 +629,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -477,7 +666,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

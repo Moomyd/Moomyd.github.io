@@ -249,6 +249,246 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/15/CRA的Webpack/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zmy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zmy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/15/CRA的Webpack/" itemprop="url">CRA的Webpack</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-15T17:33:22+08:00">
+                2021-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/webpack/" itemprop="url" rel="index">
+                    <span itemprop="name">-webpack</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在实际的项目开发中，我们通常会使用脚手架来初始化项目。因为配置 Webpack 是一项繁复的工作，所以如果有一个工具可以自动生成配置，就可以大大加速项目的搭建。常用的脚手架，比如 <strong>Create React App</strong>。这款脚手架是用来初始化 React 项目的，但同样可以用来初始化普通的 JS 项目。</p>
+<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>npm run eject显示出所有的配置。多出来的config文件如下：</p>
+<img src="../../pictures/webpack1.png">
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── env.js <span class="comment">//获取环境变量</span></span><br><span class="line">├── getHttpsConfig.js <span class="comment">//获取Https配置</span></span><br><span class="line">├── modules.js <span class="comment">//获取alias等</span></span><br><span class="line">├── paths.js <span class="comment">//获取路径信息</span></span><br><span class="line">├── pnpTs.js <span class="comment">//pnp加速</span></span><br><span class="line">├── webpack.config.js <span class="comment">//webpack配置</span></span><br><span class="line">└── webpackDevServer.config.js <span class="comment">//devserver配置</span></span><br></pre></td></tr></table></figure>
+
+<p>这个文件夹中的所有文件都是为了webpack.config.js服务的。对webpack.config.js的拆分：</p>
+<img src="../../pictures/webpack2.png">
+
+<h2 id="详解"><a href="#详解" class="headerlink" title="详解"></a>详解</h2><p>create-react-app中是通过定义一个 Webpack 工厂函数来实现开发和产品环境区分的，通过之间传入对应的环境参数不同，生成不同环境的打包配置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params">webpackEnv</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> isEnvDevelopment = webpackEnv === <span class="string">'development'</span>;</span><br><span class="line">  <span class="keyword">const</span> isEnvProduction = webpackEnv === <span class="string">'production'</span>;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>getStyleLoaders</strong>函数定义了处理css所需要的loaders</p>
+<ul>
+<li>style-loader 通过注入<code>&lt;style&gt;</code>标签将CSS添加到DOM，建议将 style-loader 与 css-loader 结合使用。</li>
+<li>css-loader 解释 @import 和 url() ，会 import/require() 后再解析它们，主要用于将 CSS 转换为JS模块。</li>
+<li>postcss-loader 启用 postcss 来处理 Css，需要另外配置。通过配置不同插件，可以完成非常强大的功能。</li>
+<li>sass-loader 加载 SASS / SCSS 文件并将其编译为 CSS。</li>
+<li>resolve-url-loader 一个Webpack加载器，它基于原始源文件重写url（）语句中的相对路径。</li>
+</ul>
+<p><strong>mode</strong> </p>
+<ul>
+<li>dev:develop //开发模式，不进行优化提升开发效率</li>
+<li>prd:production //生产模式，默认开启代码优化</li>
+</ul>
+<p><strong>bail</strong>编译遇到错误立即终止打包过程</p>
+<p><strong>entry webpack解析入口</strong></p>
+<ul>
+<li>${appIndexJs} 代码入口</li>
+</ul>
+<p><strong>output webpack打包出口</strong></p>
+<ul>
+<li><p>common：publicPath: ${publicUrlOrPath} //可以放置cdn地址</p>
+</li>
+<li><p>dev：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">path: <span class="literal">undefined</span> <span class="comment">//打包进入内存 </span></span><br><span class="line">pathInfo: <span class="literal">true</span></span><br><span class="line">filename: <span class="keyword">static</span>/js/bundle.js<span class="comment">// 文件名</span></span><br><span class="line">chunkFilename: <span class="keyword">static</span>/js/[name].bundle.js <span class="comment">//非入口chunk 文件的名称</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>prd：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">path: $&#123;appBuildPath&#125; <span class="comment">//目标输出目录 path 的绝对路径</span></span><br><span class="line">filename: <span class="keyword">static</span>/js/[name].[contenthash:<span class="number">8</span>].js <span class="comment">//文件名</span></span><br><span class="line">chunkFilename: <span class="keyword">static</span>/js/[name].[contenthash:<span class="number">8</span>].chunk.js <span class="comment">//非入口chunk 文件的名称</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p><strong>devtool</strong></p>
+<ul>
+<li>dev：cheap-module-source-map 没有列信息不包含loader的sourcemap</li>
+<li>prd：source-map【ourcemap条目指向原始磁盘位置(Windows上的URL格式)】</li>
+</ul>
+<p><strong>optimization</strong></p>
+<ul>
+<li>minimize:Webpack4 启动的优化配置，一般只在产品环境production设置。</li>
+<li>minimizer: TerserPlugin 压缩js;<br>OptimizeCSSAssetsPlugin 优化压缩css</li>
+<li>splitChunks(自动开启 vendor 和 commons 的分割): chunks: all //动态和非动态模块同时进行优化打包</li>
+</ul>
+<p><strong>resolve</strong></p>
+<ul>
+<li>alias //别名</li>
+<li>extensions //自动解析确定的扩展</li>
+<li>modules //webpack 解析模块时应该搜索的目录</li>
+<li>plugins: ModuleScopePlugin: 限制自己编写的模块只能从src引入;<br>rules</li>
+</ul>
+<p><strong>module</strong></p>
+<ul>
+<li>strictExportPresence:使缺少的导出出现错误而不是警告</li>
+<li>rules:<ul>
+<li>/.bmp/, /.gif/, /.jpe?g/, /.png/ url-loader解析</li>
+<li>js|mjs|jsx|ts|tsx 进行eslint语法检测</li>
+<li>babel-loader，cacheDirectory: true开启缓存</li>
+<li>/.css$/ style-loader MiniCssExtractPlugin css-loader postcss-loader</li>
+<li>/.module.css$/ 开启cssmodule</li>
+<li>同时也支持sass和sassmodule</li>
+</ul>
+</li>
+</ul>
+<p><strong>plugins</strong></p>
+<ul>
+<li>common<ul>
+<li>HtmlWebpackPlugin 打包到Html中</li>
+<li>InterpolateHtmlPlugin 允许在html中加入变量</li>
+<li>ModuleNotFoundPlugin 找不到module提示</li>
+<li>DefinePlugin 定义变量</li>
+<li>ManifestPlugin 资源映射文件</li>
+<li>IgnorePlugin 忽略掉某些包</li>
+<li>ForkTsCheckerWebpackPlugin Ts类型检测</li>
+</ul>
+</li>
+<li>dev<ul>
+<li>HotModuleReplacementPlugin 热更新</li>
+<li>CaseSensitivePathsPlugin 路径区分大小写</li>
+<li>WatchMissingNodeModulesPlugin npm install后不需要重新restart</li>
+</ul>
+</li>
+<li>prd<ul>
+<li>MiniCssExtractPlugin  将css提取到单独的文件</li>
+<li>WorkboxWebpackPlugin  pwa开启servicework</li>
+</ul>
+</li>
+</ul>
+<p><strong>node</strong>:nodejs 标准模块的mock。使 nodejs 编写的程序能够在类似浏览器等环境运行。</p>
+<p><strong>performance</strong>:关闭 bundle 文件大小提示，create react app 使用了自带的 react-dev-utils/FileSizeReporter 插件。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/24/TypeScript/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1876,181 +2116,6 @@ Vuex也是基于Flux思想的产品，在某种意义上它和 Redux 很像，�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/21/React-Hooks/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zmy">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zmy's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/09/21/React-Hooks/" itemprop="url">React Hooks</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-21T22:58:23+08:00">
-                2020-09-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React/" itemprop="url" rel="index">
-                    <span itemprop="name">React</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Hooks 是一项新功能提案，可让您在不编写类的情况下使用 state(状态) 和其他 React 功能。</p>
-<h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><h4 id="在组件之间重用有状态逻辑很困难"><a href="#在组件之间重用有状态逻辑很困难" class="headerlink" title="在组件之间重用有状态逻辑很困难"></a>在组件之间重用有状态逻辑很困难</h4><p>React并没有为组件提供一种可重复使用行为的方法（例如，将其关联到 store 里）。如果你已经使用了 React 一段时间，你可能会熟悉 render props(渲染属性) 和 高阶组件的模式尝试解决这个问题。但是这些模式要求您在使用它们时重构组件，这可能很麻烦并且使代码更难以跟踪。如果你看一下 React DevTools 中典型的 React 应用程序，你可能会发现一个包含提供者，消费者，高阶组件，渲染属性和其他抽象层的组件所包裹起来的组件。虽然我们可以 在 DevTools 中过滤它们 ，但这会引出了一个更深层次的基本问题：React 需要一个更好的原语来共享有状态逻辑。<br>使用 Hook ，您可以从组件中提取有状态逻辑，以便可以独立测试并重用。Hooks 允许您在不更改组件层次结构的情况下重用有状态逻辑。 这样可以轻松地在许多组件个之间或与社区共享 Hooks 。</p>
-<h4 id="复杂的组件变得难以理解"><a href="#复杂的组件变得难以理解" class="headerlink" title="复杂的组件变得难以理解"></a>复杂的组件变得难以理解</h4><p>我们常常不得不维护一些组件，这些组件一开始很简单，但后来却变成了一堆难以管理的有状态逻辑和副作用。每个生命周期方法通常包含一组不相关的逻辑。例如，组件可能在componentDidMount 和 componentDidUpdate中执行一些数据获取。然而，相同的 componentDidMount 方法可能还包含一些不相关的逻辑，它们设置事件监听器，并在 componentWillUnmount 中执行清理。一起更改的相互关联的代码会被分离，但是完全不相关的代码最终会组合在一个方法中。这很容易引入错误和不一致。<br>在许多情况下，将这些组件分解成更小的组件是不可能的，因为有状态逻辑到处都是。测试它们也很困难。这也是许多人喜欢将 React 与单独的状态管理库结合使用的原因之一。然而，这通常会引入太多的抽象，需要在不同的文件之间跳转，并且使得重用组件更加困难。</p>
-<h4 id="人和机器都容易混淆的-类-class"><a href="#人和机器都容易混淆的-类-class" class="headerlink" title="人和机器都容易混淆的 类(class)"></a>人和机器都容易混淆的 类(class)</h4><p>类组件可能会鼓励无意识的模式，使这些优化回退到较慢的路径。类(class)也为今天的工具提出了问题。例如，类不能很好地压缩，并且它们使得热更新加载变得片状和不可靠。我们希望提供一种 API，使代码更可能的留在可优化的路径上。<br>为了解决这些问题，Hooks 允许您在没有类的情况下使用更多 React 的功能。 从概念上讲，React 组件一直更接近函数。 Hooks 拥抱函数，但不会牺牲 React 的实际精神。 Hooks 提供了对命令式逃生舱的访问，并且不需要您学习复杂的函数式或反应式编程技术。</p>
-<h2 id="State-Hook"><a href="#State-Hook" class="headerlink" title="State Hook"></a>State Hook</h2><p>Hook 是一些可以让你在函数组件里“钩入” React state 及生命周期等特性的函数。Hook 不能在 class 组件中使用 —— 这使得你不使用 class 也能使用 React。<br>例子：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Example</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 声明一个叫 "count" 的 state 变量</span></span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;p&gt;You clicked &#123;count&#125; times&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;</span></span><br><span class="line"><span class="regexp">        Click me</span></span><br><span class="line"><span class="regexp">      &lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>等价class</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      count: <span class="number">0</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;p&gt;You clicked &#123;<span class="keyword">this</span>.state.count&#125; times&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button onClick=&#123;() =&gt; this.setState(&#123; count: this.state.count + 1 &#125;)&#125;&gt;</span></span><br><span class="line"><span class="regexp">          Click me</span></span><br><span class="line"><span class="regexp">        &lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>React函数组件：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Example = <span class="function">(<span class="params">props</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 你可以在这使用 Hook</span></span><br><span class="line">  <span class="keyword">return</span> &lt;div /&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Example(props) &#123;</span><br><span class="line">  // 你可以在这使用 Hook</span><br><span class="line">  return &lt;div /&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>之前叫“无状态组件”引入了使用React state的能力叫做“函数组件”<br>useState定义了一个“state”变量（count）它与class中的this.state一样。里面唯一的参数就是初始state。不同于 class 的是，我们可以按照需要使用数字或字符串对其进行赋值，而不一定是对象。返回值为：当前 state 以及更新 state 的函数。这就是我们写 const [count, setCount] = useState() 的原因。这与 class 里面 this.state.count 和 this.setState 类似，唯一区别就是你需要成对的获取它们。</p>
-<h2 id="Effect-Hook"><a href="#Effect-Hook" class="headerlink" title="Effect Hook"></a>Effect Hook</h2><p>useEffect 就是一个 Effect Hook，给函数组件增加了操作副作用（数据获取、订阅或者手动修改过 DOM）的能力。<br>当你调用 useEffect 时，就是在告诉 React 在完成对 DOM 的更改后运行你的“副作用”函数。由于副作用函数是在组件内声明的，所以它们可以访问到组件的 props 和 state。默认情况下，React 会在每次渲染后调用副作用函数 —— 包括第一次渲染的时候。<br>副作用函数还可以通过返回一个函数来指定如何“清除”副作用。</p>
-<h3 id="无需清除的-effect"><a href="#无需清除的-effect" class="headerlink" title="无需清除的 effect"></a>无需清除的 effect</h3><p>有时候，我们只想在 React 更新 DOM 之后运行一些额外的代码。比如发送网络请求，手动变更 DOM，记录日志，这些都是常见的无需清除的操作。因为我们在执行完这些操作之后，就可以忽略他们了。让我们对比一下使用 class 和 Hook 都是怎么实现这些副作用的。<br>在class中示例：<br>这是一个 React 计数器的 class 组件。它在 React 对 DOM 进行操作之后，立即更新了 document 的 title 属性<br>我们希望在组件加载和更新时执行同样的操作。从概念上说，我们希望它在每次渲染之后执行 —— 但 React 的 class 组件没有提供这样的方法。即使我们提取出一个方法，我们还是要在两个地方调用它。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Example</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123;</span><br><span class="line">      count: <span class="number">0</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    <span class="built_in">document</span>.title = <span class="string">`You clicked <span class="subst">$&#123;<span class="keyword">this</span>.state.count&#125;</span> times`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidUpdate() &#123;</span><br><span class="line">    <span class="built_in">document</span>.title = <span class="string">`You clicked <span class="subst">$&#123;<span class="keyword">this</span>.state.count&#125;</span> times`</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;p&gt;You clicked &#123;<span class="keyword">this</span>.state.count&#125; times&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button onClick=&#123;() =&gt; this.setState(&#123; count: this.state.count + 1 &#125;)&#125;&gt;</span></span><br><span class="line"><span class="regexp">          Click me</span></span><br><span class="line"><span class="regexp">        &lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>Hook示例：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Example</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">document</span>.title = <span class="string">`You clicked <span class="subst">$&#123;count&#125;</span> times`</span>;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;p&gt;You clicked &#123;count&#125; times&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;</span></span><br><span class="line"><span class="regexp">        Click me</span></span><br><span class="line"><span class="regexp">      &lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>使用这个 Hook，你可以告诉 React 组件需要在渲染后执行某些操作。React 会保存你传递的函数（我们将它称之为 “effect”），并且在执行 DOM 更新之后调用它。在这个 effect 中，我们设置了 document 的 title 属性，不过我们也可以执行数据获取或调用其他命令式的 API。<br>将 useEffect 放在组件内部让我们可以在 effect 中直接访问 count state 变量（或其他 props）。我们不需要特殊的 API 来读取它 —— 它已经保存在函数作用域中。Hook 使用了 JavaScript 的闭包机制，而不用在 JavaScript 已经提供了解决方案的情况下，还引入特定的 React API。<br>默认情况下，它在第一次渲染之后和每次更新之后都会执行。<br>每次我们重新渲染，都会生成新的 effect，替换掉之前的。某种意义上讲，effect 更像是渲染结果的一部分 —— 每个 effect “属于”一次特定的渲染。<br>与 componentDidMount 或 componentDidUpdate 不同，使用 useEffect 调度的 effect 不会阻塞浏览器更新屏幕，这让你的应用看起来响应更快。</p>
-<h3 id="需要清除的effect"><a href="#需要清除的effect" class="headerlink" title="需要清除的effect"></a>需要清除的effect</h3><p>有一些副作用是需要清除的。例如订阅外部数据源。这种情况下，清除工作是非常重要的，可以防止引起内存泄露<br>使用class示例：<br>在 React class 中，你通常会在 componentDidMount 中设置订阅，并在 componentWillUnmount 中清除它。例如，假设我们有一个 ChatAPI 模块，它允许我们订阅好友的在线状态。以下是我们如何使用 class 订阅和显示该状态：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FriendStatus</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="keyword">super</span>(props);</span><br><span class="line">    <span class="keyword">this</span>.state = &#123; <span class="attr">isOnline</span>: <span class="literal">null</span> &#125;;</span><br><span class="line">    <span class="keyword">this</span>.handleStatusChange = <span class="keyword">this</span>.handleStatusChange.bind(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    ChatAPI.subscribeToFriendStatus(</span><br><span class="line">      <span class="keyword">this</span>.props.friend.id,</span><br><span class="line">      <span class="keyword">this</span>.handleStatusChange</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  componentWillUnmount() &#123;</span><br><span class="line">    ChatAPI.unsubscribeFromFriendStatus(</span><br><span class="line">      <span class="keyword">this</span>.props.friend.id,</span><br><span class="line">      <span class="keyword">this</span>.handleStatusChange</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">  handleStatusChange(status) &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">      isOnline: status.isOnline</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state.isOnline === <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">'Loading...'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.state.isOnline ? <span class="string">'Online'</span> : <span class="string">'Offline'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>你会注意到 componentDidMount 和 componentWillUnmount 之间相互对应。使用生命周期函数迫使我们拆分这些逻辑代码，即使这两部分代码都作用于相同的副作用。<br>使用hook示例：<br>你可能认为需要单独的 effect 来执行清除操作。但由于添加和删除订阅的代码的紧密性，所以 useEffect 的设计是在同一个地方执行。如果你的 effect 返回一个函数，React 将会在执行清除操作时调用它：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState, useEffect &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">FriendStatus</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [isOnline, setIsOnline] = useState(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">handleStatusChange</span>(<span class="params">status</span>) </span>&#123;</span><br><span class="line">      setIsOnline(status.isOnline);</span><br><span class="line">    &#125;</span><br><span class="line">    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);</span><br><span class="line">    <span class="comment">// Specify how to clean up after this effect:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">cleanup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (isOnline === <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Loading...'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> isOnline ? <span class="string">'Online'</span> : <span class="string">'Offline'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这是 effect 可选的清除机制。每个 effect 都可以返回一个清除函数。如此可以将添加和移除订阅的逻辑放在一起。它们都属于 effect 的一部分。<br>React 会在组件卸载的时候执行清除effect操作。正如之前学到的，effect 在每次渲染的时候都会执行。这就是为什么 React 会在执行当前 effect 之前对上一个 effect 进行清除。<br>并不是必须为 effect 中返回的函数命名。这里我们将其命名为 cleanup 是为了表明此函数的目的，但其实也可以返回一个箭头函数或者给起一个别的名字。</p>
-<h3 id="使用effect的提示"><a href="#使用effect的提示" class="headerlink" title="使用effect的提示"></a>使用effect的提示</h3><p>使用多个 Effect 实现关注点分离.React 将按照 effect 声明的顺序依次调用组件中的每一个 effect。<br>每次重新渲染时执行effect的清除阶段。调用一个新的 effect 之前对前一个 effect 进行清理。此默认行为保证了一致性，避免了在 class 组件中因为没有处理更新逻辑而导致常见的 bug。<br>如果某些特定值在两次重渲染之间没有发生变化，你可以通知 React 跳过对 effect 的调用，只要传递数组作为 useEffect 的第二个可选参数即可<br>effect 的清除机制可以避免 componentDidUpdate 和 componentWillUnmount 中的重复，同时让相关的代码关联更加紧密，帮助我们避免一些 bug。我们还看到了我们如何根据 effect 的功能分隔他们，这是在 class 中无法做到的。</p>
-<h2 id="Hook使用规则"><a href="#Hook使用规则" class="headerlink" title="Hook使用规则"></a>Hook使用规则</h2><ul>
-<li>只能在函数最外层调用 Hook。不要在循环、条件判断或者子函数中调用。</li>
-<li>只能在 React 的函数组件中调用 Hook。不要在其他 JavaScript 函数中调用。<br>React依靠Hook的调用顺序去知道state对应的useState<h2 id="自定义Hook"><a href="#自定义Hook" class="headerlink" title="自定义Hook"></a>自定义Hook</h2>当我们想在两个函数之间共享逻辑时，我们会把它提取到第三个函数中。而组件和 Hook 都是函数，所以也同样适用这种方式。<br>自定义 Hook 是一个函数，其名称以 “use” 开头，函数内部可以调用其他的 Hook。<br>自定义 Hook 是一种自然遵循 Hook 设计的约定，而并不是 React 的特性。<br>自定义 Hook 是一种重用状态逻辑的机制(例如设置为订阅并存储当前值)，所以每次使用自定义 Hook 时，其中的所有 state 和副作用都是完全隔离的。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2101,7 +2166,7 @@ Vuex也是基于Flux思想的产品，在某种意义上它和 Redux 很像，�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2112,7 +2177,7 @@ Vuex也是基于Flux思想的产品，在某种意义上它和 Redux 很像，�
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -2123,7 +2188,7 @@ Vuex也是基于Flux思想的产品，在某种意义上它和 Redux 很像，�
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -2160,7 +2225,7 @@ Vuex也是基于Flux思想的产品，在某种意义上它和 Redux 很像，�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
