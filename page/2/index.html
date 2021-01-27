@@ -249,6 +249,378 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/22/单页应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zmy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zmy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/22/单页应用/" itemprop="url">单页应用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-22T23:58:06+08:00">
+                2020-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React-router/" itemprop="url" rel="index">
+                    <span itemprop="name">React-router</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">单页面应用</th>
+<th align="center">多页面应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">组成</td>
+<td align="right">一个外壳页面和多个页面片段组成</td>
+<td align="center">多个页面构成</td>
+</tr>
+<tr>
+<td align="left">资源共用(css,js)</td>
+<td align="right">共用，只需在外壳部分加载</td>
+<td align="center">不共用，每个页面都需要加载</td>
+</tr>
+<tr>
+<td align="left">刷新方式</td>
+<td align="right">页面局部刷新或更改</td>
+<td align="center">整页刷新</td>
+</tr>
+<tr>
+<td align="left">url模式</td>
+<td align="right">a.com/#/pageone</td>
+<td align="center">a.com/pageone.html</td>
+</tr>
+<tr>
+<td align="left">用户体验</td>
+<td align="right">页面片段间切换快体验良好</td>
+<td align="center">页面切换加载缓慢，流畅度不够，用户体验比较差</td>
+</tr>
+<tr>
+<td align="left">转场动画</td>
+<td align="right">容易实现</td>
+<td align="center">无法实现</td>
+</tr>
+<tr>
+<td align="left">数据传递</td>
+<td align="right">容易</td>
+<td align="center">依赖 url传参、或者cookie 、localStorage等</td>
+</tr>
+<tr>
+<td align="left">搜索引擎优化</td>
+<td align="right">需要单独方案、实现较为困难、不利于SEO检索 可利用服务器端渲染(SSR)优化</td>
+<td align="center">实现方法简单</td>
+</tr>
+<tr>
+<td align="left">适用范围</td>
+<td align="right">高要求的体验度、追求界面流畅的应用</td>
+<td align="center">适用于追求高度支持搜索引擎的应用</td>
+</tr>
+<tr>
+<td align="left">开发成本</td>
+<td align="right">较高，常需借助专业的框架</td>
+<td align="center">较低 ，但页面重复代码多</td>
+</tr>
+<tr>
+<td align="left">维护成本</td>
+<td align="right">相对容易</td>
+<td align="center">相对复杂</td>
+</tr>
+<tr>
+<td align="left">## 路由</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">路由是由多个URL组成，使用不同的URL可以导航到不同的位置。传统的多页面应用中。网站的每个URL地址都是对应于服务器磁盘上的一个实际物理文件。因为浏览器对页面的访问是无状态的。所以在切换不同的页面时都会重新请求。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">而在vue框架中实际切换页面并没有重新请求。因为单页面应用中，整个项目中只会存在一个 html 文件，当用户切换页面时，只是通过对这个唯一的 html 文件进行动态重写，从而达到响应用户的请求。从切换页面这个角度上说，应用只是在第一次打开时请求了服务器（非服务端渲染的单页应用）。因为访问的页面是并不真实存在的，所以如何正确的在一个 html 文件中展现出用户想要访问的信息就成为单页面应用需要考虑的问题，而对于这一路由问题的解决方案，为了与我们后端传统意义上的路由进行区别，就将此称为前端路由——其核心是 <strong>改变视图的同时不会向后端发出请求。</strong></td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">## 单页面应用</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">传统的一个页面映射一个.html.css.js。切换页面时需要从服务器下载对应的html、css和js文件，而这些文件大小并不算小，这就造成了页面加载速度的缓慢，从而影响了用户体验。为了更快响应，我们提出了新的模式<strong>组件化</strong>。组件化模式缩小了文件的颗粒度，把不同的逻辑视图块分割为小的独立的组件，将不同页面视为组件的不同排列组合，html作为包裹这件组合后的组件的容器。整个页面，只有一个html。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">当页面切换时，url 发生改变，只是表明页面组件排列组合的方式变了，并不需要向后端发送请求重载页面，这样的应用也就叫做单页面应用，因为只有一个html文件。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">## 路由模式</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* Hash: 使用URL的hash值来作为路由。支持所有浏览器。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* History: 以来HTML5 History API 和服务器配置。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* Abstract: 支持所有javascript运行模式。如果发现没有浏览器的API，路由会自动强制进入这个模式。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">## hash模式</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">hash 模式是一种把前端路由的路径用井号 # 拼接在真实 URL 后面的模式。当井号 # 后面的路径发生变化时，浏览器并不会重新发起请求，而是会触发 hashchange 事件。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">改变hash不会触发页面跳转，因为hash链接是当前页面中的某个片段，所以如果hash有变化，那么页面将会滚动到hash所连接的位置。但是页面中如果不存在hash对应的片段，则没有任何效果。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* hash值的变化不会导致浏览器向服务器发送请求</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* location.hash可以获取hash值</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* hashchange是hash值发生改变调用的函数</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">优点：</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* 实现简单，兼容性好（兼容到ie8）；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* 绝大多数前端框架均提供了给予hash的路由实现；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* 不需要服务器端进行任何设置和开发；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* 除了资源加载和ajax请求以外，不会发起其他请求</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">缺点：</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* 对于部分需要重定向的操作，后端无法获取hash部分内容，导致后台无法取得url中的数据，典型的例子就是微信公众号的oauth验证；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* 服务器端无法准确跟踪前端路由信息；</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">* 对于需要锚点功能的需求会与目前路由机制冲突</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">hash 和 pushState 对比：</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">1. hash只能修改url的片段标识符的部分。并且必须从#号开始，但是pushState且能修改路径、查询参数和片段标识符。pushState比hash更符合前端路由的访问方式，更加优雅(因为不带#号)。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">2. hash必须和原先的值不同，才能新增会话浏览历史的记录，但是pushState可以新增相同的url的记录</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">## history模式</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">HTML5的History API为浏览器的全局history对象增加了该扩展方法。它是一个浏览器的一个接口，在window对象中提供了onpopstate事件来监听历史栈的改变，只要历史栈有信息发生改变的话，就会触发该事件。</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">history提供了两个操作历史栈的API:</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="left">history.pushState(data[,title][,url]);  向历史记录中追加一条记录</td>
+<td align="right"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>history.replaceState(data[,title][,url]);  替换当前页在历史记录中的信息。<br>优点：</p>
+<ul>
+<li>对于重定向过程中不会丢失url中的参数，后端可以拿到这部分数据；</li>
+<li>绝大多数前段框架均提供了browser的路由实现；</li>
+<li>后端可以准确跟踪路由信息；</li>
+<li>可以使用history.state来获取当前url对应的状态信息<br>缺点：兼容性不如 hash，且需要服务端支持，否则一刷新页面就404了</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/27/render-props/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1735,192 +2107,6 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/19/js中this的用法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zmy">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zmy's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/19/js中this的用法/" itemprop="url">js中this的用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-19T14:56:19+08:00">
-                2019-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">-js</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="为什么要学习this"><a href="#为什么要学习this" class="headerlink" title="为什么要学习this"></a>为什么要学习this</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">  foo: function () &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var foo = obj.foo;</span><br><span class="line"></span><br><span class="line">// 写法一</span><br><span class="line">obj.foo()</span><br><span class="line"></span><br><span class="line">// 写法二</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure>
-
-<p>上面代码中，虽然obj.foo和foo指向同一个函数，但是执行结果可能不一样。看下面的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">  foo: function () &#123; console.log(this.bar) &#125;,</span><br><span class="line">  bar: 1</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var foo = obj.foo;</span><br><span class="line">var bar = 2;</span><br><span class="line"></span><br><span class="line">obj.foo() // 1</span><br><span class="line">foo() // 2</span><br></pre></td></tr></table></figure>
-
-<p>这种差异的原因，就在于函数体内部使用了this关键字。很多教科书会告诉你，this指的是函数运行时所在的环境。对于obj.foo()来说，foo运行在obj环境，所以this指向obj；对于foo()来说，foo运行在全局环境，所以this指向全局环境。所以，两者的运行结果不一样。</p>
-<p>这种解释没错，但是教科书往往不告诉你，为什么会这样？也就是说，函数的运行环境到底是怎么决定的？举例来说，为什么obj.foo()就是在obj环境执行，而一旦var foo = obj.foo，foo()就变成在全局环境执行？下面来解释。</p>
-<h2 id="内存的数据结构"><a href="#内存的数据结构" class="headerlink" title="内存的数据结构"></a>内存的数据结构</h2><p>js之所以有this和内存里面的数据结构有关</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;foo:5&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>上面的代码将一个对象赋值给变量obj。JavaScript 引擎会先在内存里面，生成一个对象{ foo: 5 }，然后把这个对象的内存地址赋值给变量obj。</p>
-<p>也就是说，变量obj是一个地址（reference）。后面如果要读取obj.foo，引擎先从obj拿到内存地址，然后再从该地址读出原始的对象，返回它的foo属性。</p>
-<p>原始的对象以字典结构保存，每一个属性名都对应一个属性描述对象。举例来说，上面例子的foo属性，实际上是以下面的形式保存的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  foo: &#123;</span><br><span class="line">    [[value]]: 5</span><br><span class="line">    [[writable]]: true</span><br><span class="line">    [[enumerable]]: true</span><br><span class="line">    [[configurable]]: true</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>属性的值也可能是一个函数</p>
-<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>js允许在函数体内部引用当前环境的其他变量</p>
-<p>现在问题就来了，由于函数可以在不同的运行环境执行，所以需要有一种机制，能够在函数体内部获得当前的运行环境（context）。所以，this就出现了，它的设计目的就是在函数体内部，指代函数当前的运行环境。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var f = function () &#123;</span><br><span class="line">  console.log(this.x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var x = 1;</span><br><span class="line">var obj = &#123;</span><br><span class="line">  f: f,</span><br><span class="line">  x: 2,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// 单独执行</span><br><span class="line">f() // 1</span><br><span class="line"></span><br><span class="line">// obj 环境执行</span><br><span class="line">obj.f() // 2</span><br></pre></td></tr></table></figure>
-
-<p>上面代码中，函数f在全局环境执行，this.x指向全局环境的x。<br><img src="https://www.wangbase.com/blogimg/asset/201806/bg2018061804.png"><br>在obj环境执行，this.x指向obj.x。</p>
-<img src="https://www.wangbase.com/blogimg/asset/201806/bg2018061805.png">
-所以有了上面的结果
-
-<p>回到this本身，this是Javascript语言的一个关键字。<br>它代表函数运行时，自动生成的一个内部对象，只能在函数内部使用。下面分四种情况，讨论this的用法。</p>
-<h3 id="情况一，纯粹的函数调用"><a href="#情况一，纯粹的函数调用" class="headerlink" title="情况一，纯粹的函数调用"></a>情况一，纯粹的函数调用</h3><p>这是函数的最通常用法，属于全局性调用，因此this就代表全局对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">function test()&#123; </span><br><span class="line"></span><br><span class="line">　　　　this.x = 1; </span><br><span class="line"></span><br><span class="line">　　　　alert(this.x); </span><br><span class="line"></span><br><span class="line">　　&#125; </span><br><span class="line"></span><br><span class="line">　　test(); // 1 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">　var x = 1; </span><br><span class="line"></span><br><span class="line">　　function test()&#123; </span><br><span class="line"></span><br><span class="line">　　　　alert(this.x); </span><br><span class="line"></span><br><span class="line">　　&#125; </span><br><span class="line"></span><br><span class="line">　　test(); // 1 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var x = 1; </span><br><span class="line"></span><br><span class="line">　　function test()&#123; </span><br><span class="line"></span><br><span class="line">　　　　this.x = 0; </span><br><span class="line"></span><br><span class="line">　　&#125; </span><br><span class="line"></span><br><span class="line">　　test(); </span><br><span class="line"></span><br><span class="line">　　alert(x); //0</span><br></pre></td></tr></table></figure>
-
-<h3 id="情况二，作为对象方法的调用"><a href="#情况二，作为对象方法的调用" class="headerlink" title="情况二，作为对象方法的调用"></a>情况二，作为对象方法的调用</h3><p>函数还可以作为某个对象的方法调用，这时this就指这个上级对象。<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function test()&#123; </span><br><span class="line"></span><br><span class="line">　　　　alert(this.x); </span><br><span class="line"></span><br><span class="line">　　&#125; </span><br><span class="line"></span><br><span class="line">　　var o = &#123;&#125;; </span><br><span class="line"></span><br><span class="line">　　o.x = 1; </span><br><span class="line"></span><br><span class="line">　　o.m = test; </span><br><span class="line"></span><br><span class="line">　　o.m(); // 1</span><br></pre></td></tr></table></figure></p>
-<h3 id="情况三，作为构造函数调用"><a href="#情况三，作为构造函数调用" class="headerlink" title="情况三，作为构造函数调用"></a>情况三，作为构造函数调用</h3><p>所谓构造函数，就是通过这个函数生成一个新对象（object）。这时，this就指这个新对象。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function test()&#123; </span><br><span class="line"></span><br><span class="line">　　　　this.x = 1; </span><br><span class="line"></span><br><span class="line">　　&#125; </span><br><span class="line"></span><br><span class="line">　　var o = new test(); </span><br><span class="line"></span><br><span class="line">　　alert(o.x); // 1</span><br></pre></td></tr></table></figure>
-
-<p>这时this不是全局变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var x = 2; </span><br><span class="line"></span><br><span class="line">　　function test()&#123; </span><br><span class="line"></span><br><span class="line">　　　　this.x = 1; </span><br><span class="line"></span><br><span class="line">　　&#125; </span><br><span class="line"></span><br><span class="line">　　var o = new test(); </span><br><span class="line"></span><br><span class="line">　　alert(x); //2</span><br></pre></td></tr></table></figure>
-
-<h3 id="情况四，apply调用"><a href="#情况四，apply调用" class="headerlink" title="情况四，apply调用"></a>情况四，apply调用</h3><p>apply()是函数对象的一个方法，它的作用是改变函数的调用对象，它的第一个参数就表示改变后的调用这个函数的对象。因此，this指的就是这第一个参数。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var x = 0; </span><br><span class="line"></span><br><span class="line">　　function test()&#123; </span><br><span class="line"></span><br><span class="line">　　　　alert(this.x); </span><br><span class="line"></span><br><span class="line">　　&#125; </span><br><span class="line"></span><br><span class="line">　　var o=&#123;&#125;; </span><br><span class="line"></span><br><span class="line">　　o.x = 1; </span><br><span class="line"></span><br><span class="line">　　o.m = test; </span><br><span class="line"></span><br><span class="line">　　o.m.apply(); //0 </span><br><span class="line"></span><br><span class="line">o.m.apply(o); //1</span><br></pre></td></tr></table></figure>
-
-<p>apply()的参数为空时，默认调用全局对象。因此，这时的运行结果为0，证明this指的是全局对象。 </p>
-<h3 id="情况五"><a href="#情况五" class="headerlink" title="情况五"></a>情况五</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var checkThis = function()&#123; </span><br><span class="line"></span><br><span class="line">alert( this.x); </span><br><span class="line"></span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">var x = &apos;this is a property of window&apos;; </span><br><span class="line"></span><br><span class="line">var obj = &#123;&#125;; </span><br><span class="line"></span><br><span class="line">obj.x = 100; </span><br><span class="line"></span><br><span class="line">obj.y = function()&#123; alert( this.x ); &#125;; </span><br><span class="line"></span><br><span class="line">obj.y(); //弹出 100 </span><br><span class="line"></span><br><span class="line">checkThis(); //弹出 &apos;this is a property of window&apos;</span><br></pre></td></tr></table></figure>
-
-<p>这里为什么会弹出 ‘this is a property of window’，可能有些让人迷惑。在JavaScript的变量作用域里有一条规则“全局变量都是window对象的属性”。当执行checkThis() 时相当于window.checkThis()，因此，此时checkThis函数体内的this关键字的指向变成了window对象，而又因为window对象又一个x属性（’thisis a property of window’）,所以会弹出 ‘thisis a property of window’。 </p>
-<h3 id="情况六，call"><a href="#情况六，call" class="headerlink" title="情况六，call"></a>情况六，call</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function changeStyle( type , value )&#123; </span><br><span class="line"></span><br><span class="line">this.style[ type ] = value; </span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">var one = document.getElementByIdx( &apos;one&apos; ); </span><br><span class="line"></span><br><span class="line">changeStyle.call( one , &apos;fontSize&apos; , &apos;100px&apos; ); </span><br><span class="line"></span><br><span class="line">changeStyle(&apos;fontSize&apos; , &apos;300px&apos;); //出现错误，因为此时changeStyle中this引用的是window对象，而window并无style属性。</span><br></pre></td></tr></table></figure>
-
-<p>注意changeStyle.call()中有三个参数，第一个参数用于指定该函数将被哪个对象所调用。这里指定了one，也就意味着，changeStyle函数将被one调用，因此函数体内this指向是one对象。而第二个和第三个参数对应的是changeStyle函数里的type和value两个形参。最总我们看到的效果是Dom元素one的字体变成了100px。 </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1971,7 +2157,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1982,7 +2168,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -1993,7 +2179,7 @@ JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,u
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
