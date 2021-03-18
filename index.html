@@ -249,6 +249,571 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/17/透视HTTP协议/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zmy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zmy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/03/17/透视HTTP协议/" itemprop="url">透视HTTP协议</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-17T00:41:47+08:00">
+                2021-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>URI：即统一资源标识符，作为互联网上资源的唯一身份；<br>HTML：即超文本标记语言，描述超文本文档；<br>HTTP：即超文本传输协议，用来传输超文本。</p>
+<h1 id="HTTP发展历史："><a href="#HTTP发展历史：" class="headerlink" title="HTTP发展历史："></a>HTTP发展历史：</h1><ul>
+<li>HTTP 协议始于三十年前蒂姆·伯纳斯 - 李的一篇论文；</li>
+<li>HTTP/0.9 是个简单的文本协议，只能获取文本资源；</li>
+<li>HTTP/1.0 确立了大部分现在使用的技术，但它不是正式标准；</li>
+<li>HTTP/1.1 是目前互联网上使用最广泛的协议，功能也非常完善；</li>
+<li>HTTP/2 基于 Google 的 SPDY 协议，注重性能改善，但还未普及；</li>
+<li>HTTP/3 基于 Google 的 QUIC 协议，是将来的发展方向。<h1 id="HTTP是什么"><a href="#HTTP是什么" class="headerlink" title="HTTP是什么"></a>HTTP是什么</h1>HTTP 是一个用在计算机世界里的协议。它使用计算机能够理解的语言确立了一种计算机之间交流通信的规范，以及相关的各种控制和错误处理方式。<br>HTTP 是一个在计算机世界里专门用来在两点之间传输数据的约定和规范。<br>HTTP 是一个在计算机世界里专门在两点之间传输文字、图片、音频、视频等超文本数据的约定和规范”。<h1 id="与HTTP相关的各种概念"><a href="#与HTTP相关的各种概念" class="headerlink" title="与HTTP相关的各种概念"></a>与HTTP相关的各种概念</h1></li>
+<li>网络世界：互联网是各种规模较小的网络连接而成的。现在的互联网90%以上都被万维网，也就是HTTP覆盖。</li>
+<li>浏览器：在HTTP协议里面，浏览器的角色被称为用户代理，即只作为访问者的代理发起HTTP请求。</li>
+<li>web服务器：HTTP协议的应答方。硬件含义：是物理形式或者“云”形式的机器，在大多数情况下它可能不是一台服务器，但外界看来仍表现为一台机器是虚拟的。软件含义：提供web服务的应用程序。web服务器有Apache和nginx等</li>
+<li>CDN，全称是“Content Delivery Network”，翻译过来就是“内容分发网络”。它应用了 HTTP 协议里的缓存和代理技术，代替源站响应客户端的请求。它可以缓存源站的数据，让浏览器的请求不用“千里迢迢”地到达源站服务器，直接在“半路”就可以获取响应。如果 CDN 的调度算法很优秀，更可以找到离用户最近的节点，大幅度缩短响应时间。</li>
+<li>爬虫是另一类 User Agent，是自动访问网络资源的程序。</li>
+<li>WAF：网络应用防火墙，专门检测HTTP流量防护Web应用的安全技术。<h1 id="与HTTP相关的各种协议"><a href="#与HTTP相关的各种协议" class="headerlink" title="与HTTP相关的各种协议"></a>与HTTP相关的各种协议</h1></li>
+<li>TCP/IP：IP主要用来解决寻址和路由的问题，TCP基于IP协议提供可靠(数据不丢失)的字节流形式（数据完整）的通信，是HTTP得以实现的基础</li>
+<li>DNS：域名系统，将域名转换映射到IP就是域名解析</li>
+<li>URI/URL：统一资源标识符，常用表现形式URL统一资源定位符（网址）,主要由三部分构成：协议名、主机名、路径</li>
+<li>HTTPS： HTTPS 相当于“HTTP+SSL/TLS+TCP/IP”， SSL/TLS，它是一个负责加密通信的安全协议，建立在 TCP/IP 之上</li>
+<li>代理（Proxy）是 HTTP 协议中请求方和应答方中间的一个环节，作为“中转站”，既可以转发客户端的请求，也可以转发服务器的应答。代理常见种类：匿名台历、透明代理、正向代理、反向代理。可以实现负载均衡，内容缓存，安全防护，数据处理<h1 id="“四层”和“七层”"><a href="#“四层”和“七层”" class="headerlink" title="“四层”和“七层”"></a>“四层”和“七层”</h1><h2 id="TCP-IP网络分层"><a href="#TCP-IP网络分层" class="headerlink" title="TCP/IP网络分层"></a>TCP/IP网络分层</h2>从下往上：</li>
+<li>链接层:负责在以太网、WiFi 这样的底层网络上发送原始数据包，工作在网卡这个层次</li>
+<li>网际层：IP协议就在这一层，用 IP 地址取代 MAC 地址</li>
+<li>传输层：是保证数据在 IP 地址标记的两点之间“可靠”地传输，是 TCP 协议工作的层次</li>
+<li>应用层，有各种面向具体应用的协议<h2 id="OSI网络分层"><a href="#OSI网络分层" class="headerlink" title="OSI网络分层"></a>OSI网络分层</h2></li>
+<li>第一层：物理层，网络的物理形式，例如电缆、光纤、网卡、集线器等等；</li>
+<li>第二层：数据链路层，它基本相当于 TCP/IP 的链接层；</li>
+<li>第三层：网络层，相当于 TCP/IP 里的网际层；</li>
+<li>第四层：传输层，相当于 TCP/IP 里的传输层；</li>
+<li>第五层：会话层，维护网络中的连接状态，即保持会话和同步；</li>
+<li>第六层：表示层，把数据转换为合适、可理解的语法和语义；</li>
+<li>第七层：应用层，面向具体的应用传输数据。<h2 id="工作方式"><a href="#工作方式" class="headerlink" title="工作方式"></a>工作方式</h2>HTTP 利用 TCP/IP 协议栈逐层打包再拆包，实现了数据传输，但下面的细节并不可见。<h1 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h1></li>
+<li>域名使用字符串来代替 IP 地址，方便用户记忆，本质上一个名字空间系统；</li>
+<li>DNS 就像是我们现实世界里的电话本、查号台，统管着互联网世界里的所有网站，是一个“超级大管家”；</li>
+<li>DNS 是一个树状的分布式查询系统，但为了提高查询效率，外围有多级的缓存；</li>
+<li>使用DNS 可以实现基于域名的负载均衡，既可以在内网，也可以在外网。<h2 id="DNS解析过程"><a href="#DNS解析过程" class="headerlink" title="DNS解析过程"></a>DNS解析过程</h2>浏览器缓存-&gt;操作系统dnscache -&gt;hosts文件-&gt;非权威域名服务器-&gt;根域名服务器-&gt;顶级域名服务器-&gt;二级域名服务器-&gt;权威域名服务器。<h1 id="HTTP报文"><a href="#HTTP报文" class="headerlink" title="HTTP报文"></a>HTTP报文</h1>HTTP 协议的请求报文和响应报文的结构基本相同，由三大部分组成：</li>
+<li>起始行（start line）：描述请求或响应的基本信息；</li>
+<li>头部字段集合（header）：使用 key-value 形式更详细地说明报文；</li>
+<li>消息正文（entity）：实际传输的数据，它不一定是纯文本，可以是图片、视频等二进制数据。</li>
+</ul>
+<p>HTTP 报文结构就像是“大头儿子”，由“起始行 + 头部 + 空行 + 实体”组成，简单地说就是“header+body”</p>
+<h2 id="请求报文起始行（请求行）"><a href="#请求报文起始行（请求行）" class="headerlink" title="请求报文起始行（请求行）"></a>请求报文起始行（请求行）</h2><ul>
+<li>请求方法：是一个动词，如 GET/POST，表示对资源的操作；</li>
+<li>请求目标：通常是一个 URI，标记了请求方法要操作的资源；</li>
+<li>版本号：表示报文使用的 HTTP 协议版本。<h2 id="响应报文起始行（响应行）"><a href="#响应报文起始行（响应行）" class="headerlink" title="响应报文起始行（响应行）"></a>响应报文起始行（响应行）</h2></li>
+<li>版本号：表示报文使用的 HTTP 协议版本；</li>
+<li>状态码：一个三位数，用代码的形式表示处理的结果，比如 200 是成功，500 是服务器错误；</li>
+<li>原因：作为数字状态码补充，是更详细的解释文字，帮助人理解原因。<h2 id="常用头字段"><a href="#常用头字段" class="headerlink" title="常用头字段"></a>常用头字段</h2></li>
+<li>Host （请求头中必须出现）字段告诉服务器这个请求应该由哪个主机来处理，当一台计算机上托管了多个虚拟主机的时候，服务器端就需要用 Host 字段来选择</li>
+<li>User-Agent 是请求字段，只出现在请求头里，服务器可以依据它来返回最合适此浏览器显示的页面。</li>
+<li>Date 字段是一个通用字段，表示HTTP报文创建的时间</li>
+<li>Server 字段是响应字段，只能出现在响应头里。它告诉客户端当前正在提供 Web 服务的软件名称和版本号<h1 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h1></li>
+<li>GET：获取资源，可以理解为读取或者下载数据；</li>
+<li>HEAD：获取资源的元信息（响应头）</li>
+<li>POST：向资源提交数据，相当于写入或上传数据；新建</li>
+<li>PUT：类似 POST；修改</li>
+<li>DELETE：删除资源；</li>
+<li>CONNECT：建立特殊的连接隧道；要求服务器为客户端和另一台远程服务器建立一条特殊的连接隧道，这时 Web 服务器在中间充当了代理的角色。</li>
+<li>OPTIONS：列出可对资源实行的方法；在响应头的 Allow 字段里返回。</li>
+<li>TRACE：追踪请求 - 响应的传输路径。<h2 id="安全和幂等"><a href="#安全和幂等" class="headerlink" title="安全和幂等"></a>安全和幂等</h2></li>
+<li>“安全”是指请求方法不会“破坏”服务器上的资源，即不会对服务器上的资源造成实质的修改。</li>
+<li>“幂等”意思是多次执行相同的操作，结果也都是相同的，即多次“幂”后结果“相等”。</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/16/css布局/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zmy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zmy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/03/16/css布局/" itemprop="url">css布局</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-16T11:04:32+08:00">
+                2021-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">-css</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h1><p>能将一个元素拉到容器的一侧，这样文档流就能够包围它。<br>浮动本身不是为了实现布局而设计的。</p>
+<p>学习浮动的必要性：</p>
+<ul>
+<li>要支持IE浏览器，只有IE10和IE11支持Flexbox，还有一些bug</li>
+<li>为了维护旧代码</li>
+<li>浮动布局不需要很多标记</li>
+<li>要求将图片移动到网页一侧<br>双容器模式：将内容放到两个嵌套的容器中，内层容器设置外边距，让它在外层容器居中。<h2 id="容器折叠和清楚浮动"><a href="#容器折叠和清楚浮动" class="headerlink" title="容器折叠和清楚浮动"></a>容器折叠和清楚浮动</h2>容器折叠：浮动元素不同于不同文档流的元素，他们的高度不会加到父元素上</li>
+</ul>
+<p>清除浮动：<code>clear:both</code> 在html结尾中添加空标记，使用css清除浮动</p>
+<p>使用伪元素（：before ：after 用来在元素的开始或者结束位置插入内容)<br>使用<code>display:table</code>可以包含外边距</p>
+<h2 id="浮动陷阱"><a href="#浮动陷阱" class="headerlink" title="浮动陷阱"></a>浮动陷阱</h2><p>浏览器会将浮动元素尽可能的放在靠上的位置。可以使用<code>nth-child</code>去清除每行第一个浮动</p>
+<h2 id="媒体对象和BFC"><a href="#媒体对象和BFC" class="headerlink" title="媒体对象和BFC"></a>媒体对象和BFC</h2><p>让图片在一侧，一段文字出现在图片的旁边叫做媒体对象</p>
+<p>媒体对象里面的文字默认围绕浮动图片，为了文字不和浮动图片重叠，建立块级格式化上下文(BFC)</p>
+<p>BFC是网页的一块区域，元素基于这块区域布局，它将内部与外部上下文分隔开：</p>
+<ul>
+<li>包含内部所有元素的上下外边距不会产生外边距折叠</li>
+<li>包含内部所有的浮动元素</li>
+<li>不会和BFC外面的浮动元素重叠</li>
+</ul>
+<p>创建BFC：(通常设overflow)</p>
+<ul>
+<li>float:left/right</li>
+<li>overflow:hidden/auto/scroll </li>
+<li>display:inline-block/table-cell/flex等</li>
+<li>position：absolute/fixed<h2 id="网格系统"><a href="#网格系统" class="headerlink" title="网格系统"></a>网格系统</h2>构建网格系统可以提高代码的复用率。<h1 id="Flexbox"><a href="#Flexbox" class="headerlink" title="Flexbox"></a>Flexbox</h1>为元素添加<code>display:flex</code>该元素变成弹性元素，直接子元素变成弹性子元素</li>
+</ul>
+<p>属性：</p>
+<ul>
+<li>flex-direction 指定主轴方向 row row-reverse column column-reverse</li>
+<li>flex-wrap 指定了弹性子元素是否在弹性容器内折行显示</li>
+<li>justify-content 控制子元素在主轴上的位置</li>
+<li>align-items 控制副轴上的位置</li>
+<li>align-content 如果开启了flex-wrap会控制子元素在副轴上的间距</li>
+<li>flex-grow 增长因子，决定子元素在主轴方向扩展的大小</li>
+<li>flex-shrink 收缩因子</li>
+<li>flex-basis 子元素初始大小</li>
+<li>align-self 在副轴上的对齐方向</li>
+<li>Order 整数<h1 id="网格布局"><a href="#网格布局" class="headerlink" title="网格布局"></a>网格布局</h1>Flexbox和网格布局：</li>
+<li>Flexbox本质上是一维的而网格是二维的</li>
+<li>Flexbox是以内容为切入点由内向外工作，而网格是从外向内</li>
+<li>flex换行后没法让上一行和下一行对齐，网格可以对齐</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/02/算法通关/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zmy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zmy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/03/02/算法通关/" itemprop="url">算法通关</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-02T20:46:28+08:00">
+                2021-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="精通一个领域"><a href="#精通一个领域" class="headerlink" title="精通一个领域"></a>精通一个领域</h1><ul>
+<li>切碎知识点</li>
+<li>刻意练习</li>
+<li>反馈<h1 id="堆栈-（先进后出）"><a href="#堆栈-（先进后出）" class="headerlink" title="堆栈 （先进后出）"></a>堆栈 （先进后出）</h1></li>
+</ul>
+<h1 id="队列（先进先出-FIFO）"><a href="#队列（先进先出-FIFO）" class="headerlink" title="队列（先进先出 FIFO）"></a>队列（先进先出 FIFO）</h1><h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ul>
+<li>q.empty()               如果队列为空返回true，否则返回false</li>
+<li>q.size()                返回队列中元素的个数</li>
+<li>q.pop()                 删除队列首元素但不返回其值</li>
+<li>q.front()               返回队首元素的值，但不删除该元素</li>
+<li>q.push()                在队尾压入新元素</li>
+<li>q.back()                返回队列尾元素的值，但不删除该元素</li>
+</ul>
+<p>判断队列是空队列还是已满呢？</p>
+<ol>
+<li>栈空： 队首标志=队尾标志时，表示栈空。</li>
+<li>栈满 : 队尾+1 = 队首时，表示栈满。</li>
+</ol>
+<h1 id="deque双端队列"><a href="#deque双端队列" class="headerlink" title="deque双端队列"></a>deque双端队列</h1><p>deque（双端队列）是由一段一段的定量连续空间构成，可以向两端发展，因此不论在尾部或头部安插元素都十分迅速。 在中间部分安插元素则比较费时，因为必须移动其它元素。</p>
+<h2 id="基本操作-1"><a href="#基本操作-1" class="headerlink" title="基本操作"></a>基本操作</h2><ul>
+<li>容器大小：deq.size();</li>
+<li>容器最大容量：deq.max_size();</li>
+<li>更改容器大小：deq.resize();</li>
+<li>容器判空：deq.empty();</li>
+<li>头部添加元素：deq.push_front(const T&amp; x);</li>
+<li>末尾添加元素：deq.push_back(const T&amp; x);</li>
+<li>任意位置插入一个元素：deq.insert(iterator it, const T&amp; x);</li>
+<li>任意位置插入 n 个相同元素：deq.insert(iterator it, int n, const T&amp; x);</li>
+<li>插入另一个向量的 [forst,last] 间的数据：deq.insert(iterator it, iterator first, iterator last);</li>
+<li>头部删除元素：deq.pop_front();</li>
+<li>末尾删除元素：deq.pop_back();</li>
+<li>任意位置删除一个元素：deq.erase(iterator it);</li>
+<li>删除 [first,last] 之间的元素：deq.erase(iterator first, iterator last);</li>
+<li>清空所有元素：deq.clear();</li>
+<li>下标访问：deq[1]; // 并不会检查是否越界</li>
+<li>at 方法访问：deq.at(1); // 以上两者的区别就是 at 会检查是否越界，是则抛出 out of range 异常</li>
+<li>访问第一个元素：deq.front();</li>
+<li>访问最后一个元素：deq.back();</li>
+</ul>
+<h1 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h1><p>定义：priority_queue&lt;Type, Container, Functional&gt;</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//升序队列</span></span><br><span class="line">priority_queue &lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; q;<span class="comment">//小顶堆</span></span><br><span class="line"><span class="comment">//降序队列</span></span><br><span class="line">priority_queue &lt;int,vector&lt;int&gt;,less&lt;int&gt; &gt;q; <span class="comment">//默认大顶堆</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//greater和less是std实现的两个仿函数（就是使一个类的使用看上去像一个函数。其实现就是类中实现一个operator()，这个类就有了类似函数的行为，就是一个仿函数类了）</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>堆 heap</li>
+<li>二叉搜索树<h2 id="基本操作-（只能操作队首和队尾，不能操作中间，代价大）"><a href="#基本操作-（只能操作队首和队尾，不能操作中间，代价大）" class="headerlink" title="基本操作 （只能操作队首和队尾，不能操作中间，代价大）"></a>基本操作 （只能操作队首和队尾，不能操作中间，代价大）</h2></li>
+<li>top 访问头元素</li>
+<li>empty</li>
+<li>size</li>
+<li>push</li>
+<li>swap 交换内容</li>
+<li>emplace 原地构造一个元素并插入</li>
+</ul>
+<h1 id="set和multiset和unordered-set"><a href="#set和multiset和unordered-set" class="headerlink" title="set和multiset和unordered_set"></a>set和multiset和unordered_set</h1><p>set和multiset会根据特定的排序原则将元素排序。两者不同之处在于，multisets允许元素重复，而set不允许重复。<br>sets和multisets具有以下特点：</p>
+<ul>
+<li>不提供直接用来存取元素的任何操作元素</li>
+<li>通过迭代器进行元素的存取。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>&lt;int,greater&lt;int&gt; &gt; IntSet;//从大到小 6 5 4 3 2 1</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="基本操作-2"><a href="#基本操作-2" class="headerlink" title="基本操作"></a>基本操作</h2><ul>
+<li>size </li>
+<li>empty</li>
+<li>max_size</li>
+<li>count(e)</li>
+<li>find(e) //该元素的第一个位置</li>
+<li>swap</li>
+<li>begin end rbegin rend</li>
+<li>insert 插入</li>
+<li>erase(e/pos) 移出 e相等元素 pos位置元素</li>
+<li>clear</li>
+<li>lower_bound(e) 返回&gt;=e的第一个位置的迭代器 upper_bound(e) =e的第一个位置的迭代器</li>
+<li>equal_range (elem) 返回elem可安插的第一个位置和最后一个位置，也就是元素值==elem的区间</li>
+</ul>
+<h1 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h1><p>常用查询和计数</p>
+<h1 id="树"><a href="#树" class="headerlink" title="树"></a>树</h1><h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><h2 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h2><p>大问题变成多个子问题，再解决每个子问题，无重复计算。</p>
+<h2 id="贪心算法"><a href="#贪心算法" class="headerlink" title="贪心算法"></a>贪心算法</h2><p>对问题求解做出对当前问题的最优</p>
+<h2 id="深度-广度优先搜索"><a href="#深度-广度优先搜索" class="headerlink" title="深度/广度优先搜索"></a>深度/广度优先搜索</h2><p>广度习惯非递归  深度习惯递归</p>
+<h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><p>数组适合链表不适合</p>
+<ul>
+<li>有序数组</li>
+<li>存在上下界</li>
+<li>可以通过索引访问</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/27/Webpack构建产物/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,126 +934,6 @@
 <h3 id="第三步：生成代码字符串"><a href="#第三步：生成代码字符串" class="headerlink" title="第三步：生成代码字符串"></a>第三步：生成代码字符串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">step3</span>(<span class="params">entry</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//要先把对象转换为字符串，不然在下面的模板字符串中会默认调取对象的toString方法，参数变成[Object object],显然不行</span></span><br><span class="line">    <span class="keyword">const</span> graph = <span class="built_in">JSON</span>.stringify(stepTwo(entry))</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`</span></span><br><span class="line"><span class="string">        (function(graph) &#123;</span></span><br><span class="line"><span class="string">            //require函数的本质是执行一个模块的代码，然后将相应变量挂载到exports对象上</span></span><br><span class="line"><span class="string">            function require(module) &#123;</span></span><br><span class="line"><span class="string">                //localRequire的本质是拿到依赖包的exports变量</span></span><br><span class="line"><span class="string">                function localRequire(relativePath) &#123;</span></span><br><span class="line"><span class="string">                    return require(graph[module].dependencies[relativePath]);</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">                var exports = &#123;&#125;;</span></span><br><span class="line"><span class="string">                (function(require, exports, code) &#123;</span></span><br><span class="line"><span class="string">                    eval(code);</span></span><br><span class="line"><span class="string">                &#125;)(localRequire, exports, graph[module].code);</span></span><br><span class="line"><span class="string">                return exports;//函数返回指向局部变量，形成闭包，exports变量在函数执行后不会被摧毁</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">            require('<span class="subst">$&#123;entry&#125;</span>')</span></span><br><span class="line"><span class="string">        &#125;)(<span class="subst">$&#123;graph&#125;</span>)`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>将生成的代码字符串在浏览器端运行：<br><img src="https://user-gold-cdn.xitu.io/2019/6/1/16b12e88c959607a?imageslim"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/01/16/image/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zmy">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zmy's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/01/16/image/" itemprop="url">image</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-16T02:13:52+08:00">
-                2021-01-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="/2021/01/16/image/webpack2.png" alt><br><img src="/2021/01/16/image/webpack1.png" alt></p>
 
           
         
@@ -1576,307 +2021,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/02/React-Router-高级/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zmy">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zmy's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/11/02/React-Router-高级/" itemprop="url">React-Router 高级</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-02T21:43:51+08:00">
-                2020-11-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React-router/" itemprop="url" rel="index">
-                    <span itemprop="name">React-router</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h2><p>对于大型应用来说，程序应当只加载当前渲染页所需的 JavaScript。有些开发者将这种方式称之为“代码分拆” —— 将所有的代码分拆成多个小包，在用户浏览过程中按需加载。<br>路由是个非常适于做代码分拆的地方：它的责任就是配置好每个 view。<br>React Router 里的路径匹配以及组件加载都是异步完成的，不仅允许你延迟加载组件，并且可以延迟加载路由配置。在首次加载包中你只需要有一个路径定义，路由会自动解析剩下的路径。<br>getChildRoutes，getIndexRoute 和 getComponents 这几个函数。它们都是异步执行，并且只有在需要时才被调用。我们将这种方式称之为 “逐渐匹配”。</p>
-<h2 id="跳转前确认"><a href="#跳转前确认" class="headerlink" title="跳转前确认"></a>跳转前确认</h2><p>React Router 提供一个 routerWillLeave 生命周期钩子，这使得 React 组件可以拦截正在发生的跳转，或在离开 route 前提示用户。<br>routerWillLeave 返回值有以下两种：</p>
-<ol>
-<li>return false 取消此次跳转</li>
-<li>return 返回提示信息，在离开 route 前提示用户进行确认。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/26/React-Router-基础/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="zmy">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="zmy's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/10/26/React-Router-基础/" itemprop="url">React-Router 基础</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-26T22:55:09+08:00">
-                2020-10-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/React-router/" itemprop="url" rel="index">
-                    <span itemprop="name">React-router</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>React Router 是完整的 React 路由解决方案</p>
-<h2 id="路由匹配原理："><a href="#路由匹配原理：" class="headerlink" title="路由匹配原理："></a>路由匹配原理：</h2><p>路由拥有三个属性来决定是否匹配一个url：</p>
-<ul>
-<li>嵌套关系（树形结构，router深度优先遍历匹配路由）</li>
-<li>路径语法<br>特殊符号：<ul>
-<li>:paramName – 匹配一段位于 /、? 或 # 之后的 URL。 命中的部分将被作为一个参数</li>
-<li>() – 在它内部的内容被认为是可选的</li>
-<li>– 匹配任意字符（非贪婪的）直到命中下一个字符或者整个 URL 的末尾，并创建一个 splat 参数</li>
-</ul>
-</li>
-<li>– 匹配任意字符（非贪婪的）直到命中下一个字符或者整个 URL 的末尾，并创建一个 splat 参数</li>
-<li>优先级 路由算法会根据定义的顺序自顶向下匹配路由。当你拥有两个兄弟路由节点配置时，你必须确认前一个路由不会匹配后一个路由中的路径。<h2 id="React-Router是建立在history之上的"><a href="#React-Router是建立在history之上的" class="headerlink" title="React Router是建立在history之上的"></a>React Router是建立在history之上的</h2>一个 history 知道如何去监听浏览器地址栏的变化，并解析这个 URL 转化为 location 对象，然后 router 使用它匹配到路由，最后正确地渲染对应的组件。<br>常用的history形式：<br>browserHistory： 是使用浏览器中的 History API 来处理 URL（使用 React Router 推荐的 history）。浏览器提供相应的接口来修改浏览器的历史记录。需要服务器配置<br>hashHistory： 是使用 URL 中的 hash（#）部分去创建路由。不需要服务器配置。 hash 部分并不会被浏览器发送到服务端<br>createMemoryHistory：必须创建，适合测试<h2 id="默认路由（IndexRoute）"><a href="#默认路由（IndexRoute）" class="headerlink" title="默认路由（IndexRoute）"></a>默认路由（IndexRoute）</h2>如果需要在 Home 路由被渲染后才激活的指向 / 的链接，请使用 <code>&lt;IndexLink to=&quot;/&quot;&gt;Home&lt;/IndexLink&gt;</code></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1927,7 +2071,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1949,7 +2093,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

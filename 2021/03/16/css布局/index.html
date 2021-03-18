@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="布局,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="浮动能将一个元素拉到容器的一侧，这样文档流就能够包围它。浮动本身不是为了实现布局而设计的。 学习浮动的必要性：  要支持IE浏览器，只有IE10和IE11支持Flexbox，还有一些bug 为了维护旧代码 浮动布局不需要很多标记 要求将图片移动到网页一侧双容器模式：将内容放到两个嵌套的容器中，内层容器设置外边距，让它在外层容器居中。容器折叠和清楚浮动容器折叠：浮动元素不同于不同文档流的元素，他们的">
+<meta name="keywords" content="布局">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css布局">
+<meta property="og:url" content="http://yoursite.com/2021/03/16/css布局/index.html">
+<meta property="og:site_name" content="zmy&#39;s Blog">
+<meta property="og:description" content="浮动能将一个元素拉到容器的一侧，这样文档流就能够包围它。浮动本身不是为了实现布局而设计的。 学习浮动的必要性：  要支持IE浏览器，只有IE10和IE11支持Flexbox，还有一些bug 为了维护旧代码 浮动布局不需要很多标记 要求将图片移动到网页一侧双容器模式：将内容放到两个嵌套的容器中，内层容器设置外边距，让它在外层容器居中。容器折叠和清楚浮动容器折叠：浮动元素不同于不同文档流的元素，他们的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-03-16T14:44:17.376Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css布局">
+<meta name="twitter:description" content="浮动能将一个元素拉到容器的一侧，这样文档流就能够包围它。浮动本身不是为了实现布局而设计的。 学习浮动的必要性：  要支持IE浏览器，只有IE10和IE11支持Flexbox，还有一些bug 为了维护旧代码 浮动布局不需要很多标记 要求将图片移动到网页一侧双容器模式：将内容放到两个嵌套的容器中，内层容器设置外边距，让它在外层容器居中。容器折叠和清楚浮动容器折叠：浮动元素不同于不同文档流的元素，他们的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/03/16/css布局/">
+
+
+
+
+
+  <title>css布局 | zmy's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">zmy's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">active waste</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/03/16/css布局/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zmy">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="zmy's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">css布局</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-16T11:04:32+08:00">
+                2021-03-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/css/" itemprop="url" rel="index">
+                    <span itemprop="name">-css</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h1><p>能将一个元素拉到容器的一侧，这样文档流就能够包围它。<br>浮动本身不是为了实现布局而设计的。</p>
+<p>学习浮动的必要性：</p>
+<ul>
+<li>要支持IE浏览器，只有IE10和IE11支持Flexbox，还有一些bug</li>
+<li>为了维护旧代码</li>
+<li>浮动布局不需要很多标记</li>
+<li>要求将图片移动到网页一侧<br>双容器模式：将内容放到两个嵌套的容器中，内层容器设置外边距，让它在外层容器居中。<h2 id="容器折叠和清楚浮动"><a href="#容器折叠和清楚浮动" class="headerlink" title="容器折叠和清楚浮动"></a>容器折叠和清楚浮动</h2>容器折叠：浮动元素不同于不同文档流的元素，他们的高度不会加到父元素上</li>
+</ul>
+<p>清除浮动：<code>clear:both</code> 在html结尾中添加空标记，使用css清除浮动</p>
+<p>使用伪元素（：before ：after 用来在元素的开始或者结束位置插入内容)<br>使用<code>display:table</code>可以包含外边距</p>
+<h2 id="浮动陷阱"><a href="#浮动陷阱" class="headerlink" title="浮动陷阱"></a>浮动陷阱</h2><p>浏览器会将浮动元素尽可能的放在靠上的位置。可以使用<code>nth-child</code>去清除每行第一个浮动</p>
+<h2 id="媒体对象和BFC"><a href="#媒体对象和BFC" class="headerlink" title="媒体对象和BFC"></a>媒体对象和BFC</h2><p>让图片在一侧，一段文字出现在图片的旁边叫做媒体对象</p>
+<p>媒体对象里面的文字默认围绕浮动图片，为了文字不和浮动图片重叠，建立块级格式化上下文(BFC)</p>
+<p>BFC是网页的一块区域，元素基于这块区域布局，它将内部与外部上下文分隔开：</p>
+<ul>
+<li>包含内部所有元素的上下外边距不会产生外边距折叠</li>
+<li>包含内部所有的浮动元素</li>
+<li>不会和BFC外面的浮动元素重叠</li>
+</ul>
+<p>创建BFC：(通常设overflow)</p>
+<ul>
+<li>float:left/right</li>
+<li>overflow:hidden/auto/scroll </li>
+<li>display:inline-block/table-cell/flex等</li>
+<li>position：absolute/fixed<h2 id="网格系统"><a href="#网格系统" class="headerlink" title="网格系统"></a>网格系统</h2>构建网格系统可以提高代码的复用率。<h1 id="Flexbox"><a href="#Flexbox" class="headerlink" title="Flexbox"></a>Flexbox</h1>为元素添加<code>display:flex</code>该元素变成弹性元素，直接子元素变成弹性子元素</li>
+</ul>
+<p>属性：</p>
+<ul>
+<li>flex-direction 指定主轴方向 row row-reverse column column-reverse</li>
+<li>flex-wrap 指定了弹性子元素是否在弹性容器内折行显示</li>
+<li>justify-content 控制子元素在主轴上的位置</li>
+<li>align-items 控制副轴上的位置</li>
+<li>align-content 如果开启了flex-wrap会控制子元素在副轴上的间距</li>
+<li>flex-grow 增长因子，决定子元素在主轴方向扩展的大小</li>
+<li>flex-shrink 收缩因子</li>
+<li>flex-basis 子元素初始大小</li>
+<li>align-self 在副轴上的对齐方向</li>
+<li>Order 整数<h1 id="网格布局"><a href="#网格布局" class="headerlink" title="网格布局"></a>网格布局</h1>Flexbox和网格布局：</li>
+<li>Flexbox本质上是一维的而网格是二维的</li>
+<li>Flexbox是以内容为切入点由内向外工作，而网格是从外向内</li>
+<li>flex换行后没法让上一行和下一行对齐，网格可以对齐</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/布局/" rel="tag"># 布局</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/02/算法通关/" rel="next" title="算法通关">
+                <i class="fa fa-chevron-left"></i> 算法通关
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/17/透视HTTP协议/" rel="prev" title="透视HTTP协议">
+                透视HTTP协议 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">zmy</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浮动"><span class="nav-number">1.</span> <span class="nav-text">浮动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#容器折叠和清楚浮动"><span class="nav-number">1.1.</span> <span class="nav-text">容器折叠和清楚浮动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮动陷阱"><span class="nav-number">1.2.</span> <span class="nav-text">浮动陷阱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#媒体对象和BFC"><span class="nav-number">1.3.</span> <span class="nav-text">媒体对象和BFC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网格系统"><span class="nav-number">1.4.</span> <span class="nav-text">网格系统</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Flexbox"><span class="nav-number">2.</span> <span class="nav-text">Flexbox</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网格布局"><span class="nav-number">3.</span> <span class="nav-text">网格布局</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zmy</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
