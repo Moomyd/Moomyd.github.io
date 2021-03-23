@@ -1168,10 +1168,10 @@
       
         
           
-            <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Hooks 是一项新功能提案，可让您在不编写类的情况下使用 state(状态) 和其他 React 功能。</p>
-<h3 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h3><h4 id="在组件之间重用有状态逻辑很困难"><a href="#在组件之间重用有状态逻辑很困难" class="headerlink" title="在组件之间重用有状态逻辑很困难"></a>在组件之间重用有状态逻辑很困难</h4><p>React并没有为组件提供一种可重复使用行为的方法（例如，将其关联到 store 里）。如果你已经使用了 React 一段时间，你可能会熟悉 render props(渲染属性) 和 高阶组件的模式尝试解决这个问题。但是这些模式要求您在使用它们时重构组件，这可能很麻烦并且使代码更难以跟踪。如果你看一下 React DevTools 中典型的 React 应用程序，你可能会发现一个包含提供者，消费者，高阶组件，渲染属性和其他抽象层的组件所包裹起来的组件。虽然我们可以 在 DevTools 中过滤它们 ，但这会引出了一个更深层次的基本问题：React 需要一个更好的原语来共享有状态逻辑。<br>使用 Hook ，您可以从组件中提取有状态逻辑，以便可以独立测试并重用。Hooks 允许您在不更改组件层次结构的情况下重用有状态逻辑。 这样可以轻松地在许多组件个之间或与社区共享 Hooks 。</p>
-<h4 id="复杂的组件变得难以理解"><a href="#复杂的组件变得难以理解" class="headerlink" title="复杂的组件变得难以理解"></a>复杂的组件变得难以理解</h4><p>我们常常不得不维护一些组件，这些组件一开始很简单，但后来却变成了一堆难以管理的有状态逻辑和副作用。每个生命周期方法通常包含一组不相关的逻辑。例如，组件可能在componentDidMount 和 componentDidUpdate中执行一些数据获取。然而，相同的 componentDidMount 方法可能还包含一些不相关的逻辑，它们设置事件监听器，并在 componentWillUnmount 中执行清理。一起更改的相互关联的代码会被分离，但是完全不相关的代码最终会组合在一个方法中。这很容易引入错误和不一致。<br>在许多情况下，将这些组件分解成更小的组件是不可能的，因为有状态逻辑到处都是。测试它们也很困难。这也是许多人喜欢将 React 与单独的状态管理库结合使用的原因之一。然而，这通常会引入太多的抽象，需要在不同的文件之间跳转，并且使得重用组件更加困难。</p>
-<h4 id="人和机器都容易混淆的-类-class"><a href="#人和机器都容易混淆的-类-class" class="headerlink" title="人和机器都容易混淆的 类(class)"></a>人和机器都容易混淆的 类(class)</h4><p>类组件可能会鼓励无意识的模式，使这些优化回退到较慢的路径。类(class)也为今天的工具提出了问题。例如，类不能很好地压缩，并且它们使得热更新加载变得片状和不可靠。我们希望提供一种 API，使代码更可能的留在可优化的路径上。<br>为了解决这些问题，Hooks 允许您在没有类的情况下使用更多 React 的功能。 从概念上讲，React 组件一直更接近函数。 Hooks 拥抱函数，但不会牺牲 React 的实际精神。 Hooks 提供了对命令式逃生舱的访问，并且不需要您学习复杂的函数式或反应式编程技术。</p>
+            <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>Hooks 是一项新功能提案，可让您在不编写类的情况下使用 state(状态) 和其他 React 功能。</p>
+<h2 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h2><h3 id="1-在组件之间重用有状态逻辑很困难"><a href="#1-在组件之间重用有状态逻辑很困难" class="headerlink" title="1.在组件之间重用有状态逻辑很困难"></a>1.在组件之间重用有状态逻辑很困难</h3><p>React并没有为组件提供一种可重复使用行为的方法（例如，将其关联到 store 里）。如果你已经使用了 React 一段时间，你可能会熟悉 render props(渲染属性) 和 高阶组件的模式尝试解决这个问题。但是这些模式要求您在使用它们时重构组件，这可能很麻烦并且使代码更难以跟踪。如果你看一下 React DevTools 中典型的 React 应用程序，你可能会发现一个包含提供者，消费者，高阶组件，渲染属性和其他抽象层的组件所包裹起来的组件。虽然我们可以 在 DevTools 中过滤它们 ，但这会引出了一个更深层次的基本问题：React 需要一个更好的原语来共享有状态逻辑。<br>使用 Hook ，您可以从组件中提取有状态逻辑，以便可以独立测试并重用。Hooks 允许您在不更改组件层次结构的情况下重用有状态逻辑。 这样可以轻松地在许多组件个之间或与社区共享 Hooks 。</p>
+<h3 id="2-复杂的组件变得难以理解"><a href="#2-复杂的组件变得难以理解" class="headerlink" title="2.复杂的组件变得难以理解"></a>2.复杂的组件变得难以理解</h3><p>我们常常不得不维护一些组件，这些组件一开始很简单，但后来却变成了一堆难以管理的有状态逻辑和副作用。每个生命周期方法通常包含一组不相关的逻辑。例如，组件可能在componentDidMount 和 componentDidUpdate中执行一些数据获取。然而，相同的 componentDidMount 方法可能还包含一些不相关的逻辑，它们设置事件监听器，并在 componentWillUnmount 中执行清理。一起更改的相互关联的代码会被分离，但是完全不相关的代码最终会组合在一个方法中。这很容易引入错误和不一致。<br>在许多情况下，将这些组件分解成更小的组件是不可能的，因为有状态逻辑到处都是。测试它们也很困难。这也是许多人喜欢将 React 与单独的状态管理库结合使用的原因之一。然而，这通常会引入太多的抽象，需要在不同的文件之间跳转，并且使得重用组件更加困难。</p>
+<h3 id="3-人和机器都容易混淆的-类-class"><a href="#3-人和机器都容易混淆的-类-class" class="headerlink" title="3.人和机器都容易混淆的 类(class)"></a>3.人和机器都容易混淆的 类(class)</h3><p>类组件可能会鼓励无意识的模式，使这些优化回退到较慢的路径。类(class)也为今天的工具提出了问题。例如，类不能很好地压缩，并且它们使得热更新加载变得片状和不可靠。我们希望提供一种 API，使代码更可能的留在可优化的路径上。<br>为了解决这些问题，Hooks 允许您在没有类的情况下使用更多 React 的功能。 从概念上讲，React 组件一直更接近函数。 Hooks 拥抱函数，但不会牺牲 React 的实际精神。 Hooks 提供了对命令式逃生舱的访问，并且不需要您学习复杂的函数式或反应式编程技术。</p>
 <h2 id="State-Hook"><a href="#State-Hook" class="headerlink" title="State Hook"></a>State Hook</h2><p>Hook 是一些可以让你在函数组件里“钩入” React state 及生命周期等特性的函数。Hook 不能在 class 组件中使用 —— 这使得你不使用 class 也能使用 React。<br>例子：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; useState &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Example</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 声明一个叫 "count" 的 state 变量</span></span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = useState(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;p&gt;You clicked &#123;count&#125; times&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">      &lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;</span></span><br><span class="line"><span class="regexp">        Click me</span></span><br><span class="line"><span class="regexp">      &lt;/</span>button&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
 
@@ -1673,7 +1673,7 @@
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">-js</span>
+                    <span itemprop="name">js</span>
                   </a>
                 </span>
 
@@ -1853,7 +1853,7 @@
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/CSAPP/" itemprop="url" rel="index">
-                    <span itemprop="name">-CSAPP</span>
+                    <span itemprop="name">CSAPP</span>
                   </a>
                 </span>
 
@@ -1995,7 +1995,7 @@
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/CSAPP/" itemprop="url" rel="index">
-                    <span itemprop="name">-CSAPP</span>
+                    <span itemprop="name">CSAPP</span>
                   </a>
                 </span>
 
@@ -2140,7 +2140,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -2151,7 +2151,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
